@@ -11,16 +11,14 @@ Note:  On Windows machines, you need to add an Environment Variable to your path
 After you have Node and npm up and running, we need to have npm install the global tools we will need. Open shell/cmd prompt :
 
 ## Install [Grunt](https://github.com/cowboy/grunt) ##
-`npm install -g grunt` 
+`npm install -g grunt-cli` 
 
 ## Install [Bower](http://twitter.github.com/bower/) ##
 `npm install -g bower`
 
-## Install [PhantomJS](http://phantomjs.org/download.html) ##
-
 Windows users: don't forget to put the executable on your path.
 
-# Start your Prototype: #
+# Start your Application: #
 
 #### Install the Node dependencies locally. ####
 `npm install`
@@ -33,16 +31,16 @@ Windows users: don't forget to put the executable on your path.
 #### `clean` ####
 * Removes the 'dist' and 'test-reports' directories so that nothing lingers from previous builds.
 
-#### `lint` ####
+#### `jshint` ####
 * Runs the JavaScript through JSHint to check for errors.
 
 #### `concat` ####
 * Combines the almond require shim with the application code. 
 
-#### `mincss` ####
+#### `cssmin` ####
 * Concatenates and minifies the project's CSS into one file.
 
-#### `min` ####
+#### `uglify` ####
 * Takes the built and optimized require.js file and minifies it for filesize benefits.
 
 #### `runapp` ####
@@ -57,20 +55,11 @@ Windows users: don't forget to put the executable on your path.
 #### `runapp:release` ####
 * Uses port 8000 to serve the concatenated and minified JavaScript and the compiled CSS. 
 
-#### `runapp:mocha` ####
-* Uses port 8888 to serve the Mocha test runner.
-
 #### `requirejs` ####
 * Uses the requireJs optimizer to compile and concatenate the application's JavaScript.
 
 #### `less` ####
 * Compiles the Less files into usable CSS. 
-
-#### `jscoverage` ####
-* Instruments the application JavaScript to provide test coverage statistics.
-
-#### `coffee` ####
-* Compiles the .coffee files into their respective JavaScript files.
 
 #### `copy` ####
 * Packages up the compiled code and static resources into a deployable directory structure. 
@@ -96,8 +85,8 @@ Windows users: don't forget to put the executable on your path.
 #### `jade:release` ####
 * Compiles the index.html for the release package.
 
-#### `jade:mocha` ####
-* Compiles the Mocha test runner.
+#### 'karma' ####
+* Kicks off the spectacular [Karma]{http://karma-runner.github.io/0.8/index.html} test runner.
 
 ## Now you have these shortcut tasks to run various combinations: ##
 
