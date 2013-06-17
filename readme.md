@@ -85,8 +85,8 @@ Windows users: don't forget to put the executable on your path.
 #### `jade:release` ####
 * Compiles the index.html for the release package.
 
-#### 'karma' ####
-* Kicks off the spectacular [Karma]{http://karma-runner.github.io/0.8/index.html} test runner.
+#### `karma` ####
+* Kicks off the spectacular [Karma](http://karma-runner.github.io/0.8/index.html) test runner.
 
 ## Now you have these shortcut tasks to run various combinations: ##
 
