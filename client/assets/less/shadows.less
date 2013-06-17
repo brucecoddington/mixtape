@@ -1,0 +1,43 @@
+// No shadow
+
+.no-shadow() {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+// Box shadows
+
+.single-box-shadow(@horiz:0, @vert: 1px, @blur: 0, @spread: 0, @color: #fff) {
+  -webkit-box-shadow: @horiz @vert @blur @spread @color;
+  -moz-box-shadow:  @horiz @vert @blur @spread @color;
+  box-shadow:  @horiz @vert @blur @spread @color;
+}
+
+.dual-box-shadow(@horiz1, @vert1, @blur1, @spread1, @color1, @horiz2, @vert2, @blur2, @spread2, @color2) {
+  -webkit-box-shadow: @horiz1 @vert1 @blur1 @spread1 @color1, @horiz2 @vert2 @blur2 @spread2 @color2;
+  -moz-box-shadow: @horiz1 @vert1 @blur1 @spread1 @color1, @horiz2 @vert2 @blur2 @spread2 @color2;
+  box-shadow: @horiz1 @vert1 @blur1 @spread1 @color1, @horiz2 @vert2 @blur2 @spread2 @color2;
+}
+
+.triple-box-shadow(@horiz1, @vert1, @blur1, @spread, @color1, @horiz2, @vert2, @blur2, @spread, @color2, @horiz3, @vert3, @blur3, @spread, @color3) {
+  -webkit-box-shadow: @horiz1 @vert1 @blur1 @spread @color1, @horiz2 @vert2 @blur2 @spread @color2, @horiz3 @vert3 @blur3 @spread @color3;
+  -moz-box-shadow: @horiz1 @vert1 @blur1 @spread @color1, @horiz2 @vert2 @blur2 @spread @color2, @horiz3 @vert3 @blur3 @spread @color3;
+  box-shadow: @horiz1 @vert1 @blur1 @spread @color1, @horiz2 @vert2 @blur2 @spread @color2, @horiz3 @vert3 @blur3 @spread @color3;
+}
+
+// Box shadows with insets
+
+.single-inset-box-shadow(@horiz:0, @vert: 1px, @blur: 0, @spread: 0, @color: #fff) {
+  -webkit-box-shadow: inset @horiz @vert @blur @spread @color;
+  -moz-box-shadow:  inset @horiz @vert @blur @spread @color;
+  box-shadow:  inset @horiz @vert @blur @spread @color;
+}
+
+.single-box-shadow-with-inset(@horiz1, @vert1, @blur1, @spread1, @color1, @horiz2, @vert2, @blur2, @spread2, @color2){
+  -webkit-box-shadow: @horiz1 @vert1 @blur1 @spread1, @color1, inset @horiz2, @vert2, @blur2, @spread2, @color2 !important;
+  -moz-box-shadow: @horiz1 @vert1 @blur1 @spread1, @color1, inset @horiz2, @vert2, @blur2, @spread2, @color2 !important;
+  box-shadow: @horiz1 @vert1 @blur1 @spread1, @color1, inset @horiz2, @vert2, @blur2, @spread2, @color2 !important;
+}
+
+

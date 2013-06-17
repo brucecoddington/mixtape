@@ -1,0 +1,20 @@
+{
+    "name": "angular-locomotive-bootstrap",
+    "title": "AngularLocomotive",
+    "main": "./client/dist/release/main.js",
+    "description": "Template for AngularJS client with locomotive server.",
+    "version": "0.0.1",
+    "author": {
+        "name": "Bruce Coddington"
+    },
+    "dependencies" : {
+        "requirejs" : "2.1.5",
+        "requirejs-plugins": "1.0.2",
+        "jquery" : "1.10.1",
+        "lodash" : "1.3.1",
+        "moment": "2.0.0", 
+        "angular" : "1.0.7",
+        "javascript-debug" : "cowboy/javascript-debug",
+        "modernizr" : "2.6.2"
+    }
+}

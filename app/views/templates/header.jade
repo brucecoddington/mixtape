@@ -1,0 +1,31 @@
+header
+  .container-fluid
+    .navbar.navbar-inverse
+      .navbar-inner
+        a.btn.btn-navbar(data-toggle="collapse", data-target=".nav-collapse")
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.brand(href="/")
+          img(src="/assets/images/rr/ReligionRecordsComboLogo.png", alt="Religion Records")
+        .nav-collapse.collapse
+          ul.nav
+            li(class="#{active=='/' ? 'active' : ''}")
+              a(href="/") HOME
+                span start here
+
+            li.dropdown
+              a.dropdown-toggle(href="#", data-toggle="dropdown") SECOND
+                b.caret
+                span second option
+              ul.dropdown-menu
+                li
+                  a(href="#") Option One
+ 
+            li(class="#{active=='/three' ? 'active' : ''}")
+              a(href="/artists") THIRD
+                span third option
+
+            li(class="#{active=='/four' ? 'active' : ''}")
+              a(href="/four") FOURTH
+                span fourth option

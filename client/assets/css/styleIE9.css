@@ -1,0 +1,22 @@
+hr:before,
+hr:after,
+header {
+	filter: none;
+}
+
+#wrapper.full,
+#wall .item,
+#wrapper .posts,
+#wrapper .single-post,
+#wrapper .sidebar,
+#googlemaps {
+	filter: none;
+	overflow: hidden;
+}
+
+
+
+.facebook_connect,
+.twitter_connect {
+	filter: none;
+}

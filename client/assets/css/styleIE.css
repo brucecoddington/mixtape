@@ -1,0 +1,28 @@
+.nav-collapse.collapse {
+    float: right;
+}
+
+.navbar .brand img {
+	float: right !important;
+	left: -10px;
+	position: absolute;
+}
+
+hr {
+	height: 0px;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid transparent;
+}
+
+.meter {
+	border: 1px solid #eee;
+}
+
+ul.clients li {
+	width: 15%;
+	margin-right: 1.6%;
+	float: left;
+	text-align: center;
+	position: relative;
+}
+

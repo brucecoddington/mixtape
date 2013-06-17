@@ -1,0 +1,22 @@
+/*global define*/
+
+define(function (require){
+
+  var logger = require('logger');
+
+  return function () {
+    logger.info("Registering SERVICE");
+
+    require('angular').module('app').factory('SERVICE', 
+      [
+        '$DEPS',
+        function ($DEPS) {
+
+          return {
+            method: method
+          };
+        }
+      ]
+    );
+  };
+});

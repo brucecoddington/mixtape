@@ -1,0 +1,14 @@
+doctype 5
+html(class="no-js", manifest="cache.manifest")
+  head
+    include ../templates/head
+
+  body
+    include ../templates/header
+
+    block content
+
+    include ../templates/footer
+    include ../templates/underfooter
+    script(src="config.js")
+    script(data-main="app", src="assets/js/components/requirejs/require.js")
