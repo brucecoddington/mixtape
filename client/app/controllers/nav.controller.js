@@ -13,23 +13,19 @@ define(function (require) {
         '$scope',
         function ($scope) {
 
-          $scope.setSelected = function ($event) {
-            if ($scope.selectedNavigation) {
-              $($scope.selectedNavigation).removeClass('active');
-            }
+          $scope.selected = 'home';
 
-            var selected = $event.target;
-            $(selected).addClass('active');
-            $scope.selectedNavigation = selected;
+          $scope.setSelected = function (selected) {
+            $scope.selected = selected;
           };
 
-          (function selectHome() {
-            var home = $('a.home');
-            home.addClass('active');
-            $scope.selectedNavigation = home;
-            logger.info('Selected Home');
-          }());
+          $scope.isSelected = function (test) {
+            if (test === 'option') {
+              return test === $scope.selected.slice(0, 6);
+            }
 
+            return $scope.selected === test;
+          };
         }
       ]
     );

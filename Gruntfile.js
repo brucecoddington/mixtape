@@ -70,7 +70,8 @@ module.exports = function (grunt) {
                     'client/app/**/*.js', 
                     'client/specs/**/*.js',
                     'client/assets/less/**/*.less', 
-                    'client/assets/jade/**/*.jade'
+                    'client/assets/jade/**/*.jade',
+                    'app/views/**/*.jade'
                 ],
                 tasks: ['assemble', 'karma:client:run']
             }
@@ -200,15 +201,19 @@ module.exports = function (grunt) {
                 files: {
                     'client/index.html' : ['app/views/application/index.jade']
                 }
-            }
-//            templates : {
-//                options: {
-//                    pretty: true
-//                },
-//                files: {
-//
-//                }
-//            }
+            },
+           templates : {
+               options: {
+                   pretty: true
+               },
+               files: [{
+                   expand: true,
+                   cwd: 'client/assets/jade',
+                   src: ['**/*.jade'],
+                   dest: 'client/assets/templates',
+                   ext: '.html'
+               }]
+           }
         },
 
         // The **docco** task iterates through the `src` files and creates annotated source reports for them.

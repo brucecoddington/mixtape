@@ -1,5 +1,5 @@
 header
-  .container-fluid
+  .container-fluid(ng-controller="NavController")
     .navbar.navbar-inverse
       .navbar-inner
         a.btn.btn-navbar(data-toggle="collapse", data-target=".nav-collapse")
@@ -9,22 +9,22 @@ header
         a.brand(href="/") LoGo
         .nav-collapse.collapse
           ul.nav
-            li(class="#{active=='/' ? 'active' : ''}")
-              a(href="/") HOME
+            li(ng-class="{active : isSelected('home')}")
+              a(href="/", ng-click="setSelected('home')") HOME
                 span start here
 
-            li.dropdown
+            li.dropdown(ng-class="{active: isSelected('option')}")
               a.dropdown-toggle(href="#", data-toggle="dropdown") SECOND
                 b.caret
                 span second option
               ul.dropdown-menu
                 li
-                  a(href="#") Option One
+                  a(href="#/option1", ng-click="setSelected('option1')") Option One
  
-            li(class="#{active=='/three' ? 'active' : ''}")
-              a(href="/three") THIRD
+            li(ng-class="{active: isSelected('three')}")
+              a(href="#/three", ng-click="setSelected('three')") THIRD
                 span third option
 
-            li(class="#{active=='/four' ? 'active' : ''}")
-              a(href="/four") FOURTH
+            li(ng-class="{active: isSelected('four')}")
+              a(href="#/four", ng-click="setSelected('four')") FOURTH
                 span fourth option

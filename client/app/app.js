@@ -14,14 +14,40 @@ define(function (require) {
     logger.group("Setup Angular");
 
     var app = angular.module('app', ['ngResource']);
-
     logger.debug("Application module and routes configured.");
 
-    require('services/services')();
-    require('directives/directives')();
-    require('filters/filters')();
+    // ----------- Services ---------------
+    logger.group("Registering Services.");
 
-    require('controllers/controllers')();
+    // example of registering a service
+    // require('services/tweet.service')();
+
+    logger.groupEnd(); 
+
+    // ----------- Directives ---------------
+    logger.group("Registering directives.");
+
+    // example of registering a directive
+    // require('directives/tweet.directive')();
+
+    logger.groupEnd();
+    
+    // ----------- Filters ---------------
+    logger.group("Registering Filters.");
+
+    // example of registering a filter
+    // require('filters/tweet.filter')();
+
+    logger.groupEnd();
+
+    // ----------- Controllers ---------------
+    logger.group("Registering controllers.");
+
+      require('controllers/nav.controller')();
+      require('controllers/home.controller')();
+
+    logger.groupEnd();
+
     require('routes')();
 
     angular.bootstrap(document, ['app']);
