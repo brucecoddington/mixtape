@@ -1,5 +1,15 @@
-doctype 5
+!!! 5
+//if lt IE 7
+  html(lang="en", class="no-js ie6", manifest="cache.manifest")
+//if IE 7
+  html(lang="en", class="no-js ie7", manifest="cache.manifest")
+//if IE 8
+  html(lang="en", class="no-js ie8", manifest="cache.manifest")
+//if IE 9
+  html(lang="en", class="no-js ie9", manifest="cache.manifest")
+//if [(gt IE 9)|!(IE)] <!
 html(class="no-js", manifest="cache.manifest")
+  // <![endif]
   head
     include ../templates/head
 

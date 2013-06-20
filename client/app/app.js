@@ -1,5 +1,8 @@
 define(function (require) {
 
+  require('ngResource');
+  require('bootstrap');
+
   var logger = require('logger'),
       _ = require('lodash'),
       angular = require('angular');
@@ -10,7 +13,7 @@ define(function (require) {
     logger.group("Starting application.");    
     logger.group("Setup Angular");
 
-    var app = angular.module('app');
+    var app = angular.module('app', ['ngResource']);
 
     logger.debug("Application module and routes configured.");
 

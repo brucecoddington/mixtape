@@ -27,6 +27,7 @@ define(function (require) {
             var home = $('a.home');
             home.addClass('active');
             $scope.selectedNavigation = home;
+            logger.info('Selected Home');
           }());
 
         }

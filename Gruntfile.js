@@ -99,6 +99,7 @@ module.exports = function (grunt) {
                         lodash:'empty:',
                         moment:'empty:',
                         angular: 'empty:',
+                        ngResource: 'empty:',
                         logger: 'empty:',
 
                         // templates

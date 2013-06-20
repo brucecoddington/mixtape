@@ -16,9 +16,10 @@ var requirejs = {
 
         // AngularJS libraries
         angular : '../assets/js/components/angular/angular',
+        ngResource : '../assets/js/components/angular-resource/angular-resource.min',
         logger : '../assets/js/components/javascript-debug/ba-debug.min',
 
-        lodash : '../assets/js/components/lodash/lodash.min',
+        lodash : '../assets/js/components/lodash/dist/lodash.min',
         moment : '../assets/js/components/moment.min',
         socketio : '../../node_modules/socket.io/lib/socket.io',
         
@@ -62,6 +63,10 @@ var requirejs = {
 
         angular : {
             exports: 'angular'
+        },
+
+        ngResource : {
+            deps : ['angular']
         },
 
         bootstrap : {
