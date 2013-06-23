@@ -14,8 +14,7 @@ var requirejs = {
         bsDatePicker: '../assets/js/components/bootstrap-datepicker/js/bootstrap-datepicker',
         bsSelect: '../assets/js/components/bootstrap-select/bootstrap-select',
         bsTimePicker: '../assets/js/components/bootstrap-timepicker/js/bootstrap-timepicker',
-
-        retina : '../assets/js/libs/retina',
+        
         modernizr: '../assets/js/components/modernizr/modernizr',
 
         // AngularJS libraries

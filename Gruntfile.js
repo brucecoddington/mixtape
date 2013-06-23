@@ -28,7 +28,7 @@ module.exports = function (grunt) {
         // shim and the templates into the application code.  
         concat:{
             dist : {
-                src : ["client/assets/js/libs/almond.js", "client/dist/debug/app.js"],
+                src : ["client/assets/js/components/almond/almond.js", "client/dist/debug/app.js"],
                 dest: "client/dist/release/app.js"
             }
         },

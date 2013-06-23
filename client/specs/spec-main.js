@@ -10,11 +10,9 @@ require.config({
 
     // jquery and plugins
     jquery : '/base/client/assets/js/components/jquery/jquery.min',
-    placeholder : '/base/client/assets/js/libs/jquery.placeholder.min',
 
     // bootstrap
     bootstrap : '/base/client/assets/js/libs/bootstrap',
-    retina : '/base/client/assets/js/libs/retina',
     modernizr: '/base/client/assets/js/components/modernizr/modernizr',
 
     // AngularJS libraries
@@ -65,10 +63,6 @@ require.config({
     },
 
     bootstrap : {
-      deps: ['jquery']
-    },
-
-    placeholder : {
       deps: ['jquery']
     }
   },

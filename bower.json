@@ -24,6 +24,8 @@
         "bootstrap-select" : "*",
         "javascript-debug" : "cowboy/javascript-debug",
         "modernizr" : "2.6.2",
-        "angular-ui-utils" : "0.0.3"
+        "angular-ui-utils" : "0.0.3",
+        "almond" : "0.2.5", 
+        "retinajs" : "imulus/retinajs"
     }
 }
