@@ -17,7 +17,13 @@
         "angular-cookies" : "1.0.7",
         "angular-resource" : "1.0.7",
         "angular-sanitize" : "1.0.7",
+        "angular-strap" : "0.7.4",
+        "bootstrap": "2.3.2",
+        "bootstrap-datepicker": "1.1.2",
+        "bootstrap-timepicker": "0.2.3",
+        "bootstrap-select" : "*",
         "javascript-debug" : "cowboy/javascript-debug",
-        "modernizr" : "2.6.2"
+        "modernizr" : "2.6.2",
+        "angular-ui-utils" : "0.0.3"
     }
 }

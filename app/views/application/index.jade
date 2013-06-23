@@ -20,5 +20,9 @@ html(class="no-js", manifest="cache.manifest")
 
     include ../templates/footer
     include ../templates/underfooter
-    script(src="config.js")
-    script(data-main="app", src="assets/js/components/requirejs/require.js")
+
+    - if (debug) 
+      script(src="config.js")
+      script(data-main="app", src="assets/js/components/requirejs/require.js")
+    - else
+      script(data-main="app", src="app/app.js")

@@ -9,7 +9,7 @@ module.exports = function() {
   }));
 
   // Serve static content
-  this.use(express.static(__dirname + "/../../client/dist/ReligionRecords-debug"));
+  this.use(express.static(__dirname + "/../../client/dist/angular-locomotive-bootstrap-debug"));
 
   this.use(function (req, res) {
     res.send(404);

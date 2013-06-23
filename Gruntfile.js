@@ -11,7 +11,7 @@ module.exports = function (grunt) {
 
         // The clean task ensures all files are removed from the dist/ directory so
         // that no files linger from previous builds.
-        clean: ["client/dist/", "client/test-reports/", "client/docs/"],
+        clean: ["client/dist", "client/docs"],
 
         // The jshint option for scripturl is set to lax, because the anchor
         // override inside main.js needs to test for them so as to not accidentally
@@ -25,13 +25,11 @@ module.exports = function (grunt) {
         },
 
         // The concatenate task is used here to merge the almond require/define
-        // shim and the templates into the application code.  It's named
-        // dist/debug/require.js, because we want to only load one script file in
-        // index.html.
+        // shim and the templates into the application code.  
         concat:{
             dist : {
-                src : ["client/assets/js/libs/almond.js", "client/dist/debug/main.js"],
-                dest: "client/dist/debug/main.js"
+                src : ["client/assets/js/libs/almond.js", "client/dist/debug/app.js"],
+                dest: "client/dist/release/app.js"
             }
         },
 
@@ -79,33 +77,14 @@ module.exports = function (grunt) {
 
         requirejs : {
             compile : {
-                options : {
-                    name: 'app',
-                    dir : 'client/dist/debug',
-                    appDir : 'client/app',
+                options: {
+                    name: "app",
+                    baseUrl: "client/app",
                     optimizeCss: 'none',
                     optimize: 'none',
-                    baseUrl: ".",
-                    paths:{
-                        // We are marking the libraries as empty so that they are not concatenated into the optimized file.
-
-                        // If you want any of these libraries concatenated into your main.js, just remove them from this configuration
-                        // and r.js will use the paths set in the config.js to locate the libs.
-
-                        jquery:'empty:',
-                        placeholder: 'empty:',
-                        bootstrap: 'empty:',
-                        retina: 'empty:',
-                        modernizr: 'empty:',
-                        lodash:'empty:',
-                        moment:'empty:',
-                        angular: 'empty:',
-                        ngResource: 'empty:',
-                        logger: 'empty:',
-
-                        // templates
-                        templates : '../assets/templates'
-                    }
+                    mainConfigFile: "client/config.js",
+                    out: "client/dist/debug/app.js",
+                    insertRequire: ['app']
                 }
             }            
         },
@@ -149,46 +128,48 @@ module.exports = function (grunt) {
 
         copy: {
             vendor : {
-                files: {
-                    'client/dist/assets/css/' : 'client/assets/css/**'
-                }
+                files: [{expand: true, cwd: 'client/assets/css', src:['**'], dest:'client/dist/assets/css'}]
             },
             release : {
-                files: {
-                    'client/dist/<%= pkg.name %>/assets/' : [
-                        'client/assets/images/**',
-                        'client/assets/templates/**',
-                        'client/assets/js/**',
-                        'client/assets/font/**'
-                    ],
-                    'client/dist/<%= pkg.name %>/app/' : [
-                        'client/dist/release/app.js'
-                    ],
-                    'client/dist/<%= pkg.name %>/assets/css/' : 'client/dist/assets/css/**',
-                    'client/dist/<%= pkg.name %>/' : [
-                        'client/index.html',
-                        'client/config.js'
-                    ]
-                }
+                files: [
+                    {expand: true, 
+                        cwd: 'client/assets', 
+                        src:['images/**', 'templates/**', 'js/**', 'font/**'], 
+                        dest: 'client/dist/<%= pkg.name %>/assets'},
+                    {expand: true, 
+                        cwd: 'client/dist/release', 
+                        src:['app.js'], 
+                        dest:'client/dist/<%= pkg.name %>/app'},
+                    {expand: true, 
+                        cwd: 'client/dist/assets/css', 
+                        src:['**'], 
+                        dest: 'client/dist/<%= pkg.name %>/assets/css'},
+                    {expand: true, 
+                        cwd: 'client/dist/release', 
+                        src:['index.html'], 
+                        dest: 'client/dist/<%= pkg.name %>'}
+                ]
             },
             debug : {
-                files: {
-                    'client/dist/<%= pkg.name %>-debug/app/' : [
-                        'client/app/**'
-                    ],
-                    'client/dist/<%= pkg.name %>-debug/assets/' : [
-                        'client/assets/images/**',
-                        'client/assets/templates/**',
-                        'client/assets/js/**',
-                        'client/assets/font/**'
-                    ],
-
-                    'client/dist/<%= pkg.name %>-debug/assets/css/' : 'client/dist/assets/css/**',
-                    'client/dist/<%= pkg.name %>-debug/' : [
-                        'client/index.html',
-                        'client/config.js'
-                    ]
-                }
+                files: [
+                    {expand: true, 
+                        cwd: 'client/app', 
+                        src:['**'], 
+                        dest: 'client/dist/<%= pkg.name %>-debug/app'},
+                    {expand: true, 
+                        cwd: 'client/assets', 
+                        src: ['images/**', 'templates/**', 'js/**', 'font/**'], 
+                        dest: 'client/dist/<%= pkg.name %>-debug/assets'},
+                    {expand: true, 
+                        cwd: 'client/dist/assets/css', 
+                        src: ['**'], 
+                        dest: 'client/dist/<%= pkg.name %>-debug/assets/css'},
+                    {expand: true, 
+                        cwd: 'client', 
+                        src: ['*'], 
+                        dest: 'client/dist/<%= pkg.name %>-debug', 
+                        filter: 'isFile'}
+                ]
             }
         },
 
@@ -196,13 +177,27 @@ module.exports = function (grunt) {
         jade: {
             index: {
                 options: {
-                    pretty: true
+                    pretty: true,
+                    data: {
+                        debug: true
+                    }
                 },
                 files: {
                     'client/index.html' : ['app/views/application/index.jade']
                 }
             },
-           templates : {
+            dist : {
+                option: {
+                    pretty: true, 
+                    data: {
+                        debug: false
+                    }
+                }, 
+                files: {
+                    'client/dist/release/index.html': ['app/views/application/index.jade']
+                }
+            }, 
+            templates : {
                options: {
                    pretty: true
                },
@@ -274,9 +269,8 @@ module.exports = function (grunt) {
     // dist/debug/require.js, and then concatenate the require/define shim
     // almond.js and dist/debug/templates.js into the require.js file.
     
-    //grunt.registerTask("default", "clean jshint less requirejs cssmin docco jade");
     grunt.registerTask("default", ['clean', 'jshint', 'less', 'requirejs', 'cssmin', 'jade']);
 
     // Task to package everything up for deployment and restart karma
-    grunt.registerTask("assemble", ['default', 'uglify', 'copy:vendor', 'copy:release', 'copy:debug']);
+    grunt.registerTask("assemble", ['default', 'concat', 'copy:vendor', 'copy:debug', 'copy:release']);
 };

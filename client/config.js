@@ -10,13 +10,18 @@ var requirejs = {
         placeholder : '../assets/js/libs/jquery.placeholder.min',
 
         // bootstrap
-        bootstrap : '../assets/js/libs/bootstrap',
+        bootstrap : '../assets/js/components/bootstrap/docs/assets/js/bootstrap.min',
+        bsDatePicker: '../assets/js/components/bootstrap-datepicker/js/bootstrap-datepicker',
+        bsSelect: '../assets/js/components/bootstrap-select/bootstrap-select',
+        bsTimePicker: '../assets/js/components/bootstrap-timepicker/js/bootstrap-timepicker',
+
         retina : '../assets/js/libs/retina',
         modernizr: '../assets/js/components/modernizr/modernizr',
 
         // AngularJS libraries
         angular : '../assets/js/components/angular/angular',
         ngResource : '../assets/js/components/angular-resource/angular-resource.min',
+        
         logger : '../assets/js/components/javascript-debug/ba-debug.min',
 
         lodash : '../assets/js/components/lodash/dist/lodash.min',
