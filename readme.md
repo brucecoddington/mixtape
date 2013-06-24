@@ -19,7 +19,8 @@ This is not a framework..just a collection of some awesome frameworks molded to 
 * [Less](http://lesscss.org/)
 * [Jade](http://jade-lang.com/)
 
-This mixtape is heavily influenced by these projects: 
+This mixtape is heavily influenced by these projects
+
 * [Backbone Boilerplate](https://github.com/backbone-boilerplate/backbone-boilerplate)
 * [Angular Fun](https://github.com/CaryLandholt/AngularFun)
 * [Grails](http://grails.org/)
@@ -64,6 +65,7 @@ This mixtape is heavily influenced by these projects:
 ## And a couple of shortcut tasks to run various combinations: ##
 
 * `grunt debug` 
+
 ** Cleans the project 
 ** Runs the application JavaScript through JSHint.
 ** Compiles the Less into CSS
@@ -72,6 +74,7 @@ This mixtape is heavily influenced by these projects:
 ** Compiles the jade templates
 
 * `grunt assemble`
+
 ** Does everything in the 'debug' task
 ** Concatenates the compiled JS with Almond.js 
 ** Assembles and packages the application.
