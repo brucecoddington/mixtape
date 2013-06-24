@@ -4,24 +4,25 @@
 
 This is not a framework..just a collection of some awesome frameworks molded to work together (kinda like a mixtape). Thank you to all of these projects for making my life easier. 
 
-* [Locomotive]()
-* [Express]()
-* [SocketIO]()
-* [Angular]()
-* [RequireJS]()
-* [karma]()
-* [Mocha]()
-* [chai]()
-* [sinon]()
-* [Bootstrap]()
-* [Redis]()
-* [MongoDB]()
-* [Less]()
+* [Locomotive](http://locomotivejs.org/)
+* [Express](http://expressjs.com/)
+* [SocketIO](http://socket.io/)
+* [Angular](http://angularjs.org/)
+* [RequireJS](http://requirejs.org/)
+* [karma](http://karma-runner.github.io/0.8/index.html)
+* [Mocha](http://visionmedia.github.io/mocha/)
+* [chai](http://chaijs.com/)
+* [sinon](http://sinonjs.org/)
+* [Bootstrap](http://twitter.github.io/bootstrap/)
+* [Redis](http://redis.io/)
+* [MongoDB](http://www.mongodb.org/)
+* [Less](http://lesscss.org/)
+* [Jade](http://jade-lang.com/)
 
 This mixtape is heavily influenced by these projects: 
-* [Backbone Boilerplate]()
-* [Angular Fun]()
-* [Grails]()
+* [Backbone Boilerplate](https://github.com/backbone-boilerplate/backbone-boilerplate)
+* [Angular Fun](https://github.com/CaryLandholt/AngularFun)
+* [Grails](http://grails.org/)
 
 # Dependencies: #  
 
@@ -65,13 +66,12 @@ This mixtape is heavily influenced by these projects:
 * `grunt debug` 
 ** Cleans the project 
 ** Runs the application JavaScript through JSHint.
-** Compiles the JavaScript via RequireJS Optimizer.
 ** Compiles the Less into CSS
+** Compiles the JavaScript via RequireJS Optimizer.
 ** Minifies the CSS.
-** Runs the JasmineBDD specs and displays the results.
-** Creates the Docco documentation.
+** Compiles the jade templates
 
 * `grunt assemble`
 ** Does everything in the 'debug' task
-** Minifies the optimized JavaScript
+** Concatenates the compiled JS with Almond.js 
 ** Assembles and packages the application.
