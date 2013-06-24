@@ -5,6 +5,7 @@ var ApplicationController = new Controller();
 
 ApplicationController.index = function() {
   this.active = "/";
+  this.debug = locomotive.express.settings.env !== 'production'
   this.render();
 }
 
