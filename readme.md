@@ -66,15 +66,15 @@ This mixtape is heavily influenced by these projects
 
 * `grunt debug` 
 
-* Cleans the project 
-* Runs the application JavaScript through JSHint.
-* Compiles the Less into CSS
-* Compiles the JavaScript via RequireJS Optimizer.
-* Minifies the CSS.
-* Compiles the jade templates
+  * Cleans the project 
+  * Runs the application JavaScript through JSHint.
+  * Compiles the Less into CSS
+  * Compiles the JavaScript via RequireJS Optimizer.
+  * Minifies the CSS.
+  * Compiles the jade templates
 
 * `grunt assemble`
 
-* Does everything in the 'debug' task
-* Concatenates the compiled JS with Almond.js 
-* Assembles and packages the application.
+  * Does everything in the 'debug' task
+  * Concatenates the compiled JS with Almond.js 
+  * Assembles and packages the application.
