@@ -7,7 +7,6 @@ var requirejs = {
 
         // jquery and plugins
         jquery : '../assets/js/components/jquery/jquery.min',
-        placeholder : '../assets/js/libs/jquery.placeholder.min',
 
         // bootstrap
         bootstrap : '../assets/js/components/bootstrap/docs/assets/js/bootstrap.min',
@@ -27,16 +26,8 @@ var requirejs = {
         moment : '../assets/js/components/moment.min',
         socketio : '../../node_modules/socket.io/lib/socket.io',
         
-        // //jasmine testing libraries
-        mocha : '../../node_modules/mocha/mocha',
-        chai : '../../node_modules/chai/chai',
-        sinon : '../../node_modules/sinon/lib/sinon',
-
         // templates
-        templates : '../assets/templates',
-
-        // mocha spec directory
-        specs : '../specs'
+        templates : '../assets/templates'
     },
 
     shim :  {
@@ -51,15 +42,6 @@ var requirejs = {
         moment : {
             exports : 'moment'
         },
-
-        // Testing dependencies
-        sinon : {
-            exports : 'sinon'
-        },
-
-        mocha : {
-            exports: 'mocha'
-        }, 
 
         logger : {
             exports: 'debug'
@@ -77,8 +59,16 @@ var requirejs = {
             deps: ['jquery']
         },
 
-        placeholder : {
-            deps: ['jquery']
+        bsDatePicker : {
+            deps: ['bootstrap']
+        },
+
+        bsSelect : {
+            deps: ['bootstrap']
+        },
+
+        bsTimePicker : {
+            deps: ['bootstrap']
         }
     },
 

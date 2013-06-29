@@ -20,3 +20,15 @@
   background: linear-gradient(to bottom,  @color1 1%,@color2 100%); /* W3C */
   filter: %("progid:DXImageTransform.Microsoft.gradient( startColorstr='%s', endColorstr='%s',GradientType=0 )", @hex1, @hex2); /* IE6-8 */
 }
+
+.button-background-gradient(@start, @end, @startStr, @endStr){
+  background-image: -moz-linear-gradient(top, @start, @end);
+  background-image: -ms-linear-gradient(top, @start, @end);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@start), to(@end));
+  background-image: -webkit-linear-gradient(top, @start, @end);
+  background-image: -o-linear-gradient(top, @start, @end);
+  background-image: linear-gradient(top, @start, @end);
+  background-repeat: repeat-x;
+  filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr='#'%s, endColorstr='#'%s, GradientType=0)", @startStr, @endStr);
+  filter: ~"progid:DXImageTransform.Microsoft.gradient(enabled = false)";
+}

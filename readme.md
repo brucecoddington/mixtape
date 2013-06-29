@@ -23,9 +23,10 @@ This mixtape is heavily influenced by these projects
 
 * [Backbone Boilerplate](https://github.com/backbone-boilerplate/backbone-boilerplate)
 * [Angular Fun](https://github.com/CaryLandholt/AngularFun)
+* [angular-requirejs-seed](https://github.com/maxdow/angularjs-requirejs-seed)
 * [Grails](http://grails.org/)
 
-# Dependencies: #  
+# Dependencies #  
 
 * [Node](http://nodejs.org/)
 * [Grunt](https://github.com/cowboy/grunt) `npm install -g grunt-cli` 

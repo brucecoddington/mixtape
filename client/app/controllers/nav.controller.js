@@ -1,9 +1,7 @@
-/*jshint laxcomma:true*/
-
 define(function (require) {
     
   var logger = require('logger'),
-    $ = require('jquery');
+      $ = require('jquery');
 
   return function () {
     logger.info('Registering NavController');

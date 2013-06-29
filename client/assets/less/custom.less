@@ -6,7 +6,7 @@ body {
 	font-family: 'Lato', sans-serif;
 	font-weight: 400;
 	background: url(../img/bg.jpg) repeat;
-	color: @body-font-color;
+	color: @textColor;
 	font-size: 12px;
 }
 
@@ -15,10 +15,10 @@ body {
 }
 
 a {
-	color: @link-main-color;
+	color: @linkColor;
 
 	&:hover {
-		color: @link-hover-color;
+		color: @linkColorHover;
 	};
 }
 
@@ -32,14 +32,14 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   	font-size: 36px;
   	line-height: 40px;
-	color: @header-font-color;
+	color: @textColor;
 	font-weight: bold !important;
 }
 
 h2 {
   	font-size: 20px;
   	line-height: 40px;
-	color: @header-font-color;
+	color: @textColor;
 	font-weight: bold !important;
 }
 
@@ -143,7 +143,7 @@ img.right {
 header {
 	width: 100%;
 	border-top: 4px solid #eaeaea;
-	border-bottom: 4px solid @nav-bar-active-bg-color;
+	border-bottom: 4px solid @navbarBackground;
 	background: #fff; /* Old browsers */
 	filter: none;
   .dual-box-shadow(0, 0px, 0, 4px, rgba(0, 0, 0, .025), 0px, 1px, 1px, 0, rgba(0, 0, 0, .15));;
@@ -160,7 +160,7 @@ header {
     .single-transition;
 
     &:hover {
-      color: @nav-bar-font-color;
+      color: @navbarText;
       text-decoration: none;
     }
 
@@ -192,7 +192,7 @@ header {
       display: block;
       font-size: 20px;
       font-weight: 200;
-      border-right: 1px solid @nav-bar-active-bg-color;
+      border-right: 1px solid @navbarBackground;
       top: 0px;
     }
 
@@ -203,14 +203,14 @@ header {
       display: block;
       font-size: 20px;
       font-weight: 200;
-      border-right: 1px solid @nav-bar-active-bg-color;
+      border-right: 1px solid @navbarBackground;
       left: 0px;
       top: 0px;
     }
 
     &:hover {
       background: transparent;
-      color: @nav-bar-font-color;
+      color: @navbarText;
     }
 
     .icon-bar {
@@ -244,14 +244,14 @@ header {
 
         &:focus {
           border-top:4px solid #ddd;
-          background: @nav-bar-active-bg-color !important;
-          color: @nav-bar-font-color;
+          background: @navbarBackgroundHighlight !important;
+          color: @navbarText;
         }
 
         &:hover {
           border-top:4px solid #ddd;
-          background: @nav-bar-active-bg-color !important;
-          color: @nav-bar-font-color;
+          background: @navbarBackgroundHighlight !important;
+          color: @navbarText;
         }
 
         > span {
@@ -264,16 +264,16 @@ header {
 
     > .active {
       > a {
-          border-top:4px solid @main-highlight-color;
-          background: @nav-bar-active-bg-color !important;
-          color: @nav-bar-font-color;
+          border-top:4px solid @tooltipColor;
+          background: @navbarBackgroundHighlight !important;
+          color: @navbarText;
           text-decoration: none;
           .no-shadow;
 
         &:focus {
-          border-top:4px solid @main-highlight-color;
-          background: @nav-bar-active-bg-color !important;
-          color: @nav-bar-font-color;
+          border-top:4px solid @tooltipColor;
+          background: @navbarBackgroundHighlight !important;
+          color: @navbarText;
           text-decoration: none;
           .no-shadow;
         }
@@ -293,7 +293,7 @@ header {
   }
 }
 
-.nav-collapse{
+.nav-collapse {
   &.collapse {
     height: auto \9 !important;
     overflow: visible \9 !important;
@@ -328,19 +328,19 @@ header {
     > a {
       &:hover {
         color: #fff;
-        background: @main-highlight-color !important;
+        background: @mainHighlightColor !important;
       }
 
       &:focus {
         color: #fff;
-        background: @main-highlight-color !important;
+        background: @mainHighlightColor !important;
       }
     }
   }
 
   .active {
     > a {
-      color: @main-highlight-color !important;
+      color: @mainHighlightColor !important;
       background: transparent !important;
 
       &:hover {
@@ -353,19 +353,19 @@ header {
 
 .dropdown-submenu:hover > a {
   	color: #fff;
-  	background: @main-highlight-color !important;	
+  	background: @mainHighlightColor !important;	
 }
 
 .nav .active .dropdown-toggle .caret {
-  	border-top-color: @main-highlight-color !important;	
-  	border-bottom-color: @main-highlight-color !important;	
+  	border-top-color: @mainHighlightColor !important;	
+  	border-bottom-color: @mainHighlightColor !important;	
 }
 
 .navbar-inverse .nav li.dropdown.open > .dropdown-toggle,
 .navbar-inverse .nav li.dropdown.active > .dropdown-toggle,
 .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle {
-  color: @nav-bar-font-color;
-  background-color: @nav-bar-active-bg-color;
+  color: @navbarText;
+  background-color: @navbarBackgroundHighlight;
 }
 
 /* Wrapper
@@ -375,7 +375,7 @@ header {
   padding: 20px 0px;
   margin-bottom: 4px;
   background: #fff;
-  border-top: 4px solid @nav-bar-active-bg-color;
+  border-top: 4px solid @navbarBackgroundHighlight;
   .dual-box-shadow(0, 0px, 0, 4px, rgba(0, 0, 0, .025), 0px, -1px, 1px, 0, rgba(0, 0, 0, .025));
 
   .transparent {
@@ -387,8 +387,8 @@ header {
   }
 
   .full {
-    border: 1px solid @nav-bar-active-bg-color;
-    border-top: 2px solid @nav-bar-active-bg-color;
+    border: 1px solid @navbarBackgroundHighlight;
+    border-top: 2px solid @navbarBackgroundHighlight;
     background: #f6f6f6; /* Old browsers */
     padding: 20px;
     text-shadow: 0px 1px 0px #fff;
@@ -468,7 +468,7 @@ header {
   i {
     font-size: 60px;
     padding: 0px 5px;
-    color: @main-highlight-color;
+    color: @mainHighlightColor;
   }
 
   h3 {
@@ -643,7 +643,7 @@ ul.clients {
   padding: 20px 20px;
   margin-bottom: 40px;
   background: #fff;
-  border: 4px solid @nav-bar-active-bg-color;
+  border: 4px solid @navbarBackgroundHighlight;
   .dual-box-shadow(0, 0px, 0, 4px, rgba(0,0,0,.025), 0px, -1px, 1px, 0, rgba(0,0,0,.025));
 }
 
@@ -657,7 +657,7 @@ ul.clients {
   .item {
     padding: 4px;
     background: #fff;
-    border: 4px solid @nav-bar-active-bg-color;
+    border: 4px solid @navbarBackgroundHighlight;
     .dual-box-shadow(0, 0px, 0, 4px, rgba(0,0,0,.025), 0px, -1px, 1px, 0, rgba(0,0,0,.025));
 
     margin: 0px;
@@ -739,7 +739,7 @@ ul.clients {
       padding: 15px;
       color: #fff;
       font-family: "Boogaloo";
-      background: @main-highlight-color;
+      background: @mainHighlightColor;
     }
 
     .author {
@@ -748,7 +748,7 @@ ul.clients {
       padding: 15px;
       color: #fff;
       font-family: "Boogaloo";
-      background: @main-highlight-color;
+      background: @mainHighlightColor;
       font-size: 14px;
       text-align: center;
     }
@@ -935,8 +935,8 @@ ul.clients {
         }
 
         &:hover {
-          background: @main-highlight-color;
-          border: 1px solid @main-highlight-color;
+          background: @mainHighlightColor;
+          border: 1px solid @mainHighlightColor;
           color: #fff;
         }
       }
@@ -961,7 +961,7 @@ ul.clients {
   .post-date {
     display: block;
     background: transparent;
-    color: @main-highlight-color;
+    color: @mainHighlightColor;
     width: 80px;
     height: 40px;
     text-align: center;
@@ -986,7 +986,7 @@ ul.clients {
     height: 60px;
     font-size: 40px;
     line-height: 65px;
-    color: @main-highlight-color;
+    color: @mainHighlightColor;
     text-align: center;
     .border-radius(2px);
   }
@@ -1128,11 +1128,11 @@ input[type="button"]:hover {background:#aaa; text-decoration:none}
 	background: #555;
 }
 
-.button.color {color:#fff; background:@main-highlight-color;}
+.button.color {color:#fff; background:@mainHighlightColor;}
 .button.color:hover {background:#aaa;}
 
 input[type="button"] {
-	background: @main-highlight-color;
+	background: @mainHighlightColor;
 	color: #fff;
 }
 
@@ -1237,7 +1237,7 @@ input[type="button"] {
 }
 
 .accordion-heading .active{
-  	background: @main-highlight-color;
+  	background: @mainHighlightColor;
 	color: #fff;
 }
 
@@ -1348,7 +1348,7 @@ input[type="button"] {
   border-left: none;
   border-right: none;
   height: 14px;
-  .top-to-bottom-gradient(rgba(252,252,252,1), rgba(250,250,250,1), #fcfcfc, @nav-bar-active-bg-color);
+  .top-to-bottom-gradient(rgba(252,252,252,1), rgba(250,250,250,1), #fcfcfc, @navbarBackgroundHighlight);
   .border-radius(2px);
   .single-box-shadow-with-inset(0, 1px, 0, 0, #ffffff, 0px, 1px, 1px, 0, rgba(0,0,0,0.1));
   position: relative;
@@ -1371,7 +1371,7 @@ input[type="button"] {
       bottom: 0;
       right: 0;
       overflow: hidden;
-      background: @main-highlight-color;
+      background: @mainHighlightColor;
       .single-box-shadow-with-inset(0, 1px, 0, 0, #ffffff, 0px, 1px, 1px, 0, rgba(0,0,0,0.4));
       .border-radius(1px);
     }
@@ -1392,7 +1392,7 @@ input[type="button"] {
 
     > span {
       li.current {
-        background: @main-highlight-color;
+        background: @mainHighlightColor;
         .single-box-shadow-with-inset(0, 1px, 0, 0, #ffffff, 0px, 1px, 1px, 0, rgba(0,0,0,0.4));
         .border-radius(1px);
       }
@@ -1422,7 +1422,7 @@ input[type="button"] {
   }
 
   &.color {
-    background: @main-highlight-color;
+    background: @mainHighlightColor;
     color: #fff;
   }
 }
@@ -1614,8 +1614,8 @@ ol li ol.childlist{
     .single-transition(all, 0.1s);
 
     &:hover {
-      color: @main-highlight-color !important;
-      border: 1px solid @main-highlight-color !important;
+      color: @mainHighlightColor !important;
+      border: 1px solid @mainHighlightColor !important;
       text-decoration: none;
     }
   }
@@ -1631,7 +1631,7 @@ ol li ol.childlist{
   }
 
   strong {
-    color: @main-highlight-color;
+    color: @mainHighlightColor;
   }
 }
 
@@ -1661,12 +1661,12 @@ ol li ol.childlist{
     border: 1px solid #eee;
 
     &:hover {
-      border: 1px solid @main-highlight-color;
+      border: 1px solid @mainHighlightColor;
     }
 
     &.current {
-      border: 1px solid @main-highlight-color;
-      background: @main-highlight-color;
+      border: 1px solid @mainHighlightColor;
+      background: @mainHighlightColor;
       color: #fff;
     }
   }
@@ -1700,7 +1700,7 @@ ol li ol.childlist{
 ====================================================================== */
 
 #footer {
-  background: @header-font-color;
+  background: @headingsColor;
   padding: 20px 30px;
   text-shadow: 0px -1px 0px #000;
   color: #b0b0b0 !important;
@@ -1738,7 +1738,7 @@ ol li ol.childlist{
       padding: 2px;
 
       &:hover {
-        border-color: @main-highlight-color;
+        border-color: @mainHighlightColor;
       }
     }
   }
@@ -1806,18 +1806,6 @@ ol li ol.childlist{
 
 /* Buttons
 =================================================================== */
-
-.button-background-gradient(@start, @end, @startStr, @endStr){
-  background-image: -moz-linear-gradient(top, @start, @end);
-  background-image: -ms-linear-gradient(top, @start, @end);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@start), to(@end));
-  background-image: -webkit-linear-gradient(top, @start, @end);
-  background-image: -o-linear-gradient(top, @start, @end);
-  background-image: linear-gradient(top, @start, @end);
-  background-repeat: repeat-x;
-  filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr='#'%s, endColorstr='#'%s, GradientType=0)", @startStr, @endStr);
-  filter: ~"progid:DXImageTransform.Microsoft.gradient(enabled = false)";
-}
 
 .btn-primary {
   background-color: #006dcc;
@@ -1923,7 +1911,7 @@ ol li ol.childlist{
 
 .btn-inverse:active,
 .btn-inverse.active {
-  background-color: @main-highlight-color;
+  background-color: @mainHighlightColor;
 }
 
 

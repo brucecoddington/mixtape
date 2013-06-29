@@ -1,5 +1,3 @@
-/*global require, process, module */
-
 // This is the main application configuration file.  It is a Grunt
 // configuration file, which you can learn more about here:
 // https://github.com/cowboy/grunt/blob/master/docs/configuring.md
@@ -17,10 +15,29 @@ module.exports = function (grunt) {
         // override inside main.js needs to test for them so as to not accidentally
         // route.
         jshint:{
-            files: ["client/app/**/*.js"],
             options: {
                 scripturl: true,
-                laxcomma: true
+                laxcomma: true,
+                nomen: false,
+                globals : {
+                    require: true
+                }
+            },
+            code : {
+                src: ["client/app/**/*.js"],
+            },
+            specs : {
+                src: ["client/specs/**/*.js"],
+                options: {
+                    globals: {
+                        define: true, 
+                        beforeEach: true, 
+                        afterEach: true, 
+                        it: true, 
+                        xit: true
+                    },
+                    expr: true
+                }
             }
         },
 
@@ -71,7 +88,7 @@ module.exports = function (grunt) {
                     'client/assets/jade/**/*.jade',
                     'app/views/**/*.jade'
                 ],
-                tasks: ['assemble', 'karma:client:run']
+                tasks: ['assemble', 'karma:client:run', 'karma:e2e:run']
             }
         },
 
@@ -102,11 +119,19 @@ module.exports = function (grunt) {
         },
 
         karma : {
+            options : {
+                reporters: 'dots',
+                background: true
+            },
             client : {
-                configFile: 'karma.client.config.js',
+                configFile: 'karma.client.config.js'
+            },
+
+            e2e : {
+                configFile: 'karma.e2e.config.js',
                 options : {
-                    reporters: 'dots',
-                    background: true
+                    port: 9877,
+                    runnerPort: 9101
                 }
             }
         },
