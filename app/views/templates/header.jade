@@ -1,4 +1,4 @@
-header
+#header
   .container-fluid(ng-controller="NavController")
     .navbar
       .navbar-inner
@@ -21,7 +21,7 @@ header
                 li
                   a(href="#/option1", ng-click="setSelected('option1')") Option One
  
-            li(ng-class="{active: isSelected('three')}")
+            li(ng-class="{active: isSelected('three')}", id="link-three")
               a(href="#/three", ng-click="setSelected('three')") THIRD
                 span third option
 

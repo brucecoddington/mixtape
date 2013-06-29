@@ -14,6 +14,8 @@ define(function (require) {
     logger.group("Setup Angular");
 
     var app = angular.module('app', ['ngResource']);
+
+    require('routes')();
     logger.debug("Application module and routes configured.");
 
     // ----------- Services ---------------
@@ -48,9 +50,13 @@ define(function (require) {
 
     logger.groupEnd();
 
-    require('routes')();
-
     angular.bootstrap(document, ['app']);
+
+    // these next couple of lines are for the scenario runner
+    // It needs the ng-app attribute to kick off the e2e tests.
+    var html = document.getElementsByTagName('html')[0];
+    html.setAttribute('ng-app', 'app');
+    html.dataset.ngApp = 'app';
 
     logger.info("Angular compiled and executed.");
 
