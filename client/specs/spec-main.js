@@ -18,6 +18,7 @@ require.config({
 
     // AngularJS libraries
     angular : '/base/client/assets/js/components/angular/angular',
+    ngStrap : '/base/client/assets/js/components/angular-strap/dist/angular-strap',
     ngResource : '/base/client/assets/js/components/angular-resource/angular-resource.min',
     ngMocks : '/base/client/assets/js/lib/angular-mocks-1.1.5',
     ngScenario : '/base/client/assets/js/components/angular-scenario/angular-scenario',
@@ -72,6 +73,11 @@ require.config({
 
     angular : {
       exports: 'angular'
+    },
+
+    ngStrap : {
+        deps: ['bootstrap', 'angular', 'bsDatePicker', 'bsSelect', 'bsTimePicker'],
+        exports: 'angular'
     },
 
     ngResource : {

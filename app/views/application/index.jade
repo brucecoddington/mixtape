@@ -31,7 +31,32 @@ html(class="no-js", manifest="cache.manifest")
     link(href="/assets/css/style.css", rel="stylesheet", type="text/css")
 
   body
-    include ../templates/header
+    header
+      .container-fluid
+        .navbar(data-bs-navbar, data-ng-controller="NavController")
+          .navbar-inner
+            a.btn.btn-navbar(data-toggle="collapse", data-target=".nav-collapse")
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+
+            a.brand(href="#") LoGo
+
+            .nav-collapse.collapse
+              ul.nav
+                li(data-match-route="/")
+                  a(href="#") HOME
+
+                li
+                  a(data-bs-dropdown="dropdown") 
+                    | SECOND 
+                    b.caret
+
+                li(id="link-three", data-match-route="/three")
+                  a(href="#/three") THIRD
+
+                li(data-match-route="/four")
+                  a(href="#/four") FOURTH
 
     .ng-view
 

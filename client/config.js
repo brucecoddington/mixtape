@@ -19,6 +19,7 @@ var requirejs = {
         // AngularJS libraries
         angular : '../assets/js/components/angular/angular',
         ngResource : '../assets/js/components/angular-resource/angular-resource.min',
+        ngStrap : '../assets/js/components/angular-strap/dist/angular-strap',
         
         logger : '../assets/js/components/javascript-debug/ba-debug.min',
 
@@ -31,6 +32,10 @@ var requirejs = {
     },
 
     shim :  {
+        app : {
+            deps : ['ngResource', 'ngStrap', 'modernizr']
+        },
+
         modernizr: {
             exports: 'Modernizr'
         },
@@ -52,11 +57,17 @@ var requirejs = {
         },
 
         ngResource : {
-            deps : ['angular']
+            deps : ['angular'],
+            exports: 'angular'
         },
 
         bootstrap : {
             deps: ['jquery']
+        },
+
+        ngStrap : {
+            deps: ['bootstrap', 'angular', 'bsDatePicker', 'bsSelect', 'bsTimePicker'],
+            exports: 'angular'
         },
 
         bsDatePicker : {

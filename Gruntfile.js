@@ -58,14 +58,9 @@ module.exports = function (grunt) {
             combine : {
                 files : {
                     "client/dist/assets/css/style.css":[
-                      "client/assets/css/font-awesome.min.css",
-                      "client/assets/css/font-awesome-ie7.min.css",
                       "client/dist/assets/css/style.css"
                     ]   
                 }
-            },
-            min : {
-
             }
         },
 
@@ -80,15 +75,27 @@ module.exports = function (grunt) {
 
         // A task that runs in the background 'watching' for changes to code.
         watch : {
-            dev: {
+            client: {
                 files: [
                     'client/app/**/*.js', 
-                    'client/specs/**/*.js',
-                    'client/assets/less/**/*.less', 
-                    'client/assets/jade/**/*.jade',
-                    'app/views/**/*.jade'
+                    'client/specs/**/*.js'
                 ],
                 tasks: ['assemble', 'karma:client:run', 'karma:e2e:run']
+            },
+            server : {
+                files: [
+                    'specs/**/*.js',
+                    'app/**/*.js'
+                ],
+                tasks: ['mochacli']
+            },
+            views : {
+                files: [
+                    'app/views/**/*.jade',
+                    'client/assets/less/**/*.less', 
+                    'client/assets/jade/**/*.jade'
+                ],
+                tasks: ['assemble']
             }
         },
 
@@ -118,6 +125,7 @@ module.exports = function (grunt) {
             }
         },
 
+        // Start the Karma test runner for the client tests. 
         karma : {
             options : {
                 reporters: 'dots',
@@ -134,6 +142,15 @@ module.exports = function (grunt) {
                     runnerPort: 9101
                 }
             }
+        },
+
+        // Run the server-side Mocha tests
+        mochacli : {
+            options : {
+                reporter: 'spec',
+                bail: true
+            }, 
+            all : ['specs/**/*.js']
         },
 
         // generate HTML5 offline app cache manifest
@@ -200,9 +217,11 @@ module.exports = function (grunt) {
 
         // Compile the **jade** templates into html for deployment
         jade: {
+            options : {
+                pretty: true
+            }, 
             index: {
                 options: {
-                    pretty: true,
                     data: {
                         debug: true
                     }
@@ -212,8 +231,7 @@ module.exports = function (grunt) {
                 }
             },
             dist : {
-                option: {
-                    pretty: true, 
+                option: { 
                     data: {
                         debug: false
                     }
@@ -223,9 +241,6 @@ module.exports = function (grunt) {
                 }
             }, 
             templates : {
-               options: {
-                   pretty: true
-               },
                files: [{
                    expand: true,
                    cwd: 'client/assets/jade',
@@ -238,18 +253,27 @@ module.exports = function (grunt) {
 
         // The **docco** task iterates through the `src` files and creates annotated source reports for them.
         docco: {
-            js: {
+            client: {
                 src: "client/app/**/*.js",
-                output: "client/docs/js"
+                dest: "client/docs/client"
             },
 
             grunt: {
                 src: "Gruntfile.js",
-                output: "client/docs/grunt"
+                dest: "client/docs/grunt"
+            }, 
+
+            config: {
+                src: "config/**/*.js", 
+                dest: "client/docs/config"
+            },
+            app : {
+                src: "app/**/*.js",
+                dest: "client/docs/app"
             }
         },
 
-        // The **runapp** task will run the `server.js` in a `nodemon` and watch the
+        // The **runapp** task will run the `server.js` in a `nodemon` and watch the server files for changes
         runapp: {
             development : {
                 env: 'development'
@@ -265,6 +289,21 @@ module.exports = function (grunt) {
 
             test : {
                 env: 'test'
+            }
+        }, 
+
+        shell : {
+            startup : {
+                options: {
+                    stdout: true,
+                    stderror: true
+                },
+                command: [
+                    'grunt runapp:development',
+                    'grunt watch',
+                    'grunt karma:client',
+                    'grunt karma:e2e'
+                ].join('&')
             }
         }
 
@@ -285,6 +324,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-requirejs");
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks("grunt-karma");
+    grunt.loadNpmTasks("grunt-shell");
+    grunt.loadNpmTasks("grunt-mocha-cli");
 
     // **********************************************************************************************
 

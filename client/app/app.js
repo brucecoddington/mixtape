@@ -1,10 +1,6 @@
 define(function (require) {
 
-  require('ngResource');
-  require('bootstrap');
-
   var logger = require('logger'),
-      _ = require('lodash'),
       angular = require('angular');
   
   return (function initialize () {
@@ -50,7 +46,7 @@ define(function (require) {
 
     logger.groupEnd();
 
-    angular.bootstrap(document, ['app']);
+    angular.bootstrap(document, ['app', '$strap.directives']);
 
     // these next couple of lines are for the scenario runner
     // It needs the ng-app attribute to kick off the e2e tests.

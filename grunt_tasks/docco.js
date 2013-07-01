@@ -11,9 +11,9 @@ module.exports = function(grunt) {
         var srcFiles = grunt.file.expandFiles(this.data.src);
 
         var addArgs = [];
-        var output = this.data.output;
-        if (output !== undefined) {
-            addArgs.push(createArg('output', output));
+        var dest = this.data.dest;
+        if (dest !== undefined) {
+            addArgs.push(createArg('dest', dest));
         }
 
         var css = this.file.css;

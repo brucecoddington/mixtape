@@ -11,19 +11,17 @@ define(function (require) {
         '$scope',
         function ($scope) {
 
-          $scope.selected = 'home';
+          $scope.dropdown = [
+            {
+              "text": 'option1',
+              "href": '#/option1'
+            },
 
-          $scope.setSelected = function (selected) {
-            $scope.selected = selected;
-          };
-
-          $scope.isSelected = function (test) {
-            if (test === 'option') {
-              return test === $scope.selected.slice(0, 6);
+            {
+              "text": 'option2',
+              "href": '#/option2'
             }
-
-            return $scope.selected === test;
-          };
+          ];
         }
       ]
     );

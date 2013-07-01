@@ -5,6 +5,8 @@ define(function(require) {
     var angular = require('angular');
     var mocks = require('ngMocks');
 
+    require('ngStrap');
+
     var app, controller, scope;
 
     describe('nav.controller', function () {
@@ -30,19 +32,8 @@ define(function(require) {
             expect(controller).to.be.ok;
         });
 
-        it('should have a default selected property', function () {
-            expect(scope.selected).to.be.equal('home');
-        });
-
-        it('should change the selected in scope', function() {
-            scope.setSelected('newSelected');
-            expect(scope.selected).to.be.equal('newSelected');
-        });
-
-        it('should determine which nav is selected', function () {
-            scope.setSelected('newSelected');
-            expect(scope.isSelected('home')).to.not.be.ok;
-            expect(scope.isSelected('newSelected')).to.be.ok;
+        it('should have the angular strap directives', function () {
+            expect(angular.module('$strap.directives').directive('bsDropdown')).to.be.ok;
         });
     });
 });
