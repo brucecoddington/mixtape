@@ -10,11 +10,11 @@
 
         it('should tell us how many list items in the navbar', function () {
             var numberOfListItems = element('ul.nav li').count();
-            expect(numberOfListItems).toBe(5);
+            expect(numberOfListItems).toBe(4);
         });
 
         it('should have the nav controller in the header', function () { 
-            expect(element('.container-fluid[ng-controller]').text()).toBeDefined();
+            expect(element('.navbar[data-ng-controller]').text()).toBeDefined();
         });
 
         it('should have the nav button three', function () {
