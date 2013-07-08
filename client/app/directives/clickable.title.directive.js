@@ -1,31 +1,21 @@
-/*global define*/
+logger.info('Registering ClickableTitleDirective');
 
-define(function (require){
+angular.module('app').directive('ClickableTitle', 
+  function () {
+    
+    var clickableTitleController = function ($scope, $element) {
+      $element.bind('click', function () {
+        console.log('Turn up the volume.');
+      });
+    };
 
-  var logger = require('logger');
-
-  return function () {
-    logger.info('Registering ClickableTitleDirective');
-
-    require('angular').module('app').directive('ClickableTitle', 
-      function () {
-        
-        var clickableTitleController = function ($scope, $element) {
-          $element.bind('click', function () {
-            console.log('Turn up the volume.');
-          });
-        };
-
-        return {
-          controller: clickableTitleController,
-          replace: true,
-          restrict: 'EA',
-          scope: {},
-          template: '<h1 ng-transclude></h1>',
-          transclude: true
-        };
-      }
-    );
-
-  };
-});
+    return {
+      controller: clickableTitleController,
+      replace: true,
+      restrict: 'EA',
+      scope: {},
+      template: '<h1 ng-transclude></h1>',
+      transclude: true
+    };
+  }
+);

@@ -1,12 +1,12 @@
 !!! 5
 //if IE 7
-  html(lang="en", class="no-js ie", manifest="cache.manifest")
+  html(lang="en", class="no-js ie", data-ng-app="app", id="ng-app")
 //if IE 8
-  html(lang="en", class="no-js ie", manifest="cache.manifest")
+  html(lang="en", class="no-js ie", data-ng-app="app", id="ng-app")
 //if IE 9
-  html(lang="en", class="no-js ie9", manifest="cache.manifest")
+  html(lang="en", class="no-js ie9", data-ng-app="app", id="ng-app")
 //if [(gt IE 9)|!(IE)] <!
-html(class="no-js", manifest="cache.manifest")
+html(class="no-js", ng-app="app")
   // <![endif]
   head
     meta(charset="utf-8")
@@ -61,7 +61,8 @@ html(class="no-js", manifest="cache.manifest")
     .container-fluid
       .ng-view
     
-    clickable-title Hello!!
+    #main
+      clickable-title Hello!!
 
     #footer
       .container-fluid
@@ -74,9 +75,5 @@ html(class="no-js", manifest="cache.manifest")
             #under-footer-back-to-top
               a(href="#")
                 i.icon-chevron-up
-
-    - if (debug) 
-      script(src="config.js")
-      script(data-main="app", src="assets/js/components/requirejs/require.js")
-    - else
-      script(data-main="app", src="app/app.js")
+                  
+    script(src="app/app.js")

@@ -11,11 +11,7 @@ client/docs/*
 
 client/assets/js/components/*
 
-client/assets/templates/*
-
 client/cache.manifest
-
-client/spec-runner.html
 
 .idea/*
 

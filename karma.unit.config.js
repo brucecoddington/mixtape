@@ -1,19 +1,14 @@
-frameworks = ['mocha', 'requirejs'];
+frameworks = ['mocha'];
 
 files = [
-    {pattern: 'client/assets/js/**/*.js', included: false},
-    {pattern: 'node_modules/**/*.js', included: false},
-    {pattern: 'client/app/**/*.js', included: false},
-    {pattern: 'client/specs/unit/**/*.spec.js', included: false},
+    'node_modules/mocha/mocha.js',
+    'node_modules/chai/chai.js',
+    'node_modules/sinon/lib/sinon.js',
 
-    "client/specs/spec-main.js"
+    'client/app/app.js',
+    'client/specs/unit/**/*.spec.js'
 ];
 
 browsers = ['Chrome', 'Firefox'];
 
-exclude = [
-    'config.js',
-    'app/app.js' // excluding this so that spec-main.js is used to register RequireJS for unit tests
-];
-
-plugins = ['karma-mocha', 'karma-requirejs', 'karma-chrome-launcher', 'karma-firefox-launcher'];
+plugins = ['karma-mocha', 'karma-chrome-launcher', 'karma-firefox-launcher'];

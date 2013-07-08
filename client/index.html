@@ -1,9 +1,9 @@
 <!DOCTYPE html><!--[if IE 7]>
-<html lang="en" manifest="cache.manifest" class="no-js ie"></html><![endif]--><!--[if IE 8]>
-<html lang="en" manifest="cache.manifest" class="no-js ie"></html><![endif]--><!--[if IE 9]>
-<html lang="en" manifest="cache.manifest" class="no-js ie9"></html><![endif]-->
+<html lang="en" data-ng-app="app" id="ng-app" class="no-js ie"></html><![endif]--><!--[if IE 8]>
+<html lang="en" data-ng-app="app" id="ng-app" class="no-js ie"></html><![endif]--><!--[if IE 9]>
+<html lang="en" data-ng-app="app" id="ng-app" class="no-js ie9"></html><![endif]-->
 <!--if [(gt IE 9)|!(IE)] <!-->
-<html manifest="cache.manifest" class="no-js">
+<html ng-app="app" class="no-js">
   <!-- <![endif]-->
   <head>
     <meta charset="utf-8">
@@ -46,7 +46,9 @@
     <div class="container-fluid">
       <div class="ng-view"></div>
     </div>
-    <clickable-title>Hello!!</clickable-title>
+    <div id="main">
+      <clickable-title>Hello!!</clickable-title>
+    </div>
     <div id="footer">
       <div class="container-fluid">
         <div class="row-fluid">
@@ -61,7 +63,6 @@
         </div>
       </div>
     </div>
-    <script src="config.js"></script>
-    <script data-main="app" src="assets/js/components/requirejs/require.js"></script>
+    <script src="app/app.js"></script>
   </body>
 </html>

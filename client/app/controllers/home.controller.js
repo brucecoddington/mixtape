@@ -1,20 +1,11 @@
-/*global define*/
-define(function (require) {
-    
-  var logger = require('logger');
+logger.info('Registering HomeController');
 
-  return function () {
-    logger.info('Registering HomeController');
+angular.module('app').controller('HomeController',
+  [
+    '$scope',
 
-    require('angular').module('app').controller('HomeController',
-      [
-        '$scope',
-
-        function ($scope){
-           
-        }
-      ]
-    );
-  };
-    
-});
+    function ($scope){
+       
+    }
+  ]
+);

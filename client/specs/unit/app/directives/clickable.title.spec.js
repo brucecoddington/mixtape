@@ -1,45 +1,34 @@
-define(function(require) {
-    'use strict';
+var expect = chai.expect;
+var app, scope, elm;
 
-    var expect = require('chai').expect;
-    var angular = require('angular');
-    var mocks = require('ngMocks');
+describe('clickableTitle.directive', function () {
 
-    require('ngStrap');
+    beforeEach (function () {
+        app = angular.module("app", []);
+        angular.mock.module('app');
 
-    var app, scope, elm;
+        inject(function($rootScope, $compile){
+            scope = $rootScope.$new();
 
-    describe('clickableTitle.directive', function () {
+            elm = angular.element('<clickable-title>Click this title.</clickable-title>');
 
-        beforeEach (function () {
-            app = angular.module("app", []);
-            require('directives/clickable.title.directive')();
-            angular.mock.module('app');
-
-            inject(function($rootScope, $compile){
-                scope = $rootScope.$new();
-
-                elm = angular.element('<clickable-title>Click this title.</clickable-title>');
-
-                $compile(elm)(scope);
-                scope.$digest();
-            });
+            $compile(elm)(scope);
+            scope.$digest();
         });
-
-        afterEach (function () {
-            // make sure you clean up any test doubles
-        });
-
-        it('should exist', function () {
-            expect(app.directive('ClickableTitle')).to.be.ok;
-        });
-
-        it('should add a h1 to the element', function() {
-            var header = elm.find('h1');
-            console.log(header.toJSON);
-
-            expect(header.text()).to.equal('Click this title.');
-        });
-
     });
+
+    afterEach (function () {
+        // make sure you clean up any test doubles
+    });
+
+    it('should exist', function () {
+        expect(app.directive('ClickableTitle')).to.be.ok;
+    });
+
+    it('should add a h1 to the element', function() {
+        var header = elm.find('h1');
+
+        expect(header.text()).to.equal('Click this title.');
+    });
+
 });

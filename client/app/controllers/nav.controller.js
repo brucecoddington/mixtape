@@ -1,30 +1,21 @@
-define(function (require) {
-    
-  var logger = require('logger'),
-      $ = require('jquery');
+logger.info('Registering NavController');
 
-  return function () {
-    logger.info('Registering NavController');
+angular.module('app').controller('NavController',
+  [
+    '$scope',
+    function ($scope) {
 
-    require('angular').module('app').controller('NavController',
-      [
-        '$scope',
-        function ($scope) {
+      $scope.dropdown = [
+        {
+          "text": 'option1',
+          "href": '#/option1'
+        },
 
-          $scope.dropdown = [
-            {
-              "text": 'option1',
-              "href": '#/option1'
-            },
-
-            {
-              "text": 'option2',
-              "href": '#/option2'
-            }
-          ];
+        {
+          "text": 'option2',
+          "href": '#/option2'
         }
-      ]
-    );
-  };
-    
-});
+      ];
+    }
+  ]
+);

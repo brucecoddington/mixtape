@@ -20,7 +20,14 @@ module.exports = function (grunt) {
                 laxcomma: true,
                 nomen: false,
                 globals : {
-                    require: true
+                    angular: true,
+                    chai: true,
+                    describe: true, 
+                    beforeEach: true, 
+                    afterEach: true, 
+                    it: true, 
+                    xit: true, 
+                    chai: true
                 }
             },
             code : {
@@ -29,13 +36,6 @@ module.exports = function (grunt) {
             specs : {
                 src: ["client/specs/**/*.js"],
                 options: {
-                    globals: {
-                        define: true, 
-                        beforeEach: true, 
-                        afterEach: true, 
-                        it: true, 
-                        xit: true
-                    },
                     expr: true
                 }
             }
@@ -45,8 +45,39 @@ module.exports = function (grunt) {
         // shim and the templates into the application code.  
         concat:{
             dist : {
-                src : ["client/assets/js/components/almond/almond.js", "client/dist/debug/app.js"],
-                dest: "client/dist/release/app.js"
+                src : [
+                    // jquery and plugins
+                    'client/assets/js/components/jquery/jquery.js',
+
+                    // bootstrap
+                    'client/assets/js/components/bootstrap/docs/assets/js/bootstrap.js',
+                    'client/assets/js/components/bootstrap-datepicker/js/bootstrap-datepicker.js',
+                    'client/assets/js/components/bootstrap-select/bootstrap-select.js',
+                    'client/assets/js/components/bootstrap-timepicker/js/bootstrap-timepicker.js',
+                    
+                    'client/assets/js/components/modernizr/modernizr.js',
+
+                    // AngularJS libraries
+                    'client/assets/js/components/angular/angular.js',
+                    'client/assets/js/components/angular-resource/angular-resource.js',
+                    'client/assets/js/components/angular-strap/dist/angular-strap.js',
+                    
+                    // logger
+                    'client/assets/js/components/javascript-debug/ba-debug.js',
+
+                    // utilities
+                    'client/assets/js/components/lodash/dist/lodash.js',
+                    'client/assets/js/components/moment.js',
+                    'node_modules/socket.io/lib/socket.io.js',
+
+                    // application files
+                    'client/app/app.js',
+                    'client/app/controllers/home.controller.js',
+                    'client/app/controllers/nav.controller.js',
+                    'client/app/directives/clicable.title.directive.js'
+
+                ],
+                dest: "client/dist/debug/app.js"
             }
         },
 
@@ -102,20 +133,6 @@ module.exports = function (grunt) {
             }
         },
 
-        requirejs : {
-            compile : {
-                options: {
-                    name: "app",
-                    baseUrl: "client/app",
-                    optimizeCss: 'none',
-                    optimize: 'none',
-                    mainConfigFile: "client/config.js",
-                    out: "client/dist/debug/app.js",
-                    insertRequire: ['app']
-                }
-            }            
-        },
-
         // Compiles the Less files into the style.css file.
         less:{
             app:{
@@ -156,21 +173,6 @@ module.exports = function (grunt) {
             all : ['specs/**/*.js']
         },
 
-        // generate HTML5 offline app cache manifest
-        manifest: {
-            release: {
-                options: {
-                    cwd : 'client/',
-                    network : ["*"],
-                    timestamp : true
-                },
-                src: [
-                    "assets/images/**"
-                ],
-                dest: "cache.manifest"
-            }
-        },
-
         copy: {
             vendor : {
                 files: [{expand: true, cwd: 'client/assets/css', src:['**'], dest:'client/dist/assets/css'}]
@@ -183,7 +185,7 @@ module.exports = function (grunt) {
                         dest: 'client/dist/<%= pkg.name %>/assets'},
                     {expand: true, 
                         cwd: 'client/dist/release', 
-                        src:['app.js'], 
+                        src:['app.min.js'], 
                         dest:'client/dist/<%= pkg.name %>/app'},
                     {expand: true, 
                         cwd: 'client/dist/assets/css', 
@@ -198,8 +200,8 @@ module.exports = function (grunt) {
             debug : {
                 files: [
                     {expand: true, 
-                        cwd: 'client/app', 
-                        src:['**'], 
+                        cwd: 'client/dist/release', 
+                        src:['app.js'], 
                         dest: 'client/dist/<%= pkg.name %>-debug/app'},
                     {expand: true, 
                         cwd: 'client/assets', 
@@ -242,16 +244,7 @@ module.exports = function (grunt) {
                 files: {
                     'client/dist/release/index.html': ['app/views/application/index.jade']
                 }
-            }, 
-            templates : {
-               files: [{
-                   expand: true,
-                   cwd: 'client/assets/jade',
-                   src: ['**/*.jade'],
-                   dest: 'client/assets/templates',
-                   ext: '.html'
-               }]
-           }
+            }
         },
 
         // The **docco** task iterates through the `src` files and creates annotated source reports for them.
@@ -323,7 +316,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
-    grunt.loadNpmTasks("grunt-contrib-requirejs");
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks("grunt-karma");
     grunt.loadNpmTasks("grunt-shell");
@@ -337,10 +329,10 @@ module.exports = function (grunt) {
     // dist/debug/require.js, and then concatenate the require/define shim
     // almond.js and dist/debug/templates.js into the require.js file.
     
-    grunt.registerTask("default", ['clean', 'jshint', 'less', 'requirejs', 'cssmin', 'jade']);
+    grunt.registerTask("default", ['clean', 'jshint', 'less', 'cssmin', 'jade']);
 
     // Task to package everything up for deployment
-    grunt.registerTask("assemble", ['default', 'concat', 'copy:vendor', 'copy:debug', 'copy:release']);
+    grunt.registerTask("assemble", ['default', 'concat', 'uglify', 'copy:vendor', 'copy:debug', 'copy:release']);
 
     // Task to kickoff the grunt build for development 
     // This will start both Karma test runners (unit, e2e) and the 'watch' task.
