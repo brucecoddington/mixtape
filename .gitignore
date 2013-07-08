@@ -16,3 +16,5 @@ client/cache.manifest
 .idea/*
 
 *.iml
+
+client/index.html
