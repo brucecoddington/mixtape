@@ -75,12 +75,15 @@ module.exports = function (grunt) {
 
         // A task that runs in the background 'watching' for changes to code.
         watch : {
+            options : {
+                livereload: true
+            },
             client: {
                 files: [
                     'client/app/**/*.js', 
                     'client/specs/**/*.js'
                 ],
-                tasks: ['assemble', 'karma:client:run', 'karma:e2e:run']
+                tasks: ['assemble', 'karma:unit:run', 'karma:e2e:run']
             },
             server : {
                 files: [
@@ -131,8 +134,8 @@ module.exports = function (grunt) {
                 reporters: 'dots',
                 background: true
             },
-            client : {
-                configFile: 'karma.client.config.js'
+            unit : {
+                configFile: 'karma.unit.config.js'
             },
 
             e2e : {
@@ -299,10 +302,9 @@ module.exports = function (grunt) {
                     stderror: true
                 },
                 command: [
-                    'grunt runapp:development',
-                    'grunt watch',
-                    'grunt karma:client',
-                    'grunt karma:e2e'
+                    'grunt karma:unit',
+                    'grunt karma:e2e',
+                    'grunt watch'
                 ].join('&')
             }
         }
@@ -337,6 +339,10 @@ module.exports = function (grunt) {
     
     grunt.registerTask("default", ['clean', 'jshint', 'less', 'requirejs', 'cssmin', 'jade']);
 
-    // Task to package everything up for deployment and restart karma
+    // Task to package everything up for deployment
     grunt.registerTask("assemble", ['default', 'concat', 'copy:vendor', 'copy:debug', 'copy:release']);
+
+    // Task to kickoff the grunt build for development 
+    // This will start both Karma test runners (unit, e2e) and the 'watch' task.
+    grunt.registerTask("startup", ['shell:startup']);
 };

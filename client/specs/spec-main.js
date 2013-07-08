@@ -85,7 +85,8 @@ require.config({
     },
 
     ngMocks : {
-      deps: ['angular']
+      deps: ['angular'],
+      exports: 'angular.mock'
     },
 
     ngScenario : {
@@ -108,8 +109,15 @@ require.config({
         deps: ['bootstrap']
     }
   },
+
   // ask requirejs to load these files (all our tests)
   deps: tests,
+
   // start test run, once requirejs is done
-  callback: window.__karma__.start
+  callback: function () {
+    // set dependencies for all specs here. 
+    require(['ngStrap'], function () {
+      window.__karma__.start(); 
+    });
+  }
 });

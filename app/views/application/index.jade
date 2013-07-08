@@ -58,10 +58,22 @@ html(class="no-js", manifest="cache.manifest")
                 li(data-match-route="/four")
                   a(href="#/four") FOURTH
 
-    .ng-view
+    .container-fluid
+      .ng-view
+    
+    clickable-title Hello!!
 
-    include ../templates/footer
-    include ../templates/underfooter
+    #footer
+      .container-fluid
+        .row-fluid
+          .span10
+            #under-footer-copyright &copy; 2013, Somebody, All rights reserved.
+              .credit site by Someone
+
+          .span2
+            #under-footer-back-to-top
+              a(href="#")
+                i.icon-chevron-up
 
     - if (debug) 
       script(src="config.js")

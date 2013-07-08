@@ -25,8 +25,7 @@ define(function (require) {
     // ----------- Directives ---------------
     logger.group("Registering directives.");
 
-    // example of registering a directive
-    // require('directives/tweet.directive')();
+        require('directives/clickable.title.directive')();
 
     logger.groupEnd();
     
@@ -46,15 +45,17 @@ define(function (require) {
 
     logger.groupEnd();
 
-    angular.bootstrap(document, ['app', '$strap.directives']);
+    angular.element(document).ready(function () {
+        angular.bootstrap(document, ['app', '$strap.directives']);
 
-    // these next couple of lines are for the scenario runner
-    // It needs the ng-app attribute to kick off the e2e tests.
-    var html = document.getElementsByTagName('html')[0];
-    html.setAttribute('ng-app', 'app');
-    html.dataset.ngApp = 'app';
+        // these next couple of lines are for the scenario runner
+        // It needs the ng-app attribute to kick off the e2e tests.
+        var html = document.getElementsByTagName('html')[0];
+        html.setAttribute('ng-app', 'app');
+        html.dataset.ngApp = 'app';
 
-    logger.info("Angular compiled and executed.");
+        logger.info("Angular compiled and executed.");
+    });
 
     logger.groupEnd(); 
     logger.groupEnd(); 

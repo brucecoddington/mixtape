@@ -5,8 +5,6 @@ define(function(require) {
     var angular = require('angular');
     var mocks = require('ngMocks');
 
-    require('ngStrap');
-
     var app, controller, scope;
 
     describe('nav.controller', function () {
