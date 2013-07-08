@@ -1,16 +1,19 @@
-frameworks = ['ng-scenario'];
+module.exports = function(config) {
+    config.set({
+        frameworks: ['ng-scenario'],
 
-files = [
-    "client/dist/release/app.js",
-    "client/specs/e2e/**/*.spec.js"
-];
+        files: [
+            "client/specs/e2e/**/*.spec.js"
+        ],
 
-proxies = {
-    '/' : 'http://localhost:8880'
+        proxies: {
+            '/' : 'http://localhost:8080'
+        },
+
+        urlRoot: "__karma__",
+
+        browsers: ['Chrome', 'Firefox'],
+
+        plugins: ['karma-chrome-launcher', 'karma-firefox-launcher', 'karma-ng-scenario']
+    });
 };
-
-urlRoot = "__karma__";
-
-browsers = ['Chrome', 'Firefox'];
-
-plugins = ['karma-chrome-launcher', 'karma-firefox-launcher', 'karma-ng-scenario'];
