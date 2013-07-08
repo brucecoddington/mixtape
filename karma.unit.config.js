@@ -5,7 +5,9 @@ files = [
     'node_modules/chai/chai.js',
     'node_modules/sinon/lib/sinon.js',
 
-    'client/app/app.js',
+    'client/dist/debug/app.js',
+    'client/assets/js/components/angular/build/angular-mocks.js',
+    
     'client/specs/unit/**/*.spec.js'
 ];
 

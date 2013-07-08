@@ -1,6 +1,6 @@
 logger.info('Registering NavController');
 
-angular.module('app').controller('NavController',
+app.controller('NavController',
   [
     '$scope',
     function ($scope) {

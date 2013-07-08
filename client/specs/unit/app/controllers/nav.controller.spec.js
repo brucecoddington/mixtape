@@ -1,29 +1,39 @@
 var expect = chai.expect;
-var app, controller, scope;
+var appl, controller, scope;
 
 describe('nav.controller', function () {
 
-    beforeEach (function () {
-        app = angular.module("app", []);
-        angular.mock.module('app');
+    describe('controller actions', function () {
+        beforeEach (function () {
+            appl = angular.mock.module('app', []);
 
-        inject(function($rootScope, $controller){
-            scope = $rootScope.$new();
-            controller = $controller('NavController', {
-                $scope: scope
-            }); 
+            angular.mock.inject(function($rootScope, $controller) {
+                scope = $rootScope.$new();
+                controller = $controller('NavController', {
+                    $scope: scope
+                }); 
+            });
         });
-    });
 
-    afterEach (function () {
-        // make sure you clean up any test doubles
-    });
+        afterEach (function () {
+            // make sure you clean up any test doubles
+        });
 
-    it('should have the nav controller in the app module', function () {
-        expect(controller).to.be.ok;
+        it('should have the nav controller in the app module', function () {
+            expect(controller).to.be.ok;
+        });    
     });
+    
+    describe('angular strap exists', function () {
+        var strap;
 
-    it('should have the angular strap directives', function () {
-        expect(angular.module('$strap.directives').directive('bsDropdown')).to.be.ok;
+        beforeEach(function () {
+            strap = angular.mock.module('$strap.directives');
+        });
+
+        it('should have the angular strap directives', function () {
+            expect(strap.directive('bsDropdown')).to.be.ok;
+        });    
     });
+    
 });

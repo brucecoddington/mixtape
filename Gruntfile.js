@@ -58,8 +58,9 @@ module.exports = function (grunt) {
                     'client/assets/js/components/modernizr/modernizr.js',
 
                     // AngularJS libraries
-                    'client/assets/js/components/angular/angular.js',
-                    'client/assets/js/components/angular-resource/angular-resource.js',
+                    'client/assets/js/components/angular/build/angular.js',
+                    'client/assets/js/components/angular/build/angular-resource.js',
+                    'client/assets/js/components/angular/build/angular-cookies.js',
                     'client/assets/js/components/angular-strap/dist/angular-strap.js',
                     
                     // logger
@@ -68,7 +69,6 @@ module.exports = function (grunt) {
                     // utilities
                     'client/assets/js/components/lodash/dist/lodash.js',
                     'client/assets/js/components/moment.js',
-                    'node_modules/socket.io/lib/socket.io.js',
 
                     // application files
                     'client/app/app.js',
@@ -188,7 +188,7 @@ module.exports = function (grunt) {
                 files: [
                     {expand: true, 
                         cwd: 'client/assets', 
-                        src:['images/**', 'templates/**', 'js/**', 'font/**'], 
+                        src:['images/**', 'templates/**', 'font/**'], 
                         dest: 'client/dist/<%= pkg.name %>/assets'},
                     {expand: true, 
                         cwd: 'client/dist/release', 
@@ -207,12 +207,12 @@ module.exports = function (grunt) {
             debug : {
                 files: [
                     {expand: true, 
-                        cwd: 'client/dist/release', 
+                        cwd: 'client/dist/debug', 
                         src:['app.js'], 
                         dest: 'client/dist/<%= pkg.name %>-debug/app'},
                     {expand: true, 
                         cwd: 'client/assets', 
-                        src: ['images/**', 'templates/**', 'js/**', 'font/**'], 
+                        src: ['images/**', 'templates/**', 'font/**'], 
                         dest: 'client/dist/<%= pkg.name %>-debug/assets'},
                     {expand: true, 
                         cwd: 'client/dist/assets/css', 
@@ -339,7 +339,7 @@ module.exports = function (grunt) {
 
     // Load the necessary tasks
     grunt.loadTasks("grunt_tasks");
-    
+
     grunt.loadNpmTasks('grunt-hub');
     grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-contrib-jade");
