@@ -289,6 +289,13 @@ module.exports = function (grunt) {
         }, 
 
         shell : {
+            bowerInstall : {
+                options: {
+                    stdout: true,
+                    stderr: true
+                },
+                command: 'bower install'
+            },
             startup : {
                 options: {
                     stdout: true,
@@ -299,6 +306,23 @@ module.exports = function (grunt) {
                     'grunt karma:e2e',
                     'grunt watch'
                 ].join('&')
+            },
+            angular : {
+                options: {
+                    stdout: true,
+                    stderr: true,
+                    execOptions: {
+                        cwd: 'client/assets/js/components/angular'
+                    }
+                },
+                command: 'npm install'
+            }
+        },
+
+        hub: {
+            angular: {
+                src: ['client/assets/js/components/angular/Gruntfile.js'],
+                tasks: ['package']
             }
         }
 
@@ -320,9 +344,19 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-karma");
     grunt.loadNpmTasks("grunt-shell");
     grunt.loadNpmTasks("grunt-mocha-cli");
+    grunt.loadNpmTasks('grunt-hub');
 
     // **********************************************************************************************
 
+    //Initialize a fresh project.  This will build any dependencies and run the default grunt task.
+    grunt.registerTask("init", ['shell:bowerInstall', 'builddeps', 'default']);
+
+    //Build dependencies of the project
+    grunt.registerTask("builddeps", ['angular']);
+
+    //Build angular.js
+    grunt.registerTask("angular", ['shell:angular', 'hub:angular']);
+    
     // The default task will remove all contents inside the dist/ folder, lint
     // all your code, precompile all the underscore templates into
     // dist/debug/templates.js, compile all the application code into
