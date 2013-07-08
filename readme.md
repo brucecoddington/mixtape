@@ -31,6 +31,8 @@ This mixtape is heavily influenced by these projects
 * [Node](http://nodejs.org/)
 * [Grunt](https://github.com/cowboy/grunt) `npm install -g grunt-cli` 
 * [Bower](http://twitter.github.com/bower/) `npm install -g bower`
+* [Nodemon](https://github.com/remy/nodemon/) `npm install -g nodemon`
+* [Docco](http://jashkenas.github.io/docco/) `npm install -g docco`
 
 # Start your Application: #
 

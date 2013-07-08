@@ -155,22 +155,7 @@ module.exports = function (grunt) {
             }, 
             all : ['specs/**/*.js']
         },
-
-        // generate HTML5 offline app cache manifest
-        manifest: {
-            release: {
-                options: {
-                    cwd : 'client/',
-                    network : ["*"],
-                    timestamp : true
-                },
-                src: [
-                    "assets/images/**"
-                ],
-                dest: "cache.manifest"
-            }
-        },
-
+        
         copy: {
             vendor : {
                 files: [{expand: true, cwd: 'client/assets/css', src:['**'], dest:'client/dist/assets/css'}]
