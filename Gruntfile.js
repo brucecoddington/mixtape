@@ -114,7 +114,10 @@ module.exports = function (grunt) {
                     'client/app/**/*.js', 
                     'client/specs/**/*.js'
                 ],
-                tasks: ['assemble', 'karma:unit:run', 'karma:e2e:run']
+                tasks: ['assemble', 'karma:unit:run', 'karma:e2e:run'],
+                options : {
+                    livereload: true
+                }
             },
             server : {
                 files: [
@@ -129,7 +132,10 @@ module.exports = function (grunt) {
                     'client/assets/less/**/*.less', 
                     'client/assets/jade/**/*.jade'
                 ],
-                tasks: ['assemble']
+                tasks: ['assemble'],
+                options : {
+                    livereload: true
+                }
             }
         },
 
@@ -151,6 +157,7 @@ module.exports = function (grunt) {
                 reporters: 'dots',
                 background: true
             },
+
             unit : {
                 configFile: 'karma.unit.config.js'
             },
@@ -332,7 +339,8 @@ module.exports = function (grunt) {
 
     // Load the necessary tasks
     grunt.loadTasks("grunt_tasks");
-    grunt.loadNpmTasks("grunt-hub");
+    
+    grunt.loadNpmTasks('grunt-hub');
     grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-contrib-jade");
     grunt.loadNpmTasks("grunt-contrib-less");
