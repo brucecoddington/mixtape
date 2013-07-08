@@ -332,6 +332,7 @@ module.exports = function (grunt) {
 
     // Load the necessary tasks
     grunt.loadTasks("grunt_tasks");
+    grunt.loadNpmTasks("grunt-hub");
     grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-contrib-jade");
     grunt.loadNpmTasks("grunt-contrib-less");
@@ -344,7 +345,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-karma");
     grunt.loadNpmTasks("grunt-shell");
     grunt.loadNpmTasks("grunt-mocha-cli");
-    grunt.loadNpmTasks('grunt-hub');
 
     // **********************************************************************************************
 
