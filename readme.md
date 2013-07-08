@@ -33,14 +33,15 @@ This mixtape is heavily influenced by these projects
 * [Bower](http://twitter.github.com/bower/) `npm install -g bower`
 * [Nodemon](https://github.com/remy/nodemon/) `npm install -g nodemon`
 * [Docco](http://jashkenas.github.io/docco/) `npm install -g docco`
+* [Karma](https://github.com/karma-runner/karma/) `npm install -g karma`
 
 # Start your Application: #
 
 #### Install the Node dependencies locally. ####
 `npm install`
 
-#### Install the Browser dependencies. ####
-`bower install`
+#### Run init task to initialize a freshly checked out project ####
+`grunt init` will run bower install, build project dependencies (Angular) and then finally run the default task.
 
 ## These are the Grunt.js tasks that are available: ##
 

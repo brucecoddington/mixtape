@@ -17,7 +17,7 @@ var requirejs = {
         modernizr: '../assets/js/components/modernizr/modernizr',
 
         // AngularJS libraries
-        angular : '../assets/js/components/angular/angular',
+        angular : '../assets/js/components/angular/build/angular',
         ngResource : '../assets/js/components/angular-resource/angular-resource.min',
         ngStrap : '../assets/js/components/angular-strap/dist/angular-strap',
         
