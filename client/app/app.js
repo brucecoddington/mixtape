@@ -3,7 +3,7 @@ var logger = window.debug;
 logger.group("Starting application.");    
 logger.group("Setup Angular");
 
-var app = angular.module('app', ['ngResource']);
+var app = angular.module('app', ['app.directives', 'app.controllers']);
 
 logger.group("Loading Routes");
 
