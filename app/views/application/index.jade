@@ -75,5 +75,35 @@ html(class="no-js", ng-app="app")
             #under-footer-back-to-top
               a(href="#")
                 i.icon-chevron-up
-                  
-    script(src="app/app.js")
+
+    - if (env != 'development')              
+      script(src="app/app.js")
+    - else
+      script(src='assets/js/components/jquery/jquery.js')
+
+      // bootstrap
+      script(src='assets/js/components/bootstrap/docs/assets/js/bootstrap.js')
+      script(src='assets/js/components/bootstrap-datepicker/js/bootstrap-datepicker.js')
+      script(src='assets/js/components/bootstrap-select/bootstrap-select.js')
+      script(src='assets/js/components/bootstrap-timepicker/js/bootstrap-timepicker.js')
+      
+      script(src='assets/js/components/modernizr/modernizr.js')
+
+      // AngularJS libraries
+      script(src='assets/js/components/angular/build/angular.js')
+      script(src='assets/js/components/angular/build/angular-resource.js')
+      script(src='assets/js/components/angular/build/angular-cookies.js')
+      script(src='assets/js/components/angular-strap/dist/angular-strap.js')
+      
+      // logger
+      script(src='assets/js/components/javascript-debug/ba-debug.js')
+
+      // utilities
+      script(src='assets/js/components/lodash/dist/lodash.js')
+      script(src='assets/js/components/moment/moment.js')
+
+      // application files
+      script(src='app/app.js')
+      script(src='app/controllers/home.controller.js')
+      script(src='app/controllers/nav.controller.js')
+      script(src='app/directives/clickable.title.directive.js')

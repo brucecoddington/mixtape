@@ -4,7 +4,7 @@ var locomotive = require('locomotive')
 var ApplicationController = new Controller();
 
 ApplicationController.index = function() {
-  this.debug = locomotive.express.settings.env !== 'production'
+  this.env = locomotive.express.settings.env
   this.render();
 }
 
