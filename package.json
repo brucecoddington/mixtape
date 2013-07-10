@@ -43,6 +43,7 @@
     "grunt-shell": "~0.3.0",
     "grunt-mocha-cli": "~1.0.6",
     "karma-mocha": "0.0.3",
-    "karma-ng-html2js-preprocessor": "0.0.2"
+    "karma-ng-html2js-preprocessor": "0.0.2",
+    "karma-junit-reporter": "0.0.2"
   }
 }

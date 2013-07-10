@@ -9,7 +9,7 @@ module.exports = function (grunt) {
 
         // The clean task ensures all files are removed from the dist/ directory so
         // that no files linger from previous builds.
-        clean: ["client/dist", "client/docs"],
+        clean: ["client/dist", "client/docs", "client/test-reports"],
 
         // The jshint option for scripturl is set to lax, because the anchor
         // override inside main.js needs to test for them so as to not accidentally
@@ -26,12 +26,11 @@ module.exports = function (grunt) {
                     beforeEach: true, 
                     afterEach: true, 
                     it: true, 
-                    xit: true, 
-                    chai: true
+                    xit: true 
                 }
             },
             code : {
-                src: ["client/src/**/*.js"],
+                src: ["client/src/**/*.js"]
             },
             specs : {
                 src: ["client/test/**/*.js"],
@@ -147,21 +146,28 @@ module.exports = function (grunt) {
 
         // Start the Karma test runner for the client tests. 
         karma : {
-            options : {
-                reporters: 'dots',
-                background: true
-            },
-
             unit : {
+                reporters: 'dots',
+                background: true,
                 configFile: 'karma.unit.config.js'
             },
 
             e2e : {
+                reporters: 'dots',
+                background: true,
                 configFile: 'karma.e2e.config.js',
                 options : {
                     port: 9877,
                     runnerPort: 9101
                 }
+            },
+
+            unitci : {
+                configFile: 'karma.ci.unit.config.js'
+            },
+
+            e2eci : {
+                configFile: 'karma.ci.e2e.config.js'
             }
         },
 
@@ -287,6 +293,12 @@ module.exports = function (grunt) {
             test : {
                 env: 'test'
             }
+        },
+
+        runappci: {
+            all :{
+                env: 'development'
+            }
         }, 
 
         shell : {
@@ -366,6 +378,8 @@ module.exports = function (grunt) {
     // almond.js and dist/debug/templates.js into the require.js file.
     
     grunt.registerTask("default", ['clean', 'jshint', 'less', 'cssmin', 'jade']);
+
+    grunt.registerTask("test", ['assemble', 'runappci', 'karma:unitci', 'karma:e2eci']);
 
     // Task to package everything up for deployment
     grunt.registerTask("assemble", ['default', 'concat', 'uglify', 'copy:vendor', 'copy:debug', 'copy:release']);

@@ -82,3 +82,11 @@ This mixtape is heavily influenced by these projects
   * Does everything in the 'debug' task
   * Concatenates the compiled JS with Almond.js 
   * Assembles and packages the application.
+
+* `grunt test`
+
+  * Does everything in the 'assemble' task
+  * Forks the current process and starts the application server (for e2e testing)
+  * Runs the karma unit tests `karma:unitci`
+  * Runs the karma e2e tests `karma:e2eci`
+  * On completion, the forked node server shuts down

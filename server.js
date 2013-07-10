@@ -20,6 +20,12 @@ locomotive.boot('./', process.env.NODE_ENV, function (err, app) {
 
     var server = app.listen(app.settings.port, function () {
         console.log("Ready for requests on port %d in %s mode.", app.settings.port, app.settings.env);
+
+        //If this process was forked, send the ready message to whoever spawned it
+        if (process.send) {
+            process.send({ status: 'ready' });
+        }
+        
     });
 
     //global.socketio = require('./config/bootstrap/socket')(server);
