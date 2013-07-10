@@ -3,7 +3,7 @@ module.exports = function(config) {
         frameworks: ['ng-scenario'],
 
         files: [
-            "client/specs/e2e/**/*.spec.js"
+            "client/test/e2e/**/*.spec.js"
         ],
 
         proxies: {

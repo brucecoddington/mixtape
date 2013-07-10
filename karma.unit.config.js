@@ -9,7 +9,7 @@ module.exports = function(config) {
 		    'dist/debug/app.js',
 		    'assets/js/components/angular/build/angular-mocks.js',
 		    
-		    'specs/unit/**/*.spec.js', 
+		    'test/unit/**/*.spec.js', 
 
 		    'assets/templates/**/*.html'
 		],
