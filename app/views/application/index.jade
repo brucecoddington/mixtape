@@ -1,12 +1,12 @@
 !!! 5
 //if IE 7
-  html(lang="en", class="no-js ie", data-ng-app="app", id="ng-app")
+  html(lang="en", class="no-js ie", data-ng-app="main", id="ng-app")
 //if IE 8
-  html(lang="en", class="no-js ie", data-ng-app="app", id="ng-app")
+  html(lang="en", class="no-js ie", data-ng-app="main", id="ng-app")
 //if IE 9
-  html(lang="en", class="no-js ie9", data-ng-app="app", id="ng-app")
+  html(lang="en", class="no-js ie9", data-ng-app="main", id="ng-app")
 //if [(gt IE 9)|!(IE)] <!
-html(class="no-js", ng-app="app")
+html(class="no-js", ng-app="main")
   // <![endif]
   head
     meta(charset="utf-8")
@@ -60,9 +60,6 @@ html(class="no-js", ng-app="app")
 
     .container-fluid
       .ng-view
-    
-    #main
-      clickable-title Hello!!
 
     #footer
       .container-fluid
@@ -103,7 +100,8 @@ html(class="no-js", ng-app="app")
       script(src='assets/js/components/moment/moment.js')
 
       // application files
-      script(src='app/app.js')
-      script(src='app/controllers.js')
-      script(src='app/directives.js')
+      script(src='src/main.js')
+      script(src='src/app/app.js')
+      script(src='src/app/controllers.js')
+      script(src='src/app/directives.js')
       

@@ -31,10 +31,10 @@ module.exports = function (grunt) {
                 }
             },
             code : {
-                src: ["client/app/**/*.js"],
+                src: ["client/src/**/*.js"],
             },
             specs : {
-                src: ["client/specs/**/*.js"],
+                src: ["client/test/**/*.js"],
                 options: {
                     expr: true
                 }
@@ -71,9 +71,10 @@ module.exports = function (grunt) {
                     'client/assets/js/components/moment.js',
 
                     // application files
-                    'client/app/controllers.js',
-                    'client/app/directives.js',
-                    'client/app/app.js'
+                    'client/src/app/controllers.js',
+                    'client/src/app/directives.js',
+                    'client/src/app/app.js',
+                    'client/src/main.js'
 
                 ],
                 dest: "client/dist/debug/app.js"
@@ -110,17 +111,15 @@ module.exports = function (grunt) {
             },
             client: {
                 files: [
-                    'client/app/**/*.js', 
-                    'client/specs/**/*.js'
+                    'client/src/**/*.js', 
+                    'client/test/**/*.js',
+                    'client/assets/templates/**/*.html'
                 ],
-                tasks: ['assemble', 'karma:unit:run', 'karma:e2e:run'],
-                options : {
-                    livereload: true
-                }
+                tasks: ['assemble', 'karma:unit:run', 'karma:e2e:run']
             },
             server : {
                 files: [
-                    'specs/**/*.js',
+                    'test/**/*.js',
                     'app/**/*.js'
                 ],
                 tasks: ['mochacli']
@@ -128,13 +127,9 @@ module.exports = function (grunt) {
             views : {
                 files: [
                     'app/views/**/*.jade',
-                    'client/assets/less/**/*.less', 
-                    'client/assets/jade/**/*.jade'
+                    'client/assets/less/**/*.less'
                 ],
-                tasks: ['assemble'],
-                options : {
-                    livereload: true
-                }
+                tasks: ['assemble']
             }
         },
 
@@ -176,7 +171,7 @@ module.exports = function (grunt) {
                 reporter: 'spec',
                 bail: true
             }, 
-            all : ['specs/**/*.js']
+            all : ['test/**/*.js']
         },
 
         copy: {
@@ -187,7 +182,7 @@ module.exports = function (grunt) {
                 files: [
                     {expand: true, 
                         cwd: 'client/assets', 
-                        src:['images/**', 'templates/**', 'font/**'], 
+                        src:['img/**', 'templates/**', 'font/**'], 
                         dest: 'client/dist/<%= pkg.name %>/assets'},
                     {expand: true, 
                         cwd: 'client/dist/release', 
@@ -211,7 +206,7 @@ module.exports = function (grunt) {
                         dest: 'client/dist/<%= pkg.name %>-debug/app'},
                     {expand: true, 
                         cwd: 'client/assets', 
-                        src: ['images/**', 'templates/**', 'font/**'], 
+                        src: ['img/**', 'templates/**', 'font/**'], 
                         dest: 'client/dist/<%= pkg.name %>-debug/assets'},
                     {expand: true, 
                         cwd: 'client/dist/assets/css', 
@@ -256,7 +251,7 @@ module.exports = function (grunt) {
         // The **docco** task iterates through the `src` files and creates annotated source reports for them.
         docco: {
             client: {
-                src: "client/app/**/*.js",
+                src: "client/src/**/*.js",
                 dest: "client/docs/client"
             },
 
