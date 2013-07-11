@@ -1,0 +1,49 @@
+{
+  "name": "angular-locomotive-bootstrap",
+  "title": "Server: Locomotive, Client: AngularJS",
+  "main": "./client/dist/release/main.js",
+  "description": "Template for creating Locomotive applications with AngularJS",
+  "version": "0.0.1",
+  "author": {
+    "name": "Bruce Coddington"
+  },
+  "dependencies": {
+    "express": "3.2.6",
+    "socket.io": "0.9.16",
+    "superagent": "0.14.7",
+    "underscore": "1.4.4",
+    "locomotive": "0.3.6",
+    "connect-powered-by": "0.1.0",
+    "connect-redis": "1.4.5",
+    "redis": "0.8.3",
+    "mongoose": "3.6.11",
+    "nodemon": "0.7.8",
+    "jade": "0.31.2",
+    "tracer": "0.5.1"
+  },
+  "devDependencies": {
+    "http-proxy": "0.10.2",
+    "mocha": "1.11.0",
+    "chai": "1.6.1",
+    "sinon": "1.7.2",
+    "karma": "~0.9.4",
+    "grunt-karma": "0.5.0",
+    "grunt": "0.4.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-watch": "0.4.4",
+    "grunt-contrib-less": "~0.6.1",
+    "grunt-contrib-jade": "~0.7.0",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-cssmin": "~0.6.1",
+    "grunt-hub": "~0.5.0",
+    "karma-ng-scenario": "0.0.1",
+    "grunt-shell": "~0.3.0",
+    "grunt-mocha-cli": "~1.0.6",
+    "karma-mocha": "0.0.3",
+    "karma-ng-html2js-preprocessor": "0.0.2",
+    "karma-junit-reporter": "0.0.2"
+  }
+}

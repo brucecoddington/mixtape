@@ -1,0 +1,107 @@
+!!! 5
+//if IE 7
+  html(lang="en", class="no-js ie", data-ng-app="main", id="ng-app")
+//if IE 8
+  html(lang="en", class="no-js ie", data-ng-app="main", id="ng-app")
+//if IE 9
+  html(lang="en", class="no-js ie9", data-ng-app="main", id="ng-app")
+//if [(gt IE 9)|!(IE)] <!
+html(class="no-js", ng-app="main")
+  // <![endif]
+  head
+    meta(charset="utf-8")
+    title(ng-bind-template="{{title}} | The Title") App Title
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="description", content="App description goes here")
+    meta(name="author", content="Authors Name")
+
+    meta(property="og:title", content="")
+    meta(property="og:description", content="")
+    meta(property="og:type", content="")
+    meta(property="og:url", content="")
+    meta(property="og:image", content="")
+
+    link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700")
+    link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Droid+Serif")
+    link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Boogaloo")
+    link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Economica:700,400italic")
+    link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Lato:300,400,700,900")
+
+    //link(rel="shortcut icon", href="/assets/images/favicon.ico", type="image/x-icon")
+    link(href="/assets/css/style.css", rel="stylesheet", type="text/css")
+
+  body
+    header
+      .container-fluid
+        .navbar(data-bs-navbar, data-ng-controller="NavController")
+          .navbar-inner
+            a.btn.btn-navbar(data-toggle="collapse", data-target=".nav-collapse")
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+
+            a.brand(href="#") LoGo
+
+            .nav-collapse.collapse
+              ul.nav
+                li(data-match-route="/")
+                  a(href="#") HOME
+
+                li
+                  a(data-bs-dropdown="dropdown") 
+                    | SECOND 
+                    b.caret
+
+                li(id="link-three", data-match-route="/three")
+                  a(href="#/three") THIRD
+
+                li(data-match-route="/four")
+                  a(href="#/four") FOURTH
+
+    .container-fluid
+      .ng-view
+
+    #footer
+      .container-fluid
+        .row-fluid
+          .span10
+            #under-footer-copyright &copy; 2013, Somebody, All rights reserved.
+              .credit site by Someone
+
+          .span2
+            #under-footer-back-to-top
+              a(href="#")
+                i.icon-chevron-up
+
+    - if (env != 'development')              
+      script(src="app/app.js")
+    - else
+      script(src='assets/js/components/jquery/jquery.js')
+
+      // bootstrap
+      script(src='assets/js/components/bootstrap/docs/assets/js/bootstrap.js')
+      script(src='assets/js/components/bootstrap-datepicker/js/bootstrap-datepicker.js')
+      script(src='assets/js/components/bootstrap-select/bootstrap-select.js')
+      script(src='assets/js/components/bootstrap-timepicker/js/bootstrap-timepicker.js')
+      
+      script(src='assets/js/components/modernizr/modernizr.js')
+
+      // AngularJS libraries
+      script(src='assets/js/components/angular/build/angular.js')
+      script(src='assets/js/components/angular/build/angular-resource.js')
+      script(src='assets/js/components/angular/build/angular-cookies.js')
+      script(src='assets/js/components/angular-strap/dist/angular-strap.js')
+      
+      // logger
+      script(src='assets/js/components/javascript-debug/ba-debug.js')
+
+      // utilities
+      script(src='assets/js/components/lodash/dist/lodash.js')
+      script(src='assets/js/components/moment/moment.js')
+
+      // application files
+      script(src='src/main.js')
+      script(src='src/app/app.js')
+      script(src='src/app/controllers.js')
+      script(src='src/app/directives.js')
+      
