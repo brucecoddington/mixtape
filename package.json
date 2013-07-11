@@ -1,12 +1,9 @@
 {
-  "name": "angular-locomotive-bootstrap",
-  "title": "Server: Locomotive, Client: AngularJS",
+  "name": "d3-control-ui",
+  "title": "D3 Control UI",
   "main": "./client/dist/release/main.js",
-  "description": "Template for creating Locomotive applications with AngularJS",
+  "description": "D3 Control UI",
   "version": "0.0.1",
-  "author": {
-    "name": "Bruce Coddington"
-  },
   "dependencies": {
     "express": "3.2.6",
     "socket.io": "0.9.16",

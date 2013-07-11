@@ -363,7 +363,7 @@ module.exports = function (grunt) {
     // **********************************************************************************************
 
     //Initialize a fresh project.  This will build any dependencies and run the default grunt task.
-    grunt.registerTask("init", ['shell:bowerInstall', 'builddeps', 'default']);
+    grunt.registerTask("init", ['shell:bowerInstall', 'builddeps', 'assemble']);
 
     //Build dependencies of the project
     grunt.registerTask("builddeps", ['angular']);
@@ -379,6 +379,8 @@ module.exports = function (grunt) {
     
     grunt.registerTask("default", ['clean', 'jshint', 'less', 'cssmin', 'jade']);
 
+    // Forks off the application server and runs the unit and e2e tests.
+    // Test results stored in client/test-reports
     grunt.registerTask("test", ['assemble', 'runappci', 'karma:unitci', 'karma:e2eci']);
 
     // Task to package everything up for deployment
