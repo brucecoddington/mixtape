@@ -4,7 +4,7 @@ module.exports = function () {
 
   console.log('in development config');
 
-  this.set('port', 8080);
+  this.set('port', 3000);
 
   this.use(express.errorHandler({
     dumpExceptions: true,

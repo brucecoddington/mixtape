@@ -1,7 +1,7 @@
 var express = require('express');
 
 module.exports = function() {
-  app.set('port', 8888);
+  app.set('port', 3333);
 
   // Serve static content
   app.use(express.static(__dirname + "/../../client"));

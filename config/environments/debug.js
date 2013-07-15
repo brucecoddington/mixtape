@@ -1,7 +1,7 @@
 var express = require('express');
 
 module.exports = function() {
-  this.set('port', 8880);
+  this.set('port', 3003);
 
   this.use(express.errorHandler({
     dumpExceptions: true,

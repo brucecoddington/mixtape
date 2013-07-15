@@ -7,7 +7,7 @@ module.exports = function(config) {
         ],
 
         proxies: {
-            '/' : 'http://localhost:8080'
+            '/' : 'http://localhost:3000'
         },
 
         urlRoot: "__karma__",
