@@ -51,7 +51,6 @@ module.exports = function (grunt) {
                     // bootstrap
                     'client/assets/js/components/bootstrap/docs/assets/js/bootstrap.js',
                     'client/assets/js/components/bootstrap-datepicker/js/bootstrap-datepicker.js',
-                    'client/assets/js/components/bootstrap-select/bootstrap-select.js',
                     'client/assets/js/components/bootstrap-timepicker/js/bootstrap-timepicker.js',
                     
                     'client/assets/js/components/modernizr/modernizr.js',
@@ -60,7 +59,6 @@ module.exports = function (grunt) {
                     'client/assets/js/components/angular/build/angular.js',
                     'client/assets/js/components/angular/build/angular-resource.js',
                     'client/assets/js/components/angular/build/angular-cookies.js',
-                    'client/assets/js/components/angular-strap/dist/angular-strap.js',
                     
                     // logger
                     'client/assets/js/components/javascript-debug/ba-debug.js',
