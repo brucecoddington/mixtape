@@ -46,6 +46,7 @@ module.exports = function (grunt) {
             dist : {
                 src : [
                     // jquery and plugins
+                    'client/assets/js/components/modernizr/modernizr.js',
                     'client/assets/js/components/jquery/jquery.js',
 
                     // bootstrap
@@ -53,12 +54,16 @@ module.exports = function (grunt) {
                     'client/assets/js/components/bootstrap-datepicker/js/bootstrap-datepicker.js',
                     'client/assets/js/components/bootstrap-timepicker/js/bootstrap-timepicker.js',
                     
-                    'client/assets/js/components/modernizr/modernizr.js',
 
                     // AngularJS libraries
                     'client/assets/js/components/angular/build/angular.js',
                     'client/assets/js/components/angular/build/angular-resource.js',
                     'client/assets/js/components/angular/build/angular-cookies.js',
+                    'client/assets/js/components/angular-strap/dist/angular-strap.js',
+
+                    // Angular UI libraries
+                    'client/assets/js/components/angular-ui-bootstrap/dist/ui-bootstrap-0.4.0.js',
+                    'client/assets/js/components/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.4.0.js',
                     
                     // logger
                     'client/assets/js/components/javascript-debug/ba-debug.js',
@@ -146,17 +151,19 @@ module.exports = function (grunt) {
         karma : {
             unit : {
                 reporters: 'dots',
-                background: true,
-                configFile: 'karma.unit.config.js'
+                configFile: 'karma.unit.config.js',
+                options: {
+                    background: true
+                }
             },
 
             e2e : {
                 reporters: 'dots',
-                background: true,
                 configFile: 'karma.e2e.config.js',
                 options : {
                     port: 9877,
-                    runnerPort: 9101
+                    runnerPort: 9101,
+                    background: true
                 }
             },
 
@@ -327,6 +334,16 @@ module.exports = function (grunt) {
                     }
                 },
                 command: 'npm install'
+            },
+            angularui : {
+                options: {
+                    stdout: true,
+                    stderr: true,
+                    execOptions: {
+                        cwd: 'client/assets/js/components/angular-ui-bootstrap'
+                    }
+                },
+                command: 'npm install'
             }
         },
 
@@ -334,6 +351,10 @@ module.exports = function (grunt) {
             angular: {
                 src: ['client/assets/js/components/angular/Gruntfile.js'],
                 tasks: ['package']
+            }, 
+            angularui: {
+                src: ['client/assets/js/components/angular-ui-bootstrap/Gruntfile.js'],
+                tasks: ['build']
             }
         }
 
@@ -367,7 +388,7 @@ module.exports = function (grunt) {
     grunt.registerTask("builddeps", ['angular']);
 
     //Build angular.js
-    grunt.registerTask("angular", ['shell:angular', 'hub:angular']);
+    grunt.registerTask("angular", ['shell:angular', 'shell:angularui', 'hub:angular', 'hub:angularui']);
     
     // The default task will remove all contents inside the dist/ folder, lint
     // all your code, precompile all the underscore templates into
