@@ -9,7 +9,7 @@ module.exports = function (grunt) {
 
         // The clean task ensures all files are removed from the dist/ directory so
         // that no files linger from previous builds.
-        clean: ["client/dist", "client/docs", "client/test-reports"],
+        clean: ["dist", "client/dist", "client/docs", "client/test-reports"],
 
         // The jshint option for scripturl is set to lax, because the anchor
         // override inside main.js needs to test for them so as to not accidentally
@@ -261,23 +261,32 @@ module.exports = function (grunt) {
 
         // The **docco** task iterates through the `src` files and creates annotated source reports for them.
         docco: {
+            options: {
+                layout : "parallel"
+            },
             client: {
-                src: "client/src/**/*.js",
-                dest: "client/docs/client"
+                options: {
+                    output : "dist/docs/client/"
+                },
+                src: "client/src/**/*.js"
             },
-
+            app: {
+                options: {
+                    output : "dist/docs/app/"
+                },
+                src: "app/**/*.js"
+            },
             grunt: {
-                src: "Gruntfile.js",
-                dest: "client/docs/grunt"
+                options: {
+                    output : "dist/docs/docs/grunt/"
+                },
+                src: "Gruntfile.js"
             }, 
-
             config: {
-                src: "config/**/*.js", 
-                dest: "client/docs/config"
-            },
-            app : {
-                src: "app/**/*.js",
-                dest: "client/docs/app"
+                options: {
+                    output : "dist/docs/config/"
+                },
+                src: "config/**/*.js"
             }
         },
 
@@ -296,7 +305,10 @@ module.exports = function (grunt) {
             },
 
             test : {
-                env: 'test'
+                options: {
+                    dieWithParent: true
+                },
+                env: 'development'
             }
         },
 
@@ -362,9 +374,6 @@ module.exports = function (grunt) {
 
     // *********************************************************************************************
 
-    // Load the necessary tasks
-    grunt.loadTasks("grunt_tasks");
-
     grunt.loadNpmTasks('grunt-hub');
     grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-contrib-jade");
@@ -375,9 +384,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-mixtape-run-app');
     grunt.loadNpmTasks("grunt-karma");
     grunt.loadNpmTasks("grunt-shell");
     grunt.loadNpmTasks("grunt-mocha-cli");
+    grunt.loadNpmTasks('grunt-docco-multi');
 
     // **********************************************************************************************
 
@@ -400,10 +411,10 @@ module.exports = function (grunt) {
 
     // Forks off the application server and runs the unit and e2e tests.
     // Test results stored in client/test-reports
-    grunt.registerTask("test", ['assemble', 'runappci', 'karma:unitci', 'karma:e2eci']);
+    grunt.registerTask("test", ['assemble', 'runapp:test', 'karma:unitci', 'karma:e2eci']);
 
     // Task to package everything up for deployment
-    grunt.registerTask("assemble", ['default', 'concat', 'uglify', 'copy:vendor', 'copy:debug', 'copy:release']);
+    grunt.registerTask("assemble", ['default', 'concat', 'uglify', 'copy:vendor', 'copy:debug', 'copy:release', 'docco']);
 
     // Task to kickoff the grunt build for development 
     // This will start both Karma test runners (unit, e2e) and the 'watch' task.

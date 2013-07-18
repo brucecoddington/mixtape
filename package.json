@@ -41,6 +41,8 @@
     "grunt-mocha-cli": "~1.0.6",
     "karma-mocha": "0.0.3",
     "karma-ng-html2js-preprocessor": "0.0.2",
-    "karma-junit-reporter": "0.0.2"
+    "karma-junit-reporter": "0.0.2",
+    "grunt-mixtape-run-app": "0.0.2",
+    "grunt-docco-multi": "0.0.2"
   }
 }

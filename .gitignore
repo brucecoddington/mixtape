@@ -19,3 +19,4 @@ client/cache.manifest
 
 client/index.html
 libpeerconnection.log
+dist
