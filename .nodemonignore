@@ -3,6 +3,7 @@
 /client/*
 /grunt_tasks/*
 /node_modules/*
-grunt.js
+/dist/*
+Gruntfile.js
 karma.e2e.config.js
 karma.unit.config.js
