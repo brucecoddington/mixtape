@@ -25,7 +25,7 @@ This mixtape is heavily influenced by these projects
 * [angular-requirejs-seed](https://github.com/maxdow/angularjs-requirejs-seed)
 * [Grails](http://grails.org/)
 
-# Dependencies #  
+# Dependencies: #
 
 * [Node](http://nodejs.org/)
 * [Mongo](http://www.mongodb.org/)
