@@ -5,7 +5,7 @@
   logger.group("Starting application.");    
   logger.group("Setup Main module.");
 
-  var app = angular.module('main', ['app', '$strap.directives']);
+  var app = angular.module('main', ['app', 'services', 'filters', '$strap.directives']);
 
   logger.group("Loading Routes");
 
