@@ -13,10 +13,10 @@
         "bootstrap": "2.3.2",
         "bootstrap-datepicker": "1.1.2",
         "bootstrap-timepicker": "0.2.3",
-        "bootstrap-select" : "*",
         "javascript-debug" : "cowboy/javascript-debug",
         "modernizr" : "2.6.2",
         "angular-ui-utils" : "0.0.3",
+        "angular-ui-bootstrap" : "0.4.0",
         "retinajs" : "imulus/retinajs"
     }
 }
