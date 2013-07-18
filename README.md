@@ -53,9 +53,9 @@ This mixtape is heavily influenced by these projects
 * `cssmin` Concatenates and minifies the project's CSS into one file.
 * `uglify` Takes the built and optimized require.js file and minifies it for filesize benefits.
 * `runapp` This will start a Node.js Express server application on a specified port and serve up the application files from various project directories. 
-* `runapp:development` Uses port 8080 to serve the JavaScript files directly from the app/ directory. Serves the compiled style.css contained in 'dist/assets/css' directory.
-* `runapp:debug` Uses port 8880 to serve the 'human readable' concatenated JavaScript files and compiled CSS. 
-* `runapp:release` Uses port 8000 to serve the concatenated and minified JavaScript and the compiled CSS. 
+* `runapp:development` Uses port 3000 to serve the JavaScript files directly from the app/ directory. Serves the compiled style.css contained in 'dist/assets/css' directory.
+* `runapp:debug` Uses port 3003 to serve the 'human readable' concatenated JavaScript files and compiled CSS. 
+* `runapp:production` Uses port 3033 to serve the concatenated and minified JavaScript and the compiled CSS. 
 * `requirejs` Uses the requireJs optimizer to compile and concatenate the application's JavaScript.
 * `less` Compiles the Less files into usable CSS. 
 * `copy` Packages up the compiled code and static resources into a deployable directory structure. 
