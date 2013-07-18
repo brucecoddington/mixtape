@@ -8,7 +8,6 @@ Track list:
 * [Express](http://expressjs.com/)
 * [SocketIO](http://socket.io/)
 * [Angular](http://angularjs.org/)
-* [RequireJS](http://requirejs.org/)
 * [karma](http://karma-runner.github.io/0.8/index.html)
 * [Mocha](http://visionmedia.github.io/mocha/)
 * [chai](http://chaijs.com/)
@@ -44,6 +43,8 @@ This mixtape is heavily influenced by these projects
 
 #### Run init task to initialize a freshly checked out project ####
 `grunt init`
+
+#### Start your Mongo DB instance (if it's not already) ####
 
 ## These are the Grunt.js tasks that are available: ##
 
