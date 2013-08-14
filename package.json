@@ -1,8 +1,8 @@
 {
-  "name": "d3-control-ui",
-  "title": "D3 Control UI",
+  "name": "mixtape",
+  "title": "Mixtape",
   "main": "./client/dist/release/main.js",
-  "description": "D3 Control UI",
+  "description": "Compilation of Cool frameworks and tools.",
   "version": "0.0.1",
   "dependencies": {
     "express": "3.2.6",
@@ -43,6 +43,8 @@
     "karma-ng-html2js-preprocessor": "0.0.2",
     "karma-junit-reporter": "0.0.2",
     "grunt-mixtape-run-app": "0.0.2",
-    "grunt-docco-multi": "0.0.2"
+    "grunt-docco-multi": "0.0.2",
+    "walkdir": "0.0.7",
+    "grunt-angular-templates": "~0.3.10"
   }
 }

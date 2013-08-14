@@ -1,22 +1,31 @@
 {
-    "name": "d3-control-ui",
-    "title": "D3 Control UI",
-    "main": "./client/dist/release/main.js",
-    "description": "D3 Control UI",
-    "version": "0.0.1",
-    "dependencies" : {
-        "jquery" : "1.10.1",
-        "lodash" : "1.3.1",
-        "moment": "2.0.0", 
-        "angular" : "angular/angular.js#1.1.5",
-        "angular-strap" : "0.7.4",
-        "bootstrap": "2.3.2",
-        "bootstrap-datepicker": "1.1.2",
-        "bootstrap-timepicker": "0.2.3",
-        "javascript-debug" : "cowboy/javascript-debug",
-        "modernizr" : "2.6.2",
-        "angular-ui-utils" : "0.0.3",
-        "angular-ui-bootstrap" : "0.4.0",
-        "retinajs" : "imulus/retinajs"
-    }
+  "name": "mixtape",
+  "title": "Mixtape",
+  "main": "./client/dist/release/main.js",
+  "description": "Compilation of cool stuff.",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery": "1.10.1",
+    "lodash": "1.3.1",
+    "moment": "2.0.0",
+    "angular": "angular/angular.js#1.1.5",
+    "angular-strap": "0.7.4",
+    "bootstrap": "3.0.0-rc1",
+    "bootstrap-datepicker": "1.1.2",
+    "bootstrap-timepicker": "0.2.3",
+    "javascript-debug": "cowboy/javascript-debug",
+    "modernizr": "2.6.2",
+    "angular-ui-utils": "0.0.3",
+    "angular-ui-bootstrap": "0.4.0",
+    "angular-ui-router": "0.0.1",
+    "retinajs": "imulus/retinajs",
+    "font-awesome": "~3.2.1",
+    "respond.js": "scottjehl/Respond",
+    "bootstrap-select": "latest",
+    "responsive-tables": "*",
+    "add-to-homescreen": "*"
+  },
+  "resolutions": {
+    "bootstrap": "3.0.0-rc1"
+  }
 }

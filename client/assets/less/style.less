@@ -1,14 +1,37 @@
-@import "../js/components/bootstrap/less/bootstrap.less";
-@import "../js/components/bootstrap/less/responsive.less";
-@import "variables.less";
-@import "gradients.less";
-@import "shadows.less";
-@import "mixins.less";
-@import "../js/components/bootstrap-datepicker/less/datepicker.less";
-@import "../js/components/bootstrap-timepicker/less/timepicker.less";
-@import "../js/components/retinajs/src/retina.less";
+// Import bower components
+// --------------------------------------------------
 
-@import "bootswatch.less";
-@import "custom.less";
-@import "styleIE.less";
-@import "styleIE9.less";
+//Bootstrap
+@import "../js/components/bootstrap/less/bootstrap.less";
+
+//FontAwesome
+@import "../js/components/font-awesome/less/font-awesome.less";
+
+
+// Libs and their overrides
+// --------------------------------------------------
+
+//Bootstrap variables and overrides
+@import "lib/bootstrap/custom.less";
+@import "lib/bootstrap/variables.less";
+
+//Angular strap
+@import "lib/angular/validation.less";
+
+
+// Mixins
+// --------------------------------------------------
+
+@import "mixins/gradients.less";
+@import "mixins/shadows.less";
+@import "mixins/mixins.less";
+@import "mixins/borders.less";
+
+// application styles
+// --------------------------------------------------
+
+@import "app/variables.less";
+@import "app/custom.less";
+@import "app/navbar.less";
+@import "app/layout.less";
+
