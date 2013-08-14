@@ -1,0 +1,74 @@
+html,
+body {
+  height: 100%;
+}
+
+.footer-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin-bottom: 25px;
+}
+
+.main-container {
+  position: absolute;
+  left: @left-push-container-width;
+  right: 0;
+  top: @navbar-height;
+  bottom: 0;
+  padding: 0 20px;
+  overflow-y: scroll;
+  .single-transition(left, 0.3s, ease-in-out, 0);
+}
+
+//Add the ability to push the content body left or right
+body.pushable {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+  left: 0;
+  
+  .single-transition(left, 0.3s, ease-in-out, 0);
+
+  &.push-left {
+    left: -@right-push-container-width;
+  }
+}
+
+/* Set the fixed height of the footer here */
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  background-color: @brand-blue;
+  .footer-copyright {
+    font-size: .7em;
+    color: @gray-lighter;
+  }
+  margin-top: -30px; /* negative value of footer height */
+  height: 30px;
+  clear: both;
+  padding-top: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  clear: both;
+  [class*="span"] {
+    min-height: 25px;
+  }
+}
+
+//Push the body right when the collapsed nav bar is shown
+@media (max-width: 979px) {
+  body.push-right {
+    left: @right-push-container-width;
+  }
+  .main-container {
+    left: 0;
+    margin: 0;
+  }
+}

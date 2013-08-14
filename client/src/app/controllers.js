@@ -3,8 +3,8 @@
 
   var logger = window.debug;
 
-  angular.module('app.controllers', []).
-    controller('HomeController', [
+  angular.module('app.controllers', [])
+    .controller('HomeController', [
       '$scope',
       function ($scope){
          
@@ -29,6 +29,5 @@
     ]);
 
     logger.debug('Registered app.HomeController');
-    logger.debug('Registered app.NavController');
 
 }());

@@ -1,0 +1,118 @@
+//All nav bars
+.navbar {
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 0;
+  a.nav-icon {
+    padding: 10px;
+    cursor: pointer;
+    >i {
+      //I think this might be a font awesome issue
+      //Not sure yet whether I want to keep it or ignore it.
+      // &.icon-warning-sign {
+      //   font-size: 1.8em;
+      // }
+      position: relative;
+    }
+  }
+  .navbar-nav {
+    position: relative;
+    width: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .nav {
+    > li {
+      display: inline-block;
+    }
+  }
+}
+
+//Application nav bar
+.navbar.main {
+  z-index: 100;
+  .navbar-brand {
+    margin: 0;
+    text-align: left;
+    float: left;
+    font-size: 26px;
+    font-weight: 400;
+    padding: 13px 15px;
+    i {
+      font-size: 22px;
+    }
+    &.large {
+      display: block;
+    }
+    &.small {
+      display: none;
+    }
+  }
+  ul.nav.navbar-nav.pull-right {
+    min-width: 250px;
+  }
+  .side-nav-toggle {
+    .single-transition(margin-left, 0.3s, ease-in-out, 0);
+    margin-left: -45px;
+  }
+  a.nav-icon {
+    //Add functionality for hovering on a quickview link with a badge
+    //Makes the badge bg match the link hover color
+    &:hover,&:focus {
+      >i>.nav-badge {
+        background-color: @navbar-link-hover-color;
+      }
+    }
+    //Nav badge specific stuff
+    >i {
+      >.nav-badge {
+        position: absolute;
+        bottom: -2px;
+        right: -4px;
+        background-color: @brand-danger;
+        border-radius: 50%; 
+        color: white;
+        font-size: 14px;
+        line-height: 13px;
+        height: 16px;
+        padding-top: 2px;
+        text-align: center;
+        width: 15px;
+      }
+    }
+  }
+}
+
+//Show the side nav toggle
+@media (max-width: 979px) {
+  .navbar.main {
+    .side-nav-toggle {
+      margin-left: 0;
+    }
+  }
+}
+
+//Crush the brand and the nave icons to fix on displays smaller than the iPad
+@media (max-width: 475px) {
+  .navbar.main {
+    .navbar-brand {
+      &.large {
+        display: none;
+      }
+      &.small {
+        display: block;
+      }
+    }
+    ul.nav.navbar-nav.pull-right {
+      min-width: 200px;
+    }
+    a.nav-icon {
+      padding: 10px 5px 10px 5px;
+    }
+    .side-nav-toggle {
+      a.nav-icon {
+        padding: 10px 5px 10px 10px;
+      }
+    }
+  }
+}

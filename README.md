@@ -21,6 +21,7 @@ Track list:
 This mixtape is heavily influenced by these projects
 
 * [Backbone Boilerplate](https://github.com/backbone-boilerplate/backbone-boilerplate)
+* [angular-app](https://github.com/angular-app/angular-app)
 * [Angular Fun](https://github.com/CaryLandholt/AngularFun)
 * [angular-requirejs-seed](https://github.com/maxdow/angularjs-requirejs-seed)
 * [Grails](http://grails.org/)
