@@ -7,13 +7,13 @@ module.exports = function (grunt) {
     grunt.initConfig ({
         pkg : grunt.file.readJSON('package.json'),
 
-        clientDistDir: 'client/dist',
-        assetsDir: 'client/assets',
-        componentDir: '<%= assetsDir %>/js/components',
+        assets: 'client/assets',
+        components: '<%= assets %>/js/components',
+        clientdist: 'client/dist',
 
         // The clean task ensures all files are removed from the dist/ directory so
         // that no files linger from previous builds.
-        clean: ["dist", "<%= clientDistDir %>", "client/docs", "client/test-reports"],
+        clean: ["dist", "<%= clientdist %>", "client/docs", "client/test-reports"],
 
         // The jshint option for scripturl is set to lax, because the anchor
         // override inside main.js needs to test for them so as to not accidentally
@@ -26,11 +26,11 @@ module.exports = function (grunt) {
                 globals : {
                     angular: true,
                     chai: true,
-                    describe: true, 
-                    beforeEach: true, 
-                    afterEach: true, 
-                    it: true, 
-                    xit: true 
+                    describe: true,
+                    beforeEach: true,
+                    afterEach: true,
+                    it: true,
+                    xit: true
                 }
             },
             code : {
@@ -44,52 +44,73 @@ module.exports = function (grunt) {
             }
         },
 
-        // The concatenate task is used here to merge the almond require/define
-        // shim and the templates into the application code.  
-        concat:{
-            dist : {
+        // Compiles the Less files into the style.css file.
+        less:{
+            app:{
+                options: {
+                    paths: ["<%= assets %>/less"]
+                },
+                files : {
+                    '<%= clientdist %>/assets/css/style.css': '<%= assets %>/less/style.less'
+                }
+            }
+        },
 
+        // The concatenate task is used here to merge the almond require/define
+        // shim and the templates into the application code.
+        concat:{
+            js : {
                 src : [
-                    // jquery and plugins
-                    '<%= componentDir %>/respond.js/respond.min.js',
-                    '<%= componentDir %>/modernizr/modernizr.js',
-                    '<%= componentDir %>/jquery/jquery.js',
+                    // Shims
+                    '<%= components %>/respond.js/respond.min.js',
+                    '<%= components %>/modernizr/modernizr.js',
+
+                    // jQuery and Related
+                    '<%= components %>/jquery/jquery.js',
+                    '<%= components %>/hammerjs/dist/hammer.js',
 
                     // bootstrap
-                    '<%= componentDir %>/bootstrap/dist/js/bootstrap.js',
-                    '<%= componentDir %>/bootstrap-datepicker/js/bootstrap-datepicker.js',
-                    '<%= componentDir %>/bootstrap-timepicker/js/bootstrap-timepicker.js',
-                    
+                    '<%= components %>/bootstrap/dist/js/bootstrap.js',
+                    '<%= components %>/bootstrap-datepicker/js/bootstrap-datepicker.js',
+                    '<%= components %>/bootstrap-timepicker/js/bootstrap-timepicker.js',
 
                     // AngularJS libraries
-                    '<%= componentDir %>/angular/build/angular.js',
-                    '<%= componentDir %>/angular/build/angular-resource.js',
-                    '<%= componentDir %>/angular/build/angular-cookies.js',
-                    '<%= componentDir %>/angular-strap/dist/angular-strap.js',
+                    '<%= components %>/angular/build/angular.js',
+                    '<%= components %>/angular/build/angular-resource.js',
+                    '<%= components %>/angular/build/angular-cookies.js',
+                    '<%= components %>/angular-strap/dist/angular-strap.js',
 
                     //AngularJS Library Dependencies
-                    '<%= componentDir %>/bootstrap-select/bootstrap-select.js',
-                    '<%= componentDir %>/angular-strap/vendor/bootstrap-datepicker.js',
+                    '<%= components %>/bootstrap-select/bootstrap-select.js',
+                    '<%= components %>/angular-strap/vendor/bootstrap-datepicker.js',
 
                     // Angular UI libraries
-                    '<%= componentDir %>/angular-ui-bootstrap/dist/ui-bootstrap-0.4.0.js',
-                    '<%= componentDir %>/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.4.0.js',
-                    '<%= componentDir %>/angular-ui-router/release/angular-ui-router.js',
-                    
+                    '<%= components %>/angular-ui-bootstrap/dist/ui-bootstrap-0.4.0.js',
+                    '<%= components %>/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.4.0.js',
+                    '<%= components %>/angular-ui-router/release/angular-ui-router.js',
+                    '<%= components %>/angular-ui-utils/components/angular-ui-docs/build/ui-utils.js',
+
                     // logger
-                    '<%= componentDir %>/javascript-debug/ba-debug.js',
+                    '<%= components %>/javascript-debug/ba-debug.js',
 
                     // utilities
-                    '<%= componentDir %>/lodash/dist/lodash.js',
-                    '<%= componentDir %>/moment/moment.js',
-                    '<%= componentDir %>/add-to-homescreen/src/add2home.js',
-                    '<%= componentDir %>/responsive-tables/responsive-tables.js',
+                    '<%= components %>/lodash/dist/lodash.js',
+                    '<%= components %>/moment/moment.js',
+                    '<%= components %>/add-to-homescreen/src/add2home.js',
+                    '<%= components %>/faker/Faker.js',
 
                     'client/src/**/*.js'
 
                 ],
-                
-                dest: "<%= clientDistDir %>/debug/app.js"
+
+                dest: "<%= clientdist %>/assets/js/app.js"
+            },
+            css : {
+                src : [
+                    "<%= clientdist %>/assets/css/style.css",
+                    "<%= components %>/add-to-homescreen/style/add2home.css"
+                ],
+                dest: "<%= clientdist %>/assets/css/style.css"
             }
         },
 
@@ -97,25 +118,23 @@ module.exports = function (grunt) {
         // order and concatenate them into a single CSS file named style.css.  It
         // also minifies all the CSS as well.  This is named style.css, because we
         // only want to load one stylesheet in index.html.
-        cssmin : { 
-            combine : {
+        cssmin :{
+            all : {
                 files : {
-                    "<%= clientDistDir %>/assets/css/style.css":[
-                      "<%= clientDistDir %>/assets/css/style.css"
-                    ]   
+                    "<%= clientdist %>/assets/css/style.min.css": ["<%= clientdist %>/assets/css/style.css"]
                 }
             }
         },
 
         ngtemplates:  {
-            dist:      {
+            all:      {
                 options:  {
                     base: 'client',
-                    concat: 'dist',       //Appends the template file to the concat task
+                    concat: 'js',       //Appends the template file to the concat task
                     module: 'main'
                 },
-                src:      'client/assets/templates/**/*.html',
-                dest:     'client/dist/assets/templates/templates.js'
+                src:      '<%= assets %>/templates/**/*.html',
+                dest:     '<%= clientdist %>/assets/templates/templates.js'
             }
         },
 
@@ -123,7 +142,7 @@ module.exports = function (grunt) {
         uglify : {
             dist : {
                 files: {
-                    "<%= clientDistDir %>/release/app.js" : ["<%= clientDistDir %>/debug/app.js"]
+                    "<%= clientdist %>/assets/js/app.min.js" : ["<%= clientdist %>/assets/js/app.js"]
                 }
             }
         },
@@ -131,15 +150,38 @@ module.exports = function (grunt) {
         // A task that runs in the background 'watching' for changes to code.
         watch : {
             options : {
-                livereload: true
+                livereload: true,
+                atBegin: true
             },
-            client: {
+            development: {
                 files: [
-                    'client/src/**/*.js', 
+                    'client/src/**/*.js',
                     'client/test/**/*.js',
-                    '<%= assetsDir %>/templates/**/*.html'
+                    '<%= assets %>/templates/**/*.html',
+                    '<%= assets %>/less/**/*.less',
+                    'app/views/**/*.jade'
                 ],
-                tasks: ['assemble', 'karma:unit:run', 'karma:e2e:run']
+                tasks: ['development', 'karma:unit:run', 'karma:e2e:run']
+            },
+            debug: {
+                files: [
+                    'client/src/**/*.js',
+                    'client/test/**/*.js',
+                    '<%= assets %>/templates/**/*.html',
+                    '<%= assets %>/less/**/*.less',
+                    'app/views/**/*.jade'
+                ],
+                tasks: ['debug', 'karma:unit:run', 'karma:e2e:run']
+            },
+            production: {
+                files: [
+                    'client/src/**/*.js',
+                    'client/test/**/*.js',
+                    '<%= assets %>/templates/**/*.html',
+                    '<%= assets %>/less/**/*.less',
+                    'app/views/**/*.jade'
+                ],
+                tasks: ['production', 'karma:unit:run', 'karma:e2e:run']
             },
             server : {
                 files: [
@@ -147,29 +189,10 @@ module.exports = function (grunt) {
                     'app/**/*.js'
                 ],
                 tasks: ['mochacli']
-            },
-            views : {
-                files: [
-                    'app/views/**/*.jade',
-                    '<%= assetsDir %>/less/**/*.less'
-                ],
-                tasks: ['assemble']
             }
         },
 
-        // Compiles the Less files into the style.css file.
-        less:{
-            app:{
-                options: {
-                    paths: ["<%= assetsDir %>/less"]
-                },
-                files : {
-                    '<%= clientDistDir %>/assets/css/style.css': '<%= assetsDir %>/less/style.less'
-                }
-            }
-        },
-
-        // Start the Karma test runner for the client tests. 
+        // Start the Karma test runner for the client tests.
         karma : {
             unit : {
                 reporters: 'dots',
@@ -203,80 +226,90 @@ module.exports = function (grunt) {
             options : {
                 reporter: 'spec',
                 bail: true
-            }, 
+            },
             all : ['test/**/*.js']
         },
-
+       
         copy: {
             vendor : {
-                files: [{expand: true, cwd: '<%= assetsDir %>/css', src:['**'], dest:'<%= clientDistDir %>/assets/css'}]
-            },
-            release : {
                 files: [
-                    {expand: true, 
-                        cwd: '<%= assetsDir %>', 
-                        src:['img/**', 'templates/**', 'font/**'], 
-                        dest: '<%= clientDistDir %>/<%= pkg.name %>/assets'},
-                    {expand: true, 
-                        cwd: '<%= clientDistDir %>/release', 
-                        src:['app.min.js'], 
-                        dest:'<%= clientDistDir %>/<%= pkg.name %>/app'},
-                    {expand: true, 
-                        cwd: '<%= clientDistDir %>/assets/css', 
-                        src:['**'], 
-                        dest: '<%= clientDistDir %>/<%= pkg.name %>/assets/css'},
-                    {expand: true, 
-                        cwd: '<%= clientDistDir %>/release', 
-                        src:['index.html'], 
-                        dest: '<%= clientDistDir %>/<%= pkg.name %>'}
+                    {
+                        expand: true,
+                        cwd: '<%= components %>/font-awesome/font',
+                        src:['**'],
+                        dest:'<%= clientdist %>/assets/font'
+                    },
+                    {
+                        expand: true,
+                        cwd: '<%= components %>/dynatree/src/skin',
+                        src:['**.gif'],
+                        dest:'<%= clientdist %>/assets/img/dynatree'
+                    }
+                ]
+            },
+            development : {
+                files: [{
+                        expand: true,
+                        cwd: '<%= assets %>',
+                        src: ['img/**', 'font/**'],
+                        dest: '<%= clientdist %>/assets'
+                    }
                 ]
             },
             debug : {
+                files: [{
+                        expand: true,
+                        cwd: '<%= clientdist %>/assets',
+                        src: ['css/style.css', 'font/**', 'img/**', 'js/app.js'],
+                        dest: '<%= clientdist %>/<%= pkg.name %>-debug/assets'
+                    },
+                    {
+                        expand: true,
+                        cwd: '<%= clientdist %>/assets/html',
+                        src:['index.html'],
+                        dest: '<%= clientdist %>/<%= pkg.name %>-debug'
+                    }
+                ]
+            },
+            production : {
                 files: [
-                    {expand: true, 
-                        cwd: '<%= clientDistDir %>/debug', 
-                        src:['app.js'], 
-                        dest: '<%= clientDistDir %>/<%= pkg.name %>-debug/app'},
-                    {expand: true, 
-                        cwd: '<%= assetsDir %>', 
-                        src: ['img/**', 'templates/**', 'font/**'], 
-                        dest: '<%= clientDistDir %>/<%= pkg.name %>-debug/assets'},
-                    {expand: true, 
-                        cwd: '<%= clientDistDir %>/assets/css', 
-                        src: ['**'], 
-                        dest: '<%= clientDistDir %>/<%= pkg.name %>-debug/assets/css'},
-                    {expand: true, 
-                        cwd: 'client', 
-                        src: ['*'], 
-                        dest: '<%= clientDistDir %>/<%= pkg.name %>-debug', 
-                        filter: 'isFile'}
+                    {
+                        expand: true,
+                        cwd: '<%= clientdist %>/assets',
+                        src: ['css/style.min.css', 'font/**', 'img/**', 'js/app.min.js'],
+                        dest: '<%= clientdist %>/<%= pkg.name %>/assets'
+                    },
+                    {
+                        src: '<%= clientdist %>/assets/html/index.min.html',
+                        dest:'<%= clientdist %>/<%= pkg.name %>/index.html'
+                    }
                 ]
             }
         },
 
         // Compile the **jade** templates into html for deployment
         jade: {
-            options : {
-                pretty: true
-            }, 
-            index: {
+            debug: {
                 options: {
+                    pretty: true,
                     data: {
-                        debug: true
+                        debug: true,
+                        env: 'debug'
                     }
                 },
                 files: {
-                    'client/index.html' : ['app/views/application/index.jade']
+                    '<%= clientdist %>/assets/html/index.html' : ['app/views/application/index.jade']
                 }
             },
-            dist : {
-                option: { 
+            production : {
+                options: {
                     data: {
-                        debug: false
+                        debug: false,
+                        env: 'production'
                     }
-                }, 
+                },
                 files: {
-                    '<%= clientDistDir %>/release/index.html': ['app/views/application/index.jade']
+                    '<%= clientdist %>/assets/html/index.min.html' : ['app/views/application/index.jade']
                 }
             }
         },
@@ -303,7 +336,7 @@ module.exports = function (grunt) {
                     output : "dist/docs/docs/grunt/"
                 },
                 src: "Gruntfile.js"
-            }, 
+            },
             config: {
                 options: {
                     output : "dist/docs/config/"
@@ -338,7 +371,7 @@ module.exports = function (grunt) {
             all :{
                 env: 'development'
             }
-        }, 
+        },
 
         shell : {
             bowerInstall : {
@@ -359,35 +392,36 @@ module.exports = function (grunt) {
                     'grunt watch'
                 ].join('&')
             },
-            angular : {
+            angularuibootstrap : {
                 options: {
                     stdout: true,
                     stderr: true,
                     execOptions: {
-                        cwd: '<%= assetsDir %>/js/components/angular'
+                        cwd: '<%= components %>/angular-ui-bootstrap'
                     }
                 },
                 command: 'npm install'
             },
-            angularui : {
+            angularuiutils : {
                 options: {
                     stdout: true,
                     stderr: true,
                     execOptions: {
-                        cwd: '<%= assetsDir %>/js/components/angular-ui-bootstrap'
+                        cwd: '<%= components %>/angular-ui-utils'
                     }
                 },
                 command: 'npm install'
             }
+
         },
 
         hub: {
-            angular: {
-                src: ['<%= assetsDir %>/js/components/angular/Gruntfile.js'],
-                tasks: ['package']
-            }, 
-            angularui: {
-                src: ['<%= assetsDir %>/js/components/angular-ui-bootstrap/Gruntfile.js'],
+            angularuibootstrap: {
+                src: ['<%= components %>/angular-ui-bootstrap/Gruntfile.js'],
+                tasks: ['build']
+            },
+            angularuiutils: {
+                src: ['<%= components %>/angular-ui-utils/gruntFile.js'],
                 tasks: ['build']
             }
         }
@@ -411,34 +445,40 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-shell");
     grunt.loadNpmTasks("grunt-mocha-cli");
     grunt.loadNpmTasks('grunt-docco-multi');
+    grunt.loadNpmTasks('grunt-angular-templates');
 
     // **********************************************************************************************
 
     //Initialize a fresh project.  This will build any dependencies and run the default grunt task.
-    grunt.registerTask("init", ['shell:bowerInstall', 'builddeps', 'assemble']);
+    grunt.registerTask("init", ['shell:bowerInstall', 'builddeps', 'production']);
 
     //Build dependencies of the project
-    grunt.registerTask("builddeps", ['angular']);
+    grunt.registerTask("builddeps", ['angularuibootstrap', 'angularuiutils']);
 
-    //Build angular.js and angular-ui
-    grunt.registerTask("angular", ['shell:angular', 'shell:angularui', 'hub:angular', 'hub:angularui']);
-    
+    //Build angular-ui bootstrap
+    grunt.registerTask("angularuibootstrap", ['shell:angularuibootstrap', 'hub:angularuibootstrap']);
+
+    //Build angular-ui utils
+    grunt.registerTask("angularuiutils", ['shell:angularuiutils', 'hub:angularuiutils']);
+
     // The default task will remove all contents inside the dist/ folder, lint
     // all your code, precompile all the underscore templates into
     // dist/debug/templates.js, compile all the application code into
     // dist/debug/require.js, and then concatenate the require/define shim
     // almond.js and dist/debug/templates.js into the require.js file.
-    
-    grunt.registerTask("default", ['clean', 'jshint', 'less', 'cssmin', 'jade']);
+
+    grunt.registerTask("default", ['clean']);
+
+    // Task to compile everything in development mode
+    grunt.registerTask("development", ['default', 'jshint', 'less', 'concat:css', 'copy:vendor', 'copy:development']);
+    grunt.registerTask("debug", ['development', 'ngtemplates', 'concat:js', 'jade:debug', 'copy:debug']);
+    grunt.registerTask("production", ['debug', 'cssmin', 'uglify', 'jade:production', 'copy:production']);
 
     // Forks off the application server and runs the unit and e2e tests.
     // Test results stored in client/test-reports
-    grunt.registerTask("test", ['assemble', 'runapp:test', 'karma:unitci', 'karma:e2eci']);
+    grunt.registerTask("test", ['production', 'runapp:test', 'karma:unitci', 'karma:e2eci']);
 
-    // Task to package everything up for deployment
-    grunt.registerTask("assemble", ['default', 'concat', 'uglify', 'copy:vendor', 'copy:debug', 'copy:release', 'docco']);
-
-    // Task to kickoff the grunt build for development 
+    // Task to kickoff the grunt build for development
     // This will start both Karma test runners (unit, e2e) and the 'watch' task.
     grunt.registerTask("startup", ['shell:startup']);
 };

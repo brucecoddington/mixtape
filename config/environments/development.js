@@ -18,4 +18,4 @@ module.exports = function () {
   this.use(function (req, res) {
     res.send(404);
   });
-}
+};

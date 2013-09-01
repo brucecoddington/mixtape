@@ -1,6 +1,9 @@
-var express = require('express')
-  , poweredBy = require('connect-powered-by')
-  , util = require('util');
+var express = require('express'),
+  passport = require('passport'),
+  MongoStore = require('connect-mongo')(express),
+  poweredBy = require('connect-powered-by'),
+  util = require('util'),
+  properties = require('../properties');
 
 module.exports = function() {
   console.log('Starting all configuration');
@@ -20,20 +23,6 @@ module.exports = function() {
   this.engine('jade', require('jade').__express);
   this.format('html', {extension: 'jade'});
 
-  // Override default template extension.  By default, Locomotive finds
-  // templates using the `name.format.engine` convention, for example
-  // `index.html.ejs`  For some template engines, such as Jade, that find
-  // layouts using a `layout.engine` notation, this results in mixed conventions
-  // that can cuase confusion.  If this occurs, you can map an explicit
-  // extension to a format.
-  /* this.format('html', { extension: '.jade' }) */
-
-  // Register formats for content negotiation.  Using content negotiation,
-  // different formats can be served as needed by different clients.  For
-  // example, a browser is sent an HTML response, while an API client is sent a
-  // JSON or XML response.
-  /* this.format('xml', { engine: 'xmlb' }); */
-
   // Use middleware.  Standard [Connect](http://www.senchalabs.org/connect/)
   // middleware is built-in, with additional [third-party](https://github.com/senchalabs/connect/wiki)
   // middleware available as separate modules.
@@ -41,10 +30,23 @@ module.exports = function() {
   this.use(express.logger());
   this.use(express.favicon());
   this.use(express.compress());
+  this.use(express.cookieParser(properties.security.cookieSecret));
+  //this.use(express.cookieSession());
   this.use(express.bodyParser());
-  this.use(express.methodOverride());
+  
+  this.use(
+    express.session({
+      store: new MongoStore({
+        url: ['mongodb:/', properties.mongo.host, properties.mongo.db].join('/')
+      }),
+      secret: properties.session.secret
+    })
+  );
+  
+  this.use(passport.initialize());
+  this.use(passport.session());
   this.use(this.router);
 
   console.log('Finished all configuration');
   
-}
+};
