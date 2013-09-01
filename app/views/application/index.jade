@@ -11,9 +11,12 @@ html(class="no-js", ng-app="main")
   head
     meta(charset="utf-8")
     title(ng-bind-template="{{title}} | The Title") App Title
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    meta(name="description", content="App description goes here")
-    meta(name="author", content="Authors Name")
+    base(href="/")
+    meta(name="viewport", content="width=device-width, user-scalable=no, maximum-scale=1, minimum-scale=1")
+    meta(name="apple-mobile-web-app-capable", content="yes")
+    meta(name="apple-mobile-web-app-status-bar-style", content="black")
+
+    meta(name="description", content="Application Description Goes Here")
 
     meta(property="og:title", content="")
     meta(property="og:description", content="")
@@ -21,90 +24,38 @@ html(class="no-js", ng-app="main")
     meta(property="og:url", content="")
     meta(property="og:image", content="")
 
-    link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700")
-    link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Droid+Serif")
-    link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Boogaloo")
-    link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Economica:700,400italic")
-    link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Lato:300,400,700,900")
-
-    //link(rel="shortcut icon", href="/assets/images/favicon.ico", type="image/x-icon")
-    link(href="/assets/css/style.css", rel="stylesheet", type="text/css")
-
-  body
-    header
-      .container-fluid
-        .navbar(data-bs-navbar, data-ng-controller="NavController")
-          .navbar-inner
-            a.btn.btn-navbar(data-toggle="collapse", data-target=".nav-collapse")
-              span.icon-bar
-              span.icon-bar
-              span.icon-bar
-
-            a.brand(href="#") LoGo
-
-            .nav-collapse.collapse
-              ul.nav
-                li(data-match-route="/")
-                  a(href="#") HOME
-
-                li
-                  a(data-bs-dropdown="dropdown") 
-                    | SECOND 
-                    b.caret
-
-                li(id="link-three", data-match-route="/three")
-                  a(href="#/three") THIRD
-
-                li(data-match-route="/four")
-                  a(href="#/four") FOURTH
-
-    .container-fluid
-      .ng-view
-
-    #footer
-      .container-fluid
-        .row-fluid
-          .span10
-            #under-footer-copyright &copy; 2013, Somebody, All rights reserved.
-              .credit site by Someone
-
-          .span2
-            #under-footer-back-to-top
-              a(href="#")
-                i.icon-chevron-up
-
-    - if (env != 'development')              
-      script(src="app/app.js")
+    - if (env == 'production')
+      link(href="/assets/css/style.min.css", rel="stylesheet", type="text/css")
     - else
-      script(src='assets/js/components/jquery/jquery.js')
+      link(href="/assets/css/style.css", rel="stylesheet", type="text/css")
 
-      // bootstrap
-      script(src='assets/js/components/bootstrap/docs/assets/js/bootstrap.js')
-      script(src='assets/js/components/bootstrap-datepicker/js/bootstrap-datepicker.js')
-      script(src='assets/js/components/bootstrap-timepicker/js/bootstrap-timepicker.js')
-      
-      script(src='assets/js/components/modernizr/modernizr.js')
+    link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Lato:300,400,700,900")
+    link(rel="apple-touch-icon", href="/assets/img/apple-app-icon.png")
 
-      // AngularJS libraries
-      script(src='assets/js/components/angular/build/angular.js')
-      script(src='assets/js/components/angular/build/angular-resource.js')
-      script(src='assets/js/components/angular/build/angular-cookies.js')
-      script(src='assets/js/components/angular-strap/dist/angular-strap.js')
-      
-      // Angular UI libraries
-      script(src='assets/js/components/angular-ui-bootstrap/dist/ui-bootstrap-0.4.0.js')
-      script(src='assets/js/components/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.4.0.js')
-      
-      // logger
-      script(src='assets/js/components/javascript-debug/ba-debug.js')
+  body(ng-cloak)
 
-      // utilities
-      script(src='assets/js/components/lodash/dist/lodash.js')
-      script(src='assets/js/components/moment/moment.js')
+    .page-container
+      .navbar-container
+        .main-navbar
+          .navbar.navbar-default.navbar-static-top(ng-controller="NavController")
+            ul.nav
+              li(ng-click="$state.transitionTo('main')")
+                a(href="#") HOME
 
-      // application files
-      script(src='src/main.js')
-      script(src='src/app/app.js')
-      script(src='src/app/controllers.js')
-      script(src='src/app/directives.js')
-      
+              li
+                a(bs-dropdown="dropdown") 
+                  | SECOND 
+                  b.caret
+
+              li(ng-click="$state.transitionTo('main.three')")
+                a THIRD
+
+              li(ng-click="$state.transitionTo('main.four')")
+                a FOURTH
+
+      .content-container
+        .view-container
+          .container
+            .ui-view
+
+    include ../templates/scripts

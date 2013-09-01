@@ -5,18 +5,27 @@
   logger.group("Starting application.");    
   logger.group("Setup Main module.");
 
-  var app = angular.module('main', ['app', 'services', 'filters', '$strap.directives']);
+  var app = angular.module('main', [
+    'app', 
+    'common',
+    '$strap.directives',
+    'ui.state'
+  ]);
 
-  logger.group("Loading Routes");
+  app.value('$strapConfig', {
+    datepicker: {
+      language: 'en',
+      format: 'M d, yyyy'
+    }
+  });
 
-  app.config(['$routeProvider', function ($routeProvider){
-
-    $routeProvider
-      .when('/', {controller: 'HomeController', templateUrl: 'assets/templates/home/index.html'})
-      .when('/three', {controller: 'HomeController', templateUrl: 'assets/templates/three/index.html'})
-      .when('/four', {controller: 'HomeController', templateUrl: 'assets/templates/four/index.html'})
-      .otherwise({title: "Ummm...there is nothing more to show, yet.", templateUrl: 'assets/templates/main.html'});
-
+  app.config(['$urlRouterProvider', function ($urlRouterProvider) {
+      $urlRouterProvider.otherwise("/");
+  }])
+  
+  .run(['$state', '$rootScope', '$stateParams', function ($state, $rootScope, $stateParams) {
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
   }]);
 
   logger.groupEnd();

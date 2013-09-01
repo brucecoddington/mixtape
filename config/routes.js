@@ -8,8 +8,14 @@
 module.exports = function routes () {
   this.root('application#index');
 
+  this.post('login', 'login#index');
+  this.get('current-user', 'login#currentUser');
+
+  this.post('logout', 'logout#index');
+
   this.get("/cache.manifest", function(req, res) {
     res.header("Content-Type", "text/cache-manifest");
     return res.sendfile("client/cache.manifest");
   });
-}
+  
+};

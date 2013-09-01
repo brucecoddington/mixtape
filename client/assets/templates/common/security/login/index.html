@@ -1,0 +1,37 @@
+<div class="d3-login-form row">
+  <div class="col-xs-12">
+    <div class="alert alert-warning" ng-show="authReason">
+      {{authReason}}
+    </div>
+
+    <div class="alert alert-error" ng-show="authError">
+      {{authError}}
+    </div>
+
+    <div class="alert alert-info">Please enter your login details</div>
+
+    <div ng-form novalidate class="form-horizontal">
+      <div class="form-group">     
+        <label class="col-sm-2 control-label" for="login">E-mail</label>
+        <div class="col-sm-4">
+          <input class="form-control" name="login" type="email" ng-model="user.username" required autofocus>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="pass">Password</label>
+        <div class="col-sm-4">
+          <input class="form-control" name="pass" type="password" ng-model="user.password" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-6">
+          <div class="pull-right">
+            <button class="btn btn-primary login" ng-click="login()" ng-disabled='form.$invalid'>Sign in</button>
+            <button class="btn clear" ng-click="clearForm()">Clear</button>
+            <button class="btn btn-warning cancel" ng-click="cancelLogin()">Cancel</button>  
+          </div>
+        </div>
+      </div>        
+    </form>
+  </div>
+</div>
