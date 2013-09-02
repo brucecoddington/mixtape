@@ -7,8 +7,7 @@
 
   var app = angular.module('main', [
     'app', 
-    'services', 
-    'filters', 
+    'common',
     '$strap.directives',
     'ui.state'
   ]);
@@ -20,10 +19,8 @@
     }
   });
 
-  logger.group("Loading Routes");
-
-  app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/main");
+  app.config(['$urlRouterProvider', function ($urlRouterProvider) {
+      $urlRouterProvider.otherwise("/");
   }])
   
   .run(['$state', '$rootScope', '$stateParams', function ($state, $rootScope, $stateParams) {

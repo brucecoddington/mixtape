@@ -24,18 +24,22 @@ html(class="no-js", ng-app="main")
     meta(property="og:url", content="")
     meta(property="og:image", content="")
 
+    - if (env == 'production')
+      link(href="/assets/css/style.min.css", rel="stylesheet", type="text/css")
+    - else
+      link(href="/assets/css/style.css", rel="stylesheet", type="text/css")
+
     link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Lato:300,400,700,900")
-    link(href="/assets/css/style.css", rel="stylesheet", type="text/css")
     link(rel="apple-touch-icon", href="/assets/img/apple-app-icon.png")
 
   body(ng-cloak)
 
-    .footer-wrapper
-      .header
-        .container-fluid
-          .navbar.navbar-static-top(ng-controller="NavController")
+    .page-container
+      .navbar-container
+        .main-navbar
+          .navbar.navbar-default.navbar-static-top(ng-controller="NavController")
             ul.nav
-              li(data-match-route="/")
+              li(ng-click="$state.transitionTo('main')")
                 a(href="#") HOME
 
               li
@@ -49,12 +53,9 @@ html(class="no-js", ng-app="main")
               li(ng-click="$state.transitionTo('main.four')")
                 a FOURTH
 
-      .container
-        .ui-view
-
-    .footer
-      .row
-        .col-12
-          .footer-copyright.pull-right &copy; 2013, Somebody Cool, All rights reserved.
+      .content-container
+        .view-container
+          .container
+            .ui-view
 
     include ../templates/scripts
