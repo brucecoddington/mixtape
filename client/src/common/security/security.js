@@ -2,10 +2,17 @@
 angular.module('security.service', [
   'security.retryQueue',    // Keeps track of failed requests that need to be retried once the user logs in
   'security.login',         // Contains the login form template and controller
+  'security.authentication',// Contains the authentication object
   'ui.state'          
 ])
 
-.factory('security', ['$http', '$q', '$state', 'securityRetryQueue', function($http, $q, $state, queue) {
+.factory('security', [
+  '$http', 
+  '$q', 
+  '$state', 
+  'securityRetryQueue', 
+  'authentication', 
+  function($http, $q, $state, queue, authentication) {
 
   // Redirect to the given state (defaults to 'dashboard')
   function redirect(state, params) {
@@ -31,7 +38,7 @@ angular.module('security.service', [
   // Register a handler for when an item is added to the retry queue
   queue.onItemAddedCallbacks.push(function(retryItem) {
     if ( queue.hasMore() ) {
-      service.showLogin();
+      service.showLogin(retryItem.state);
     }
   });
 
@@ -52,8 +59,8 @@ angular.module('security.service', [
     login: function(username, password) {
       var request = $http.post('/login', {username: username, password: password});
       return request.then(function(response) {
-        service.currentUser = response.data.user;
-        service.currentUser.loggedIn = true;
+        service.currentUser = authentication.setAuthentication(response.data.user);
+        
         if ( service.isAuthenticated() ) {
           processRetry(true);
           redirect();
@@ -80,7 +87,7 @@ angular.module('security.service', [
         return $q.when(service.currentUser);
       } else {
         return $http.get('/current-user').then(function(response) {
-          service.currentUser = response.data.user;
+          service.currentUser = authentication.setAuthentication(response.data.user);
           return service.currentUser;
         });
       }
@@ -91,12 +98,17 @@ angular.module('security.service', [
 
     // Is the current user authenticated?
     isAuthenticated: function()      {
-      return !!service.currentUser;
+      return !!(service.currentUser && service.currentUser.authenticated);
     },
     
     // Is the current user an adminstrator?
     isAdmin: function() {
       return !!(service.currentUser && service.currentUser.admin);
+    },
+
+    // Does the current user have the authorization?
+    hasAuthorization: function(authorization) {
+      return !!(service.currentUser && service.currentUser.hasAuthorization(authorization));
     }
   };
 
