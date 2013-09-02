@@ -18,6 +18,7 @@ module.exports = function(config) {
 
       'dist/assets/js/app.js',
       'assets/js/components/angular-mocks/angular-mocks.js',
+      'test/util/state.mock.js',
       
       'test/unit/**/*.spec.js', 
 
