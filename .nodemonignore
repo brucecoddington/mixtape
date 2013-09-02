@@ -7,3 +7,5 @@
 Gruntfile.js
 karma.e2e.config.js
 karma.unit.config.js
+karma.ci.e2e.config.js
+karma.ci.unit.config.js

@@ -17,17 +17,17 @@
         $scope.dropdown = [
           {
             "text": 'option1',
-            "href": '#/option1'
+            "href": '#/two/one'
           },
 
           {
             "text": 'option2',
-            "href": '#/option2'
+            "href": '#/two/two'
           }
         ];
       }
     ]);
 
-    logger.debug('Registered app.HomeController');
+    logger.debug('Registered app.controllers');
 
 }());

@@ -1,37 +1,32 @@
 // Import bower components
-// --------------------------------------------------
+// --------------------------------------------------\
+// Bootstrap
+@import "lib/bootstrap/bootstrap.less";
 
-//Bootstrap
-@import "../js/components/bootstrap/less/bootstrap.less";
-
-//FontAwesome
-@import "../js/components/font-awesome/less/font-awesome.less";
-
+// FontAwesome
+@import "lib/font-awesome/font-awesome.less";
 
 // Libs and their overrides
 // --------------------------------------------------
-
-//Bootstrap variables and overrides
+// Bootstrap variables and overrides
 @import "lib/bootstrap/custom.less";
 @import "lib/bootstrap/variables.less";
 
-//Angular strap
-@import "lib/angular/validation.less";
-
+// Angular
+@import "lib/angular/angular.less";
 
 // Mixins
 // --------------------------------------------------
-
-@import "mixins/gradients.less";
-@import "mixins/shadows.less";
 @import "mixins/mixins.less";
-@import "mixins/borders.less";
 
-// application styles
+// Application Global
 // --------------------------------------------------
+@import "app/global/layout.less";
 
+// Application Navigation
+// --------------------------------------------------
+@import "app/navigation/navbar.less";
+
+// Application
+// --------------------------------------------------
 @import "app/variables.less";
-@import "app/custom.less";
-@import "app/navbar.less";
-@import "app/layout.less";
-

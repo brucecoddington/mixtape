@@ -24,63 +24,13 @@ h6 {
   text-transform: none;
 }
 
-//Fix the input height
-.form-control { 
-  height: auto;
+.bootstrap-select.btn-block.btn-group {
+  width: 100%;
+}
+.btn-block+.btn-block {
+  margin: 0;
 }
 
-.form-group {
-  .bootstrap-select.btn-block {
-    width: 100%;
-  }
-  .btn-block+.btn-block {
-    margin: 0;
-  }
-}
-
-.btn-default {
-  &:hover,
-  &:focus {
-    color: @btn-default-hover-color;
-    text-decoration: none;
-  }
-}
-.btn-primary {
-  &:hover,
-  &:focus {
-    color: @btn-primary-hover-color;
-    text-decoration: none;
-  }
-}
-// Warning appears as orange
-.btn-warning {
-  &:hover,
-  &:focus {
-    color: @btn-warning-hover-color;
-    text-decoration: none;
-  }
-}
-// Danger and error appear as red
-.btn-danger {
-  &:hover,
-  &:focus {
-    color: @btn-danger-hover-color;
-    text-decoration: none;
-  }
-}
-// Success appears as green
-.btn-success {
-  &:hover,
-  &:focus {
-    color: @btn-success-hover-color;
-    text-decoration: none;
-  }
-}
-// Info appears as blue-green
-.btn-info {
-  &:hover,
-  &:focus {
-    color: @btn-info-hover-color;
-    text-decoration: none;
-  }
+.btn-secondary {
+  .button-variant(@btn-secondary-color; @btn-secondary-bg; @btn-secondary-border);
 }

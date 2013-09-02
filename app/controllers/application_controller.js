@@ -1,4 +1,4 @@
-var walkdir = require('walkdir'), 
+var walkdir = require('walkdir'),
   path = require('path'),
   locomotive = require('locomotive'),
   Controller = locomotive.Controller;
@@ -21,7 +21,7 @@ ApplicationController.index = function() {
 
   emitter.on('end', function () {
     controller.render({
-      applicationScripts : scripts 
+      applicationScripts : scripts
     });
   });
 

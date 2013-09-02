@@ -1,0 +1,72 @@
+//All nav bars
+.navbar {
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 0;
+  min-height: 40px;
+  .navbar-nav {
+    position: relative;
+    width: auto;
+    margin: 0;
+  }
+  .nav {
+    > li {
+      display: inline-block;
+
+      > a {
+        color: @navbar-default-link-color;
+      }
+    }
+  }
+}
+
+//Application nav bar
+.main-navbar {
+  z-index: 100;
+}
+
+.main-navbar .navbar-nav.pull-right {
+  min-width: 250px;
+}
+
+.main-navbar .dropdown-menu {
+  > li a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: @line-height-base;
+    color: @dropdown-link-color;
+    white-space: nowrap; // prevent links from randomly breaking onto new lines
+
+    &:hover {
+      text-decoration: none;
+      color: @dropdown-link-hover-color;
+      #gradient > .vertical(@start-color: @dropdown-link-hover-bg; @end-color: darken(@dropdown-link-hover-bg, 5%));
+    }
+  }
+
+  .active a {
+    &:hover {
+      color: @dropdown-link-active-color;
+      text-decoration: none;
+      outline: 0;
+      #gradient > .vertical(@start-color: @dropdown-link-active-bg; @end-color: darken(@dropdown-link-active-bg, 5%));
+    }
+  }
+}
+
+//Show the side nav toggle
+@media (max-width: @screen-md) {
+  .main-navbar {}
+    
+}
+
+//Crush the brand and the nav icons to fix on displays smaller than the iPad
+@media (max-width: 475px) {
+  .main-navbar {
+    .nav.navbar-nav.pull-right {
+      min-width: 200px;
+    }  
+  }
+}
