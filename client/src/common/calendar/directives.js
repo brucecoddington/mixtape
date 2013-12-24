@@ -6,7 +6,7 @@
   logger.debug("Registering calendar.directives");
 
   angular.module('common.calendar.directives', [])
-    .directive('calendar', ['$compile', function ($compile) {
+    .directive('calendar', function ($compile) {
 
       var monthNames = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
       var days = ['s', 'm', 't', 'w', 't', 'f', 's'];
@@ -80,6 +80,6 @@
           $compile($element.contents());
         }
       };
-    }]);
+    });
 
 }());

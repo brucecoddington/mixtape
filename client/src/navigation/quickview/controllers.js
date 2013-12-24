@@ -5,9 +5,7 @@
 
   angular.module('navigation.quickview.controllers', ['common.routing.directives'])
 
-    .controller('QuickviewController', [
-      'quickviewSharedEventService',
-      '$scope',
+    .controller('QuickviewController', 
       function (quickviewSharedEventService, $scope){
 
         $scope.open = false;
@@ -27,13 +25,9 @@
           quickviewSharedEventService.deactivate();
         };
          
-      }
-    ])
+    })
 
-    .controller('QuickviewNavController', [
-      '$scope',
-      '$location',
-      'quickviewSharedEventService',
+    .controller('QuickviewNavController', 
       function ($scope, $location, quickviewSharedEventService){
         $scope.closeQuickView = function() {
           quickviewSharedEventService.deactivate();
@@ -44,35 +38,7 @@
           $location.path(['system', currentView].join('/'));
           quickviewSharedEventService.deactivate();
         };
-      }
-    ])
-
-    .controller('QuickviewAlertsController', [
-      '$scope',
-      '$state',
-      'quickviewSharedEventService',
-      function ($scope, $state, quickviewSharedEventService){
-        
-      }
-    ])
-
-    .controller('QuickviewEventsController', [
-      '$scope',
-      '$location',
-      'quickviewSharedEventService',
-      function ($scope, $location, quickviewSharedEventService){
-       
-      }
-    ])
-
-    .controller('QuickviewInboxController', [
-      '$scope',
-      '$location',
-      'quickviewSharedEventService',
-      function ($scope, $location, quickviewSharedEventService){
-        
-      }
-    ]);
+    });
 
     logger.debug('Registered quickview.QuickviewController');
 

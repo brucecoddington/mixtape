@@ -6,8 +6,7 @@
   logger.debug("Registering common.layout.directives");
 
   angular.module('common.layout.directives', [])
-    .directive('verticalCenterElement', [
-      '$window',
+    .directive('verticalCenterElement', 
       function ($window) {
         return {
           replace: true,
@@ -53,10 +52,9 @@
             });
           }
         };
-      }
-    ])
-    .directive('mxPanelPopoverPositioner', [
-      '$window',
+    })
+    
+    .directive('mxPanelPopoverPositioner', 
       function ($window) {
         return {
           restrict: 'A',
@@ -180,6 +178,5 @@
             });
           }
         };
-      }
-    ]);
+    });
 }());

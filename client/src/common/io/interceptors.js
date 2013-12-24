@@ -3,11 +3,8 @@
 
   var logger = window.debug;
 
-  angular.module('common.io.interceptors', [
-  ])
-    .factory('nProgressInterceptor', [
-      '$q',
-      '$injector', 
+  angular.module('common.io.interceptors', [])
+    .factory('nProgressInterceptor', 
       function ($q, $injector) {
     
         return {
@@ -33,15 +30,13 @@
             NProgress.done();
             return $q.reject(rejection);
           }
-
         };
-      }
-    ])
+    })
 
   // We have to add the interceptor to the queue as a string because the interceptor 
   // depends upon service instances that are not available in the config block.
-  .config(['$httpProvider', function($httpProvider) {
+  .config(function($httpProvider) {
     $httpProvider.interceptors.push('nProgressInterceptor');
-  }]);
+  });
 
 }());

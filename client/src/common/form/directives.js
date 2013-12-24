@@ -6,9 +6,7 @@
   logger.debug("Registering common.form.directives");
 
   angular.module('common.form.directives', [])
-    .directive('toggleButton', [
-      '$parse',
-      '$timeout',
+    .directive('toggleButton', 
       function ($parse, $timeout) {
         return {
           restrict: 'A',
@@ -30,12 +28,9 @@
           }
         };
       }
-    ])
+    )
 
-    .directive('fieldInheritancePopover', [
-      '$compile',
-      '$http',
-      '$templateCache',
+    .directive('fieldInheritancePopover', 
       function ($compile, $http, $templateCache) {
         return {
           replace: true,
@@ -74,8 +69,7 @@
             });
           }
         };
-      }
-    ])
+    })
 
     .directive('focusMe', function() {
       return {
@@ -89,7 +83,7 @@
       };
     })
 
-    .directive('rezrFormSectionHeader', function() {
+    .directive('mxFormSectionHeader', function() {
       return {
         replace: true,
         transclude: true,

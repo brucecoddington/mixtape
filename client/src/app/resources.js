@@ -6,10 +6,7 @@
   logger.debug("Registering api.resources");
 
   var resources = angular.module('app.resources', [])
-    .factory('$control', [
-      '$q',
-      '$api',
-      'authorization',
+    .factory('$control', 
       function ($q, $api, authorization) {
 
         var control = {
@@ -33,11 +30,9 @@
 
         return control;
       }
-    ])
+    )
 
-    .factory('$api', [
-      '$resource',
-      '$apiUrl',
+    .factory('$api', 
       function ($resource, $apiUrl) {
 
         var api = {
@@ -68,7 +63,7 @@
 
         return api;
       }
-    ]);
+    );
   
   resources.value('$apiUrl', '');
 

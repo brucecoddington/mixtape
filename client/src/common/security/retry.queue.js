@@ -6,9 +6,7 @@
   angular.module('common.security.retry.queue', [])
 
   // This is a generic retry queue for security failures.  Each item is expected to expose two functions: retry and cancel.
-  .factory('security.retry.queue', [
-    '$q', 
-    '$log', 
+  .factory('retryQueue', 
     function($q, $log) {
       var retryQueue = [];
       var service = {
@@ -40,6 +38,7 @@
 
           // The deferred object that will be resolved or rejected by calling retry or cancel
           var deferred = $q.defer();
+          
           var retryItem = {
             reason: reason,
             retry: function() {
@@ -79,7 +78,6 @@
       };
 
       return service;
-    }
-  ]);
+  });
 
 }());

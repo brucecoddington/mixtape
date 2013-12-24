@@ -33,22 +33,18 @@
 
   logger.group("Loading Routes");
 
-  app.config([
-    '$stateProvider', 
-    '$httpProvider',
-    '$urlRouterProvider', 
-    'authorizationProvider', 
+  app.config(
     function ($stateProvider, $httpProvider, $urlRouterProvider, authorizationProvider) {
     
-      $urlRouterProvider.otherwise("/rezr/dashboard");
-  }])
+      $urlRouterProvider.otherwise("/mx/dashboard");
+  })
 
-  .run(['$state', '$rootScope', '$stateParams', function ($state, $rootScope, $stateParams) {
+  .run(function ($state, $rootScope, $stateParams) {
     // putting state into $rootScope so that these services are available in views
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
     logger.debug("Application running.");
-  }]);
+  });
 
   logger.groupEnd();
 

@@ -4,8 +4,7 @@
   var logger = window.debug;
 
   angular.module('common.color.picker.controllers', [])
-    .controller('ColorPickerController', [
-      '$scope',
+    .controller('ColorPickerController', 
       function ($scope) {
         $scope.color = {
           hsl: {},
@@ -138,12 +137,11 @@
 
         $scope.initalizeModels();
       }
-    ])
+    )
 
-    .controller('ColorWheelController', [
-      '$scope',
+    .controller('ColorWheelController', 
       function ($scope) {
 
       }
-    ]);
+    );
 }());

@@ -6,11 +6,7 @@
   angular.module('navigation.topnav.controllers', [
     'common.security.service'
   ])
-    .controller('TopnavController', [
-      'sidenavSharedEventService',
-      'securityContext',
-      'authorization',
-      '$scope',
+    .controller('TopnavController', 
       function (sidenavSharedEventService, securityContext, authorization, $scope){
 
         //Selected quickview id
@@ -55,19 +51,15 @@
         $scope.$on('sidenavService.deactivate', function() {
           $scope.sideNavOpen = false;
         });
-      }
-    ])
+    })
 
-    .controller('TopnavLinkItemController', [
-      '$scope',
-      'authorization',
+    .controller('TopnavLinkItemController', 
       function ($scope, authorization) {
 
         authorization.requireAuthenticatedUser().then(function () {
           $scope.showLinkItem = true;
         });
-      }
-    ]);
+    });
 
     logger.debug('Registered navigation.topnav.TopnavController');
 

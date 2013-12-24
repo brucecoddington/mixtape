@@ -86,25 +86,25 @@ module.exports = function (grunt) {
       }
     },
 
+    ngmin : {
+      app : {
+        src : 'client/src/**/*.js',
+        dest : '<%= clientdist %>/temp/app.js'
+      }
+    },
+
     // The concatenate task is used here to merge the almond require/define
     // shim and the templates into the application code.
     concat:{
       jsdeps : {
         src : [
           // Shims
-          '<%= components %>/respond.js/respond.min.js',
+          '<%= components %>/es5-shim/es5-shim.js',
+          '<%= components %>/respond.js/dest/respond.src.js',
           '<%= components %>/modernizr/modernizr.js',
 
           // jQuery and Related
           '<%= components %>/jquery/jquery.js',
-          '<%= components %>/jquery-ui/ui/jquery.ui.core.js',
-          '<%= components %>/jquery-ui/ui/jquery.ui.widget.js',
-          '<%= components %>/jquery-ui/ui/jquery.ui.mouse.js',
-          '<%= components %>/jquery-ui/ui/jquery.ui.position.js',
-          '<%= components %>/jquery-ui/ui/jquery.ui.draggable.js',
-          '<%= components %>/jquery-ui/ui/jquery.ui.droppable.js',
-          '<%= components %>/dynatree/src/jquery.dynatree.js',
-          '<%= components %>/jquery-ui-touch-punch/jquery.ui.touch-punch.js',
           '<%= components %>/hammerjs/dist/hammer.js',
           '<%= components %>/select2/select2.js',
           '<%= components %>/messenger/build/js/messenger.js',
@@ -131,8 +131,10 @@ module.exports = function (grunt) {
           '<%= components %>/angular-ui-select2/src/select2.js',
           '<%= components %>/angular-ui-router/release/angular-ui-router.js',
           '<%= components %>/angular-ui-utils/components/angular-ui-docs/build/ui-utils.js',
-          '<%= components %>/angular-dragdrop/src/angular-dragdrop.js',
+
+          // Angular UI Calendar
           '<%= components %>/angular-ui-calendar/src/calendar.js',
+          '<%= components %>/fullcalendar/fullcalendar.js',
 
           //Highcharts
           '<%= components %>/highcharts/highcharts.src.js',
@@ -143,11 +145,11 @@ module.exports = function (grunt) {
           //NProgress
           '<%= components %>/nprogress/nprogress.js',
 
+          // Spin JS
+          '<%= components %>/spin.js/dist/spin.js',
+
           // logger
           '<%= components %>/javascript-debug/ba-debug.js',
-
-          // Full calendar
-          '<%= components %>/angular-ui-calendar/src/calendar.js',
 
           // utilities
           '<%= components %>/lodash/dist/lodash.js',
@@ -155,7 +157,8 @@ module.exports = function (grunt) {
           '<%= components %>/add-to-homescreen/src/add2home.js',
           '<%= components %>/responsive-tables/responsive-tables.js',
           '<%= components %>/faker/Faker.js',
-          '<%= components %>/color/one-color-all-debug.js'
+          '<%= components %>/color/one-color-all-debug.js',
+          '<%= components %>/accounting/accounting.js'
         ],
 
         dest: "<%= clientdist %>/assets/js/deps.js"
@@ -165,25 +168,36 @@ module.exports = function (grunt) {
           '<%= clientdist %>/assets/js/deps.js',
           '<%= clientdist %>/assets/templates/main.templates.js',
           '<%= clientdist %>/assets/templates/lib.templates.js',
-          'client/src/**/*.js'
+          '<%= clientdist %>/temp/app.js'
         ],
         dest: "<%= clientdist %>/assets/js/app.js"
       },
       css : {
         src : [
+          // jQuery and Related
           "<%= components %>/select2/select2.css",
-          "<%= components %>/bootstrap-select/bootstrap-select.css",
-          "<%= components %>/angular-strap/vendor/bootstrap-datepicker.css",
-          "<%= components %>/add-to-homescreen/style/add2home.css",
-          "<%= components %>/jquery-ui/themes/base/jquery.ui.core.css",
-          "<%= components %>/jquery-ui/themes/base/jquery.ui.dialog.css",
-          "<%= components %>/dynatree/src/skin/ui.dynatree.css",
-          "<%= components %>/farbtastic/farbtastic.css",
-          "<%= components %>/nprogress/nprogress.css",
           "<%= components %>/messenger/build/css/messenger.css",
           "<%= components %>/messenger/build/css/messenger-theme-air.css",
           "<%= components %>/messenger/build/css/messenger-spinner.css",
+
+          // Angular Strap
+          "<%= components %>/bootstrap-select/bootstrap-select.css",
+          "<%= components %>/angular-strap/vendor/bootstrap-datepicker.css",
+
+          // Angular UI Calendar
           "<%= components %>/fullcalendar/fullcalendar.css",
+          //"<%= components %>/fullcalendar/fullcalendar.print.css",
+
+          //Farbtastic
+          "<%= components %>/farbtastic/farbtastic.css",
+
+          //NProgress
+          "<%= components %>/nprogress/nprogress.css",
+          
+          // utilities
+          "<%= components %>/add-to-homescreen/style/add2home.css",
+        
+          // D3 Control
           "<%= clientdist %>/assets/css/style.css"
         ],
         dest: "<%= clientdist %>/assets/css/style.css"
@@ -556,6 +570,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-docco-multi');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-maven-tasks');
+  grunt.loadNpmTasks('grunt-ngmin');
 
   // **********************************************************************************************
 
@@ -581,7 +596,7 @@ module.exports = function (grunt) {
 
   // Task to compile everything in development mode
   grunt.registerTask("development", ['default', 'jshint', 'less', 'concat:css', 'html2js', 'concat:jsdeps', 'copy:vendor', 'copy:development']);
-  grunt.registerTask("debug", ['development', 'concat:appjs', 'jade:debug', 'copy:debug']);
+  grunt.registerTask("debug", ['development', 'ngmin:app', 'concat:appjs', 'jade:debug', 'copy:debug']);
   grunt.registerTask("production", ['debug', 'cssmin', 'uglify', 'jade:production', 'copy:production']);
 
   // Forks off the application server and runs the unit and e2e tests.

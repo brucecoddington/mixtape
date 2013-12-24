@@ -6,8 +6,7 @@
   logger.debug("Registering common.color.picker.directives");
 
   angular.module('common.color.picker.directives', [])
-    .directive('colorPickerInputField', [
-      '$compile',
+    .directive('colorPickerInputField', 
       function ($compile) {
         return {
           replace: true,
@@ -67,11 +66,9 @@
           }
         };
       }
-    ])
+    )
 
-    .directive('colorPickerPopover', [
-      '$window',
-      'colorPickerPopoverSingletonService',
+    .directive('colorPickerPopover', 
       function ($window, colorPickerPopoverSingletonService) {
         return {
           replace: true,
@@ -199,7 +196,7 @@
           }
         };
       }
-    ])
+    )
 
     .directive('colorPicker', [
       function () {

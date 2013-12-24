@@ -8,27 +8,22 @@
   angular.module('common.security.login.controllers', [])
 
     // The LoginFormController provides the behaviour behind a reusable form to allow users to authenticate.
-    .controller('LoginFormController', [
-      '$scope',
-      '$location',
-      '$stateParams',
-      'authentication',
-      'authorization',
-      'securityContext',
+    .controller('LoginFormController', 
       function($scope, $location, $stateParams, authentication, authorization, securityContext) {
 
         // Request the current user, this will wait until the current user
         // promise is resolved.
-        authorization.requireAuthenticatedUser().then(function () {
-          // Once the user logs in, redirect to the state the user originally 
-          // attempted to navigate to (passed in as a redirect parameter)
-          if ($stateParams.redirect) {
-            $location.path(decodeURIComponent($stateParams.redirect));
-          // If not redirect, change the state to main
-          } else {
-            $location.path('/');
-          }
-        });
+        authorization.requireAuthenticatedUser()
+          .then(function () {
+            // Once the user logs in, redirect to the state the user originally 
+            // attempted to navigate to (passed in as a redirect parameter)
+            if ($stateParams.redirect) {
+              $location.path(decodeURIComponent($stateParams.redirect));
+            // If not redirect, change the state to main
+            } else {
+              $location.path('/');
+            }
+          });
 
         // The model for this form 
         $scope.user = {};
@@ -65,8 +60,7 @@
         $scope.clearForm = function() {
           $scope.user = {};
         };
-      }
-    ]);
+    });
 
     logger.debug('Registered common.security.login.controllers');
 

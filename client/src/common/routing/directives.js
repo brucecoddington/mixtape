@@ -6,9 +6,7 @@
   logger.debug("Registering common.routing.directives");
 
   angular.module('common.routing.directives', [])
-    .directive('navigateToOnClick',[
-      '$compile',
-      '$location',
+    .directive('navigateToOnClick',
       function ($compile, $location) {
         return {
           replace: false,
@@ -21,7 +19,5 @@
             $compile(element.contents())(scope);
           }
         };
-      }]
-    );
-
+    });
 }());

@@ -5,8 +5,7 @@
 
   angular.module('common.security.context', [])
 
-  .factory('securityContext', [
-    '$q',
+  .factory('securityContext', 
     function ($q) {
 
       var securityContext =  {
@@ -30,7 +29,6 @@
       };
 
       return securityContext;
-    }
-  ]);
+  });
 
 }());

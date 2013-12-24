@@ -39,8 +39,7 @@
 
   angular.module('common.form.field.directives', [])
 
-    .directive('rezrFieldWrap', [
-      '$compile',
+    .directive('mxFieldWrap', 
       function ($compile) {
         return {
           transclude: true,
@@ -63,22 +62,16 @@
             };
           }
         };
-      }]
-    )
+    })
 
-    .directive('rezrDatepickerPopup', [
-      '$compile',
-      '$parse',
-      '$document',
-      'dateFilter',
-      'datepickerPopupConfig',
+    .directive('mxDatepickerPopup', 
       function ($compile, $parse, $document, dateFilter, datepickerPopupConfig) {
         return {
           restrict: 'EA',
           require: '?ngModel',
           link: function(originalScope, element, attrs, ngModel) {
             var closeOnDateSelection = angular.isDefined(attrs.closeOnDateSelection) ? scope.$eval(attrs.closeOnDateSelection) : datepickerPopupConfig.closeOnDateSelection;
-            var dateFormat = attrs.rezrDatepickerPopup || datepickerPopupConfig.dateFormat;
+            var dateFormat = attrs.mxDatepickerPopup || datepickerPopupConfig.dateFormat;
 
             // create a child scope for the datepicker directive so we are not polluting original scope
             var scope = originalScope.$new();
@@ -251,10 +244,9 @@
             element.after($compile(popupEl)(scope));
           }
         };
-      }
-    ])
+    })
 
-    .directive('rezrStaticField', function () {
+    .directive('mxStaticField', function () {
       return {
         replace: true,
         restrict: 'A',

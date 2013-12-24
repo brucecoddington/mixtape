@@ -6,8 +6,7 @@
   logger.debug("Registering common.hammer.directives");
 
   angular.module('common.hammer.directives', [])
-    .directive('swipeLeft', [
-      '$parse',
+    .directive('swipeLeft', 
       function ($parse) {
         return {
           restrict: 'A',
@@ -21,10 +20,9 @@
             });
           }
         };
-      }
-    ])
-    .directive('swipeRight', [
-      '$parse',
+    })
+
+    .directive('swipeRight', 
       function ($parse) {
         return {
           restrict: 'A',
@@ -38,6 +36,5 @@
             });
           }
         };
-      }
-    ]);
+    });
 }());

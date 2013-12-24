@@ -17,8 +17,7 @@
       }
     )
 
-    .directive('quickviewTopnavItem', [
-      '$compile',
+    .directive('quickviewTopnavItem', 
       function ($compile) {
         return {
           replace: true,
@@ -39,11 +38,9 @@
             $compile(element.contents())(scope);
           }
         };
-      }]
-    )
+    })
 
-    .directive('linksTopnav', [
-      '$compile', 
+    .directive('linksTopnav', 
       function ($compile) {
         return {
           replace: true,
@@ -83,12 +80,9 @@
             $compile(element.contents())(scope);
           }
         };
-      }]
-    )
+    })
 
-    .directive('dropdownTopnav', [
-      '$compile', 
-      'authentication',
+    .directive('dropdownTopnav', 
       function ($compile, authentication) {
         return {
           replace: true,
@@ -107,7 +101,6 @@
             $compile(element.contents())(scope);
           }
         };
-      }]
-    );
+    });
 
 }());

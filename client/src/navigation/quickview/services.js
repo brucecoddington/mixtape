@@ -6,8 +6,7 @@
   logger.debug("Registering quickview.services");
 
   angular.module('navigation.quickview.services', ['common.security'])
-    .factory('quickviewSharedEventService', [
-      '$rootScope',
+    .factory('quickviewSharedEventService', 
       function ($rootScope) {
         var eventService = {};
 
@@ -57,7 +56,6 @@
         };
 
         return eventService;
-      }
-    ]);
+    });
 
 }());

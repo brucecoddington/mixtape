@@ -5,29 +5,21 @@
 
   angular.module('common.security.authentication', [])
 
-  .factory('authentication', [
-    '$q',
-    '$api',
-    '$state',
-    '$location',
-    'securityContext',
-    'security.retry.queue',
-    'notifications',
-    '$timeout',
-    function($q, $api, $state, $location, securityContext, queue, notifications, $timeout) {
+  .factory('authentication', 
+    function($q, $api, $state, $location, securityContext, retryQueue, notifications, $timeout) {
 
       function processRetry(success) {
         if ( success ) {
-          queue.retryAll();
+          retryQueue.retryAll();
         } else {
-          queue.cancelAll();
+          retryQueue.cancelAll();
         }
       }
 
-      // Register a handler for when an item is added to the retry queue
+      // Register a handler for when an item is added to the retry retryQueue
       // This forces the login page on entry. 
-      queue.onItemAddedCallbacks.push(function(retryItem) {
-        if ( queue.hasMore() ) {
+      retryQueue.onItemAddedCallbacks.push(function(retryItem) {
+        if ( retryQueue.hasMore() ) {
           authentication.showLogin();
         }
       });
@@ -36,7 +28,7 @@
 
         // Get the first reason for needing a login
         getLoginReason: function() {
-          return queue.retryReason();
+          return retryQueue.retryReason();
         },          
 
         // Show the login form
@@ -131,7 +123,6 @@
       };
 
       return authentication;
-    }
-  ]);
+  });
 
 }());

@@ -8,11 +8,7 @@
     'navigation.sidenav.services',
     'navigation.quickview.services'
   ])
-    .controller('MainController', [
-      '$scope',
-      'sidenavSharedEventService',
-      'quickviewSharedEventService',
-      'authorization',
+    .controller('MainController', 
       function($scope, sidenavSharedEventService, quickviewSharedEventService, authorization) {
 
         $scope.pushLeft = false;
@@ -67,7 +63,7 @@
           $scope.authenticatedUser = true;
         });
       }
-    ]);
+    );
 
     logger.debug('Registered app.MainController');
 

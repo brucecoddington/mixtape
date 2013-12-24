@@ -5,11 +5,7 @@
 
   angular.module('navigation.pagination.controllers', ['ui.router'])
 
-    .controller('paginationController', [
-      '$scope',
-      '$element',
-      '$state',
-      'paginationService',
+    .controller('paginationController', 
       function ($scope, $element, $state, paginationService) {
 
         $scope.pagination = {
@@ -65,13 +61,9 @@
             $scope.requestPage($scope.pagination.page.number);
           }
         };
-      }
-    ])
+    })
 
-    .controller('paginationItemController', [
-      '$scope',
-      '$element',
-      '$state',
+    .controller('paginationItemController', 
       function ($scope, $element, $state) {
 
         $element.on('click', function (e) {
@@ -105,8 +97,7 @@
             return pageNumber < (number - 2) || pageNumber > (number + 2);
           }
         };
-      }
-    ]);
+    });
 
     logger.debug('Registered navigation.pagination.controllers');
 

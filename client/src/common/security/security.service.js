@@ -4,21 +4,13 @@
   var logger = window.debug;
 
   angular.module('common.security.service', [
-    'common.security.retry.queue',      // Keeps track of failed requests that need to be retried once the user logs in
-    'common.security.login.controllers',// Contains the login form template and controller
-    'common.security.authentication',   // Provides the login/logout functionality
-    'common.security.authorization',    // Provides the permissions analysis
-    'ui.router'          
+    'common.security.login.controllers', // Contains the login form template and controller
+    'common.security.authorization',     // Provides the permissions analysis
+    'common.security.context'            // Service that holds the user and authentication
   ])
 
-    .factory('security', [
-      '$q', 
-      '$state', 
-      'security.retry.queue', 
-      'authentication', 
-      'authorization',
-      '$location',
-      function($q, $state, queue, authentication, authorization, $location) {
+    .factory('security', 
+      function(securityContext, authorization) {
 
         // The public API of the service
         var service = {
@@ -34,13 +26,11 @@
 
           // Does the current user have the authorization?
           hasAuthorization: function(permission) {
-            //return !!(securityContext.user && authorization.hasAuthorization(permission));
-            return true;
+            return !!(securityContext.user && authorization.hasAuthorization(permission));
           }
         };
 
         return service;
-      }
-    ]);
+    });
 
 }());

@@ -5,10 +5,7 @@
 
   angular.module('navigation.pagenav.controllers', ['ui.router'])
 
-    .controller('PagenavItemController', [
-      '$scope',
-      '$element',
-      '$state',
+    .controller('PagenavItemController', 
       function ($scope, $element, $state) {
         $element.on('click', function (e) {
           $scope.$apply(function () {
@@ -27,8 +24,7 @@
               $element.removeClass('active');
             }
           });
-      }
-    ]);
+      });
 
     logger.debug('Registered navigation.pagenav.controllers');
 

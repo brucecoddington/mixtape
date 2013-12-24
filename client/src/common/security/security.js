@@ -15,7 +15,7 @@
     'ui.router'
   ]);
 
-  app.config(['$stateProvider', function ($stateProvider){
+  app.config(function ($stateProvider){
 
     $stateProvider
       .state('login', {
@@ -28,6 +28,6 @@
         }
       });
 
-  }]);
+  });
 
 }());

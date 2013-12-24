@@ -7,11 +7,7 @@
     'ui.router',
     'common.security.service'
   ])
-    .controller('SidenavController', [
-      '$scope',
-      'securityContext',
-      'authorization',
-      '$control',
+    .controller('SidenavController', 
       function ($scope, securityContext, authorization, $control) {
 
         $scope.open = false;
@@ -26,11 +22,11 @@
 
         authorization.requireAuthenticatedUser().then(function (user) {
           $scope.items = [
-            { 'state': 'rezr', 'icon': 'dashboard', 'title': 'Reservations', 'position': 1,
+            { 'state': 'mx', 'icon': 'dashboard', 'title': 'Reservations', 'position': 1,
               'subitems': [
-                {'state': 'rezr.dashboard', 'title': 'Dashboard', 'position': 1},
-                {'state': 'rezr.timeslots', 'title': 'Reserve a Time Slot', 'position': 2},
-                {'state': 'rezr.admin', 'title': 'Admin Reservations', 'position': 3}
+                {'state': 'mx.dashboard', 'title': 'Dashboard', 'position': 1},
+                {'state': 'mx.timeslots', 'title': 'Reserve a Time Slot', 'position': 2},
+                {'state': 'mx.admin', 'title': 'Admin Reservations', 'position': 3}
               ]
             },
             { 'state': 'admin', 'icon': 'cogs', 'title': 'Administration', 'position': 2,
@@ -43,13 +39,9 @@
           ];
 
         });
-      }
-    ])
+    })
 
-    .controller('SidenavItemController', [
-      '$scope', 
-      '$state',
-      'sidenavSharedEventService',
+    .controller('SidenavItemController', 
       function ($scope, $state, sidenavSharedEventService) {
 
         $scope.setView = function(stateName) {
@@ -73,12 +65,9 @@
         }); 
 
         $scope.isInState();
-      }
-    ])
+    })
 
-    .controller('SidenavCollectionController', [
-      '$scope',
-      '$state',
+    .controller('SidenavCollectionController', 
       function ($scope, $state) {
 
         $scope.isInState = function() {
@@ -98,8 +87,7 @@
         });
 
         $scope.isInState();
-      }
-    ]);
+    });
 
     logger.debug('Registered navigation.sidenav.controllers');
 }());

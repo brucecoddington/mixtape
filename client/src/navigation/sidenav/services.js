@@ -6,8 +6,7 @@
   logger.debug("Registering navigation.sidenav.services");
 
   angular.module('navigation.sidenav.services', [])
-    .factory('sidenavSharedEventService', [
-      '$rootScope',
+    .factory('sidenavSharedEventService', 
       function ($rootScope) {
         var sidenavService = {};
 
@@ -35,7 +34,6 @@
         };
 
         return sidenavService;
-      }
-    ]);
+    });
 
 }());
