@@ -111,7 +111,7 @@
             return $api.login.current().$promise.then(function(currentUser) {
         
               if(currentUser.username) {
-                notifications.displayMessage({message: "Welcome Back, " + currentUser.username + ".", type: 'success', id: 'welcome-message' });
+                notifications.success("Welcome Back, " + currentUser.username + ".", {id: 'welcome-message' });
               }
 
               return authentication.setAuthentication(currentUser);  

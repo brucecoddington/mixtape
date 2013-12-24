@@ -42,42 +42,6 @@
 
         var api = {
 
-          // administration
-          vacationProperty : $resource($apiUrl + '/vacationProperty/:id', {
-            id: '@id'
-          }, {
-            update : {
-              method: 'PUT'
-            }
-          }),
-
-          season : $resource($apiUrl + '/season', {
-            id: '@id'
-          }, {
-            update : {
-              method: 'PUT'
-            }
-          }),
-
-          timeslot : $resource($apiUrl + '/timeslot', {
-            id: '@id'
-          }, {
-            update : {
-              method: 'PUT'
-            }
-          }),
-
-          reservation : $resource($apiUrl + '/reservation', {
-            id: '@id'
-            }, {
-              update : {
-                method: 'PUT'
-              }
-            }),
-
-          // rezr
-
-
           // security
           login : $resource($apiUrl + '/login', {}, {
             'login' : {
