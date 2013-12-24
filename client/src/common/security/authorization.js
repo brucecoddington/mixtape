@@ -1,58 +1,88 @@
-angular.module('security.authorization', ['security.service'])
+(function () {
+  'use strict';
 
-// This service provides guard methods to protect application states.
-// You can add them as resolves to states to require authorization levels
-// before allowing a state change to complete
-.provider('securityAuthorization', {
+  var logger = window.debug;
 
-  requireAdminUser: ['securityAuthorization', function(securityAuthorization) {
-    return securityAuthorization.requireAdminUser();
-  }],
+  angular.module('common.security.authorization', [
+    'common.security.retry.queue',
+    'common.security.authentication'
+  ])
 
-  requireAuthenticatedUser: ['securityAuthorization', function(securityAuthorization) {
-    return securityAuthorization.requireAuthenticatedUser();
-  }],
+  // This service provides guard methods to protect application states.
+  // You can add them as resolves to states to require authorization levels
+  // before allowing a state change to complete
+  .provider('authorization', {
 
-  requireAuthorizedUser: ['securityAuthorization', function(securityAuthorization) {
-    return securityAuthorization.requireAuthenticatedUser();
-  }],
-
-  $get: ['security', 'securityRetryQueue', function(security, queue) {
-    var service = {
-
-      // Require that there is an authenticated user
-      // (use this in a state resolve to prevent non-authenticated users from entering that state)
-      requireAuthenticatedUser: function(state) {
-        var promise = security.requestCurrentUser().then(function(userInfo) {
-          if ( !security.isAuthenticated() ) {
-            return queue.pushRetryFn('unauthenticated-client', service.requireAuthenticatedUser, state);
-          }
-        });
-        return promise;
-      },
-
-      // Require that there is an administrator logged in
-      // (use this in a state resolve to prevent non-administrators from entering that state)
-      requireAdminUser: function(state) {
-        var promise = security.requestCurrentUser().then(function(userInfo) {
-          if ( !security.isAdmin() ) {
-            return queue.pushRetryFn('unauthorized-client', service.requireAdminUser, state);
-          }
-        });
-        return promise;
-      }, 
-
-      requireAuthorizedUser: function (authorization, state) {
-        var promise = security.requestCurrentUser().then(function(userInfo) {
-          if (!security.hasAuthorization(authorization)) {
-            return queue.pushRetryFn('unauthorized-client', service.requireAuthorizedUser, state);
-          }
-        });
-        return promise;
+    requireAuthenticatedUser: [
+      'authorization',
+      function(authorization) {
+        return authorization.requireAuthenticatedUser();
       }
+    ],
 
-    };
+    requireAuthorizedUser: function (permission) {
+      return [
+        'authorization',
+        function(authorization) {
+          return authorization.requireAuthorizedUser(permission);
+        }
+      ];
+    },
 
-    return service;
-  }]
-});
+    requireInstitutionContext: [
+      'authorization',
+      function(authorization) {
+        return authorization.requireInstitutionContext();
+      }
+    ],
+
+    $get: [
+      '$q',
+      '$injector',
+      'authentication',
+      'securityContext',
+      function($q, $injector, authentication, securityContext) {
+        var service = {
+
+          // Require that there is an authenticated user
+          // (use this in a state resolve to prevent non-authenticated users from entering that state)
+          requireAuthenticatedUser: function() {
+            var queue = $injector.get('security.retry.queue');
+
+            var promise = authentication.requestCurrentUser().then(function(userInfo) {
+              if ( !securityContext.authenticated ) {
+                return queue.pushRetryFn('unauthenticated-client', function() {
+                  return service.requireAuthenticatedUser();
+                });
+              }
+            });
+            return promise;
+          },
+
+          requireAuthorizedUser: function (authorization) {
+            var queue = $injector.get('security.retry.queue');
+
+            var promise = authentication.requestCurrentUser().then(function(userInfo) {
+              if ( !service.hasAuthorization(authorization) ) {
+                return queue.pushRetryFn('unauthorized-client', service.requireAuthorizedUser);
+              }
+            });
+            return promise;
+          },
+
+          hasAuthorization : function (authorization) {
+            var auth = _.find(securityContext.permissions, function(permission) {
+              return permission === authorization;
+            });
+
+            return !!auth;
+          }
+
+        };
+
+        return service;
+      }
+    ]
+  });
+
+}());

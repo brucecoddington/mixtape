@@ -15,7 +15,7 @@
           restrict: 'A',
           link : function (scope, element, attrs) {
             element.on('click', function() {
-              $state.transitionTo(scope.$apply(attrs.navigateToOnClick));
+              $location.path(scope.$apply(attrs.navigateToOnClick));
               scope.$apply();
             });
             $compile(element.contents())(scope);

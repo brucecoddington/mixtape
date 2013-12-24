@@ -1,9 +1,8 @@
 module.exports = (function () {
 
-  var mongoose = require('mongoose')
-    , Schema = mongoose.Schema
-    , _ = require('underscore')
-    ;
+  var mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+    _ = require('underscore');
 
   // schema definition
   var userSchema = new Schema ({
@@ -15,9 +14,7 @@ module.exports = (function () {
     enabled: Boolean,
     accountExpired: Boolean,
     accountLocked: Boolean,
-    passwordExpired: Boolean,
-    socketId: String,
-    roomIds: [String]
+    passwordExpired: Boolean
   });
 
   // Static functions

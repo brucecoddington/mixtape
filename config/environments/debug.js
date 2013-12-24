@@ -1,7 +1,9 @@
-var express = require('express');
+var express = require('express'),
+  properties = require('../properties');
 
 module.exports = function() {
-  this.set('port', 3003);
+  this.set('port', properties.server.debug.listenPort);
+  this.set('securePort', properties.server.debug.securePort);
 
   this.use(express.errorHandler({
     dumpExceptions: true,

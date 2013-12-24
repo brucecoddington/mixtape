@@ -1,11 +1,12 @@
-var express = require('express');
+var express = require('express'),
+  properties = require('../properties');
 
 module.exports = function() {
-  this.set('port', 3033);
-  console.log('Setting port to 3033');
+  this.set('port', properties.server.prod.listenPort);
+  this.set('securePort', properties.server.prod.securePort);
 
   // Serve static content
-  this.use(express.static(__dirname + "/../../client/dist/mixtape-ui"));
+  this.use(express.static(__dirname + "/../../client/dist/mixtape"));
 
   this.use(function (req, res) {
     res.send(404);

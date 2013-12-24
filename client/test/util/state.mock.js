@@ -15,6 +15,10 @@ angular.module('stateMock',[])
       console.log("Mock transition to: " + stateName);
     };
 
+    this.go = function (stateName) {
+      this.transitionTo(stateName);
+    };
+
     this.expectTransitionTo = function(stateName){
       this.expectedTransitions.push(stateName);
     };

@@ -1,116 +1,33 @@
-// Based loosely around work by Witold Szczerba - https://github.com/witoldsz/angular-http-auth
-angular.module('security.service', [
-  'security.retryQueue',    // Keeps track of failed requests that need to be retried once the user logs in
-  'security.login',         // Contains the login form template and controller
-  'security.authentication',// Contains the authentication object
-  'ui.state'          
-])
+(function () {
+  'use strict';
 
-.factory('security', [
-  '$http', 
-  '$q', 
-  '$state', 
-  'securityRetryQueue', 
-  'authentication', 
-  function($http, $q, $state, queue, authentication) {
+  var logger = window.debug;
 
-  // Redirect to the given state (defaults to 'dashboard')
-  function redirect(state, params) {
-    state = state || 'main';
+  // Based loosely around work by Witold Szczerba - https://github.com/witoldsz/angular-http-auth
+  var app = angular.module('common.security', [
+    'common.security.service',
+    'common.security.interceptor',
+    'common.security.authorization',
+    'common.security.authentication',
+    'common.security.retry.queue',
+    'common.security.login.controllers',
+    'common.security.context',
+    'ui.router'
+  ]);
 
-    if (params) {
-      $state.transitionTo(state, params);
-    }
-    else {
-      $state.transitionTo(state);
-    }
-  }
+  app.config(['$stateProvider', function ($stateProvider){
 
-  function processRetry(success) {
-    if ( success ) {
-      queue.retryAll();
-    } else {
-      queue.cancelAll();
-      redirect();
-    }
-  }
-
-  // Register a handler for when an item is added to the retry queue
-  queue.onItemAddedCallbacks.push(function(retryItem) {
-    if ( queue.hasMore() ) {
-      service.showLogin(retryItem.state);
-    }
-  });
-
-  // The public API of the service
-  var service = {
-
-    // Get the first reason for needing a login
-    getLoginReason: function() {
-      return queue.retryReason();
-    },
-
-    // Show the modal login dialog
-    showLogin: function() {
-      $state.transitionTo('login');
-    },
-
-    // Attempt to authenticate a user by the given email and password
-    login: function(username, password) {
-      var request = $http.post('/login', {username: username, password: password});
-      return request.then(function(response) {
-        service.currentUser = authentication.setAuthentication(response.data.user);
-        
-        if ( service.isAuthenticated() ) {
-          processRetry(true);
-          redirect();
+    $stateProvider
+      .state('login', {
+        url: '/login?redirect',
+        templateUrl: 'assets/templates/common/security/login/index.html',
+        controller: 'LoginFormController',
+        data: {
+          title: "Please Login",
+          section: ""
         }
       });
-    },
 
-    // Give up trying to login and clear the retry queue
-    cancelLogin: function() {
-      redirect();
-    },
+  }]);
 
-    // Logout the current user and redirect
-    logout: function(redirectTo) {
-      $http.post('/logout').then(function() {
-        service.currentUser = null;
-        redirect(redirectTo);
-      });
-    },
-
-    // Ask the backend to see if a user is already authenticated - this may be from a previous session.
-    requestCurrentUser: function() {
-      if ( service.isAuthenticated() ) {
-        return $q.when(service.currentUser);
-      } else {
-        return $http.get('/current-user').then(function(response) {
-          service.currentUser = authentication.setAuthentication(response.data.user);
-          return service.currentUser;
-        });
-      }
-    },
-
-    // Information about the current user
-    currentUser: null,
-
-    // Is the current user authenticated?
-    isAuthenticated: function()      {
-      return !!(service.currentUser && service.currentUser.authenticated);
-    },
-    
-    // Is the current user an adminstrator?
-    isAdmin: function() {
-      return !!(service.currentUser && service.currentUser.admin);
-    },
-
-    // Does the current user have the authorization?
-    hasAuthorization: function(authorization) {
-      return !!(service.currentUser && service.currentUser.hasAuthorization(authorization));
-    }
-  };
-
-  return service;
-}]);
+}());

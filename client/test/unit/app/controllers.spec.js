@@ -6,29 +6,32 @@
 
   describe('App', function() {
    
-    describe('Controllers', function() {
-        
-      beforeEach(module('app.controllers'));
+      describe('Controllers', function() {
+          
+        beforeEach(
+          module(
+            'app.controllers', 
+            'navigation.sidenav', 
+            'navigation.quickview', 
+            'app.resources',
+            'app.services',
+            'ngResource'
+          ));
 
-      describe('HomeController', function() {
-        it('should have the home controller in the app.controllers module',
-          inject(function($rootScope, $controller) {
-            var scope = $rootScope.$new(),
-              controller = $controller("HomeController", {$scope: scope });
-            expect(controller).to.be.ok;
-          })
-        );
+        describe('MainController', function() {
+          it('should have the main controller in the app.controllers module',
+            inject(function($rootScope, $controller, sidenavSharedEventService, quickviewSharedEventService) {
+                var scope = $rootScope.$new(),
+                    controller = $controller("MainController", {
+                      $scope: scope,
+                      sidenavSharedEventService: sidenavSharedEventService,
+                      quickviewSharedEventService: quickviewSharedEventService
+                    });
+                
+                expect(controller).to.be.ok;
+          }));
+        });
+   
       });
-
-      describe('NavController', function() {
-        it('should have the nav controller in the app.controllers module',
-          inject(function($rootScope, $controller) {
-            var scope = $rootScope.$new(),
-              controller = $controller("NavController", {$scope: scope });
-            expect(controller).to.be.ok;
-          })
-        );
-      });
-    });
   });
 }());

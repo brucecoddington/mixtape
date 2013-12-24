@@ -1,41 +1,49 @@
 describe('securityInterceptor', function() {
-  var queue, interceptor, promise, wrappedPromise;
+  var expect = chai.expect;
 
-  beforeEach(module('security.interceptor'));
+  var queue, 
+    interceptor;
+
+  beforeEach(
+    module(
+      'common.security.interceptor',
+      'common.security.retry.queue'
+    ));
 
   beforeEach(inject(function($injector) {
-    queue = $injector.get('securityRetryQueue');
+    queue = $injector.get('security.retry.queue');
     interceptor = $injector.get('securityInterceptor');
-    wrappedPromise = {};
-    promise = {
-      then: jasmine.createSpy('then').andReturn(wrappedPromise)
-    };
   }));
 
-  it('accepts and returns a promise', function() {
-    var newPromise = interceptor(promise);
-    expect(promise.then).toHaveBeenCalled();
-    expect(promise.then.mostRecentCall.args[0]).toBe(null);
-    expect(newPromise).toBe(wrappedPromise);
+  it('accepts a response object and returns a promise', function() {
+    var promise = interceptor.responseError({status: 200});
+    expect(promise.then).to.exist;
   });
 
   it('does not intercept non-401 error responses', function() {
     var httpResponse = {
       status: 400
     };
-    interceptor(promise);
-    var errorHandler = promise.then.mostRecentCall.args[1];
-    expect(errorHandler(httpResponse)).toBe(promise);
+    var promise = interceptor.responseError(httpResponse);
+    expect(promise.then).to.exist;
   });
 
   it('intercepts 401 error responses and adds it to the retry queue', function() {
     var notAuthResponse = {
-      status: 401
+      status: 401,
+      config: {}
     };
-    interceptor(promise);
-    var errorHandler = promise.then.mostRecentCall.args[1];
-    var newPromise = errorHandler(notAuthResponse);
-    expect(queue.hasMore()).toBe(true);
-    expect(queue.retryReason()).toBe('unauthorized-server');
+    interceptor.responseError(notAuthResponse);
+    expect(queue.hasMore()).to.be.true;
+    expect(queue.retryReason()).to.equal('unauthorized-server');
+  });
+
+  it('intercepts 403 error responses and adds it to the retry queue', function() {
+    var notAuthResponse = {
+      status: 403
+    };
+    interceptor.responseError(notAuthResponse);
+    expect(queue.hasMore()).to.be.true;
+    expect(queue.retryReason()).to.equal('access-denied-server');
   });
 });

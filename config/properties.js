@@ -40,5 +40,14 @@ module.exports = {
       listenPort: 3033,
       securePort: 8433
     }
+  },
+
+  proxy : {
+    '\/mixtape\/api\/.*' : {
+      urlType: 'pass',
+      protocol: 'http',
+      host: 'localhost',
+      port: 8080
+    }
   }
 };

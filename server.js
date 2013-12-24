@@ -1,9 +1,10 @@
-var fs = require('fs')
-  , locomotive = require('locomotive')
-  , https = require('https') 
-  , privateKey = fs.readFileSync(__dirname + '/config/cert/privatekey.pem').toString()
-  , certificate = fs.readFileSync(__dirname + '/config/cert/certificate.pem').toString()
-  , credentials = {key: privateKey, cert: certificate};
+var fs = require('fs'),
+  Q = require('q'),
+  locomotive = require('locomotive'),
+  https = require('https'),
+  privateKey = fs.readFileSync(__dirname + '/config/cert/privatekey.pem').toString(),
+  certificate = fs.readFileSync(__dirname + '/config/cert/certificate.pem').toString(),
+  credentials = {key: privateKey, cert: certificate};
 
 var sendReady = function sendReady() {
     //If this process was forked, send the ready message to whoever spawned it
@@ -29,15 +30,23 @@ var sendReady = function sendReady() {
       console.log(key + ": " + app.settings[key]);
     }
 
-    var server = app.listen(app.settings.port, function () {
-      console.log("Ready for requests on port %d in %s mode.", app.settings.port, app.settings.env);
-      sendReady();
-    });
-
-    var secureServer = https.createServer(credentials, app);
-    secureServer.listen(app.settings.securePort, function () {
-      console.log("Ready for requests on port %d in %s mode.", app.settings.securePort, app.settings.env);
-      sendReady();
+    // Start the HTTP server
+    Q.fcall(function() {
+      var deferred = Q.defer();
+      var server = app.listen(app.settings.port, function () {
+        console.log("Ready for requests on port %d in %s mode.", app.settings.port, app.settings.env);
+        deferred.resolve();
+      });
+      return deferred.promise;
+    })
+    // Then send the ready
+    .then(function() {
+      console.log('Server is ready and serving on HTTP and HTTPS.');
+      console.log('Returning ready to the parent process if any.');
+      if (process.send) {
+        process.send({ status: 'ready' });
+      }
     });
 
   });
+

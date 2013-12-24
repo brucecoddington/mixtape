@@ -1,12 +1,11 @@
 /*global module, require, console*/
 /*jslint nomen: false*/
 
-var express = require('express')
-  , passport = require('passport')
-  , properties = require('../properties')
-  , LocalStrategy = require('passport-local').Strategy
-  , User = require('../../app/models/user')
-  ;
+var express = require('express'),
+  passport = require('passport'),
+  properties = require('../properties'),
+  LocalStrategy = require('passport-local').Strategy,
+  User = require('../../app/models/user');
 
 module.exports = function () {
 

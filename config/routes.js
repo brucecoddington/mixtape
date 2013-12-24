@@ -9,7 +9,7 @@ module.exports = function routes () {
   this.root('application#index');
 
   this.post('login', 'login#index');
-  this.get('current-user', 'login#currentUser');
+  this.get('login', 'login#currentUser');
 
   this.post('logout', 'logout#index');
 

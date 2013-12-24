@@ -36,7 +36,7 @@ function saveAll( schema, nested, docs, callback ){
   });
 }
 
-// saveDoc saves an individual do to a Mongoose schema object. 
+// saveDoc saves an individual doc to a Mongoose schema object. 
 //
 // schema : The actual Mongoose schema object to be saved.
 // nested : The string name of the nested property.
@@ -76,8 +76,6 @@ function newUsers() {
   });
 }
 
-// User.remove().exec().then(function (){
-//   newUsers();
-// });
-
-newUsers();
+User.remove().exec().then(function (){
+  newUsers();
+});

@@ -39,7 +39,6 @@
     "grunt-contrib-uglify": "~0.2.2",
     "grunt-contrib-clean": "~0.4.1",
     "grunt-contrib-cssmin": "~0.6.1",
-    "grunt-angular-templates": "0.3.10",
     "grunt-hub": "~0.5.0",
     "karma-ng-scenario": "0.0.1",
     "grunt-shell": "~0.3.0",
@@ -47,6 +46,8 @@
     "karma-junit-reporter": "0.0.2",
     "grunt-mixtape-run-app": "0.0.2",
     "grunt-docco-multi": "0.0.2",
-    "walkdir": "0.0.7"
+    "walkdir": "0.0.7",
+    "grunt-html2js": "~0.1.8",
+    "grunt-maven-tasks": "~1.1.0"
   }
 }

@@ -3,7 +3,8 @@ var express = require('express'),
   MongoStore = require('connect-mongo')(express),
   poweredBy = require('connect-powered-by'),
   util = require('util'),
-  properties = require('../properties');
+  properties = require('../properties'),
+  proxy = require('../proxy');
 
 module.exports = function() {
   console.log('Starting all configuration');
@@ -31,18 +32,9 @@ module.exports = function() {
   this.use(express.favicon());
   this.use(express.compress());
   this.use(express.cookieParser(properties.security.cookieSecret));
-  //this.use(express.cookieSession());
+  //this.use(proxy);
   this.use(express.bodyParser());
-  
-  this.use(
-    express.session({
-      store: new MongoStore({
-        url: ['mongodb:/', properties.mongo.host, properties.mongo.db].join('/')
-      }),
-      secret: properties.session.secret
-    })
-  );
-  
+
   this.use(passport.initialize());
   this.use(passport.session());
   this.use(this.router);

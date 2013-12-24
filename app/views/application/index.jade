@@ -10,13 +10,13 @@ html(class="no-js", ng-app="main")
   // <![endif]
   head
     meta(charset="utf-8")
-    title(ng-bind-template="{{title}} | The Title") App Title
+    title(ng-bind-template="Mixtape") Mixtape
     base(href="/")
     meta(name="viewport", content="width=device-width, user-scalable=no, maximum-scale=1, minimum-scale=1")
     meta(name="apple-mobile-web-app-capable", content="yes")
     meta(name="apple-mobile-web-app-status-bar-style", content="black")
 
-    meta(name="description", content="Application Description Goes Here")
+    meta(name="description", content="The Mixtape compilation")
 
     meta(property="og:title", content="")
     meta(property="og:description", content="")
@@ -29,33 +29,22 @@ html(class="no-js", ng-app="main")
     - else
       link(href="/assets/css/style.css", rel="stylesheet", type="text/css")
 
-    link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Lato:300,400,700,900")
     link(rel="apple-touch-icon", href="/assets/img/apple-app-icon.png")
 
-  body(ng-cloak)
-
-    .page-container
-      .navbar-container
-        .main-navbar
-          .navbar.navbar-default.navbar-static-top(ng-controller="NavController")
-            ul.nav
-              li(ng-click="$state.transitionTo('main')")
-                a(href="#") HOME
-
-              li
-                a(bs-dropdown="dropdown") 
-                  | SECOND 
-                  b.caret
-
-              li(ng-click="$state.transitionTo('main.three')")
-                a THIRD
-
-              li(ng-click="$state.transitionTo('main.four')")
-                a FOURTH
-
-      .content-container
-        .view-container
-          .container
-            .ui-view
-
+    body
+      .mx-page-container(ng-class="{'mx-quick-view-open':pushLeft, 'mx-side-nav-open':pushRight, 'mx-authenticated-user': authenticatedUser}", ng-cloak, ng-controller="MainController")
+        .mx-navbar-container
+          .mx-side-nav-navbar
+            .navbar.navbar-default.navbar-static-top
+          .mx-main-navbar(topnav)
+          .mx-quick-view-navbar(quickview-nav)
+        .mx-content-container
+          .mx-login-background(ng-show="!authenticatedUser")
+            i.icon-opi-logo
+          .mx-side-nav-container(sidenav, items="items")
+          .mx-view-container(swipe-left="contentSwipeLeft($event)", swipe-right="contentSwipeRight($event)")
+            .container
+              .ui-view
+          .mx-quick-view-container(quickview)
+            
     include ../templates/scripts

@@ -1,6 +1,5 @@
-var express = require('express')
-  , passport = require('passport')
-  ;
+var express = require('express'),
+  passport = require('passport');
 
 var filterUser = function(user) {
   if ( user ) {
@@ -41,22 +40,24 @@ var security = {
     console.log('Sending current user: ' + req.user);
     console.log('req.session : ' + req.session);
     var currentUser = filterUser(req.user);
-    console.log(currentUser);
+
     res.json(200, currentUser);
   },
 
   login: function(req, res, next) {
-    function authenticationFailed(err, user, info) {
+    function handleAuth(err, user, info) {
       if (err) { return next(err); }
-      if (!user) { return res.json(filterUser(user)); }
 
-      req.login(user, function(err) {
-        if ( err ) { return next(err); }
-        return res.json(filterUser(user));
+      if (!user) { return res.json({authenticated: false, user: null, permissions: []}); }
+
+      req.login(user, function(loginErr) {
+        if ( loginErr ) { return next(loginErr); }
+
+        return res.json({authenticated: true, permissions: [], user: filterUser(user)});
       });
     }
 
-    return passport.authenticate('local', authenticationFailed)(req, res, next);
+    return passport.authenticate('local', handleAuth)(req, res, next);
   },
 
   logout: function(req, res, next) {
