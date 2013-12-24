@@ -1,29 +1,14 @@
 var express = require('express'),
   passport = require('passport');
 
-var filterUser = function(user) {
-  if ( user ) {
-    return {
-      user : {
-        id: user._id,
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        admin: user.admin
-      }
-    };
-  } else {
-    return { user: null };
-  }
-};
-
 var security = {
   authenticationRequired: function(req, res, next) {
     console.log('authRequired');
     if (req.isAuthenticated()) {
       next();
     } else {
-      res.json(401, filterUser(req.user));
+      var user = req.user ? req.user.withoutPassword() : null;
+      res.json(401, user);
     }
   },
 
@@ -32,30 +17,35 @@ var security = {
     if (req.user && req.user.admin ) {
       next();
     } else {
-      res.json(401, filterUser(req.user));
+      var user = req.user ? req.user.withoutPassword() : null;
+      res.json(401, user);
     }
   },
 
   sendCurrentUser: function(req, res, next) {
     console.log('Sending current user: ' + req.user);
     console.log('req.session : ' + req.session);
-    var currentUser = filterUser(req.user);
-
-    res.json(200, currentUser);
+    var user = req.user ? req.user.withoutPassword() : null;
+    res.json(200, user);
   },
 
   login: function(req, res, next) {
-    function handleAuth(err, user, info) {
-      if (err) { return next(err); }
 
-      if (!user) { return res.json({authenticated: false, user: null, permissions: []}); }
+    var handleAuth = function (err, user, info) {
+      if (err) { 
+        return next(err); 
+      }
+
+      if (!user) { 
+        return res.json({authenticated: false, user: null, permissions: []}); 
+      }
 
       req.login(user, function(loginErr) {
         if ( loginErr ) { return next(loginErr); }
 
-        return res.json({authenticated: true, permissions: [], user: filterUser(user)});
+        return res.json({authenticated: true, permissions: [], user: user.withoutPassword()});
       });
-    }
+    };
 
     return passport.authenticate('local', handleAuth)(req, res, next);
   },
