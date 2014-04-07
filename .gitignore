@@ -11,3 +11,4 @@ client/dist/*
 client/index.html
 libpeerconnection.log
 dist
+api/data/db/*
