@@ -31,14 +31,6 @@ var sendReady = function sendReady() {
     }
 
     // Start the HTTP server
-    // Q.fcall(function() {
-    //   var deferred = Q.defer();
-    //   var server = app.listen(app.settings.port, function () {
-    //     console.log("Ready for requests on port %d in %s mode.", app.settings.port, app.settings.env);
-    //     deferred.resolve();
-    //   });
-    //   return deferred.promise;
-    // })
     Q.nfcall(app.listen(app.settings.port))
     // Then send the ready
       .then(function() {
