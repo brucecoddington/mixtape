@@ -41,8 +41,8 @@ This mixtape is heavily influenced by these projects
 #### Install the Node dependencies locally. ####
 `npm install`
 
-#### Run init task to initialize a freshly checked out project ####
-`grunt init`
+#### Install the client dependencies. ####
+`bower install`
 
 #### Start your Mongo DB instance (if it's not already) ####
 
@@ -70,11 +70,6 @@ This mixtape is heavily influenced by these projects
 
 ## And a couple of shortcut tasks to run various combinations: ##
 
-* `grunt init` 
-
-  * Runs bower install
-  * Builds project dependencies (Angular)
-  * Runs the assemble task
 
 * `grunt debug` 
 

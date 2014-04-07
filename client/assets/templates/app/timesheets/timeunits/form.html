@@ -1,10 +1,10 @@
-<div class="tsz-timeunit-form" ng-cloak>
+<div class="mx-timeunit-form" ng-cloak>
   <div class="row">
     <div class="col-xs-12">
       <form class="form-horizontal" novalidate name="timeunitForm">
 
         <div class="form-group">
-          <div tsz-field-wrap input-id="timeunit-project" label="Project">
+          <div mx-field-wrap input-id="timeunit-project" label="Project">
             <select ui-select2="projectSelect"
               name="timeunit-project"
               ng-model="timeunit.project" 
@@ -16,7 +16,7 @@
         </div>
 
         <div class="form-group">
-          <div tsz-field-wrap input-id="timeunit-dateWorked" label="Date">
+          <div mx-field-wrap input-id="timeunit-dateWorked" label="Date">
             <div class="input-group">
               <input type="text" class="form-control" 
                 datepicker-popup="MM/dd/yyyy"
@@ -37,7 +37,7 @@
         </div>
 
         <div class="form-group">
-          <div tsz-field-wrap input-id="timeunit-hoursWorked" label="Hours">
+          <div mx-field-wrap input-id="timeunit-hoursWorked" label="Hours">
             <input type="number" class="form-control" 
               name="timeunit-hoursWorked" placeholder="Hours Worked"
               ng-model="timeunit.hoursWorked" 

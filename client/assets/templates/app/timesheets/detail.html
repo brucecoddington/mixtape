@@ -1,21 +1,21 @@
-<div class="tsz-timesheet-detail">
+<div class="mx-timesheet-detail">
   <div ng-show="$state.is('app.timesheets.detail')">
     <div class="row">
       <div class="col-xs-12">
         <form name="systemCategoryEdit" novalidate class="form-horizontal">
         
-          <div tsz-form-section-header header="Timesheet Details"></div>
+          <div mx-form-section-header header="Timesheet Details"></div>
 
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
-                <div tsz-static-field label="Name" label-col="4" 
+                <div mx-static-field label="Name" label-col="4" 
                 field-col="8" value="{{timesheet.name}}"></div>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
-                <div tsz-static-field label="Description" label-col="4" 
+                <div mx-static-field label="Description" label-col="4" 
                 field-col="8" value="{{timesheet.description}}"></div>
               </div>
             </div>
@@ -24,23 +24,23 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
-                <div tsz-static-field label="Begin Date" label-col="4" 
+                <div mx-static-field label="Begin Date" label-col="4" 
                 field-col="8" value="{{timesheet.beginDate | momentLongDate}}"></div>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
-                <div tsz-static-field label="End Date" label-col="4" 
+                <div mx-static-field label="End Date" label-col="4" 
                 field-col="8" value="{{timesheet.endDate | momentLongDate}}"></div>
               </div>
             </div>
           </div>
 
-          <div tsz-form-section-header header="Timesheet Progress"></div>
+          <div mx-form-section-header header="Timesheet Progress"></div>
 
           <div class="row">
             <div class="col-xs-12">
-              <div tsz-weekly-progress-bar hours-worked="hoursWorked()" 
+              <div mx-weekly-progress-bar hours-worked="hoursWorked()" 
                 hours-required="hoursRequired()" report="reportStatus(percentComplete)"></div>
             </div>
           </div>
@@ -62,7 +62,7 @@
       <hr/>
     </div>
 
-    <div tsz-form-section-header header="Time Units">
+    <div mx-form-section-header header="Time Units">
       <div class="row">
         <div class="col-sm-4 col-sm-offset-8 pull-right">
           <button type="button" class="btn btn-primary btn-block" ng-click="logTime()">Log Time</button>
@@ -72,14 +72,14 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <div class="tsz-responsive-table-container">
-          <table class="table table-bordered table-hover tsz-table-row-cursor">
+        <div class="mx-responsive-table-container">
+          <table class="table table-bordered table-hover mx-table-row-cursor">
             <thead>
               <tr>
                 <th>Project</th>
                 <th>Date Worked</th>
                 <th>Hours</th>
-                <th class="tsz-table-delete-column">Delete</th>
+                <th class="mx-table-delete-column">Delete</th>
               </tr>
             </thead>
             <tbody>

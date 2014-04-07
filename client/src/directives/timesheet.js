@@ -1,6 +1,6 @@
 angular.module('timesheet.directives', [])
 
-  .directive('tszWeeklyProgressBar', function () {
+  .directive('mxWeeklyProgressBar', function () {
     return {
       replace: true,
       scope: {

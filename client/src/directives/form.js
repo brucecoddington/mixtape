@@ -1,6 +1,6 @@
 angular.module('form.directives', [])
 
-  .directive('tszFormSectionHeader', function () {
+  .directive('mxFormSectionHeader', function () {
     return {
       replace: true,
       transclude: true,
@@ -11,7 +11,7 @@ angular.module('form.directives', [])
     };
   })
 
-  .directive('tszFieldWrap', function ($compile) {
+  .directive('mxFieldWrap', function ($compile) {
     return {
       transclude: true,
       restrict: 'A',
@@ -35,7 +35,7 @@ angular.module('form.directives', [])
     };
   })
 
-  .directive('tszStaticField', function () {
+  .directive('mxStaticField', function () {
     return {
       replace: true,
       restrict: 'A',
