@@ -1,33 +1,28 @@
-(function () {
-  'use strict';
+angular.module('app.controllers', [])
 
-  var logger = window.debug;
+  .controller('MainCtrl', function ($scope, securityContext){
+    
+    $scope.$watch(function () {
+      return securityContext.authenticated;
+    },
+    function (authenticated) {
+      $scope.authenticated = authenticated;
+      $scope.loggedInUser = securityContext.user;
+    });
 
-  angular.module('app.controllers', [])
-    .controller('HomeController', [
-      '$scope',
-      function ($scope){
-         
-      }
-    ])
-    .controller('NavController', [
-      '$scope',
-      function ($scope) {
+  })
+  
+  .controller('AppCtrl', 
+    function ($scope){
+      
+    }
+  )
 
-        $scope.dropdown = [
-          {
-            "text": 'option1',
-            "href": '#/two/one'
-          },
-
-          {
-            "text": 'option2',
-            "href": '#/two/two'
-          }
-        ];
-      }
-    ]);
-
-    logger.debug('Registered app.controllers');
-
-}());
+  .controller('NavCtrl', 
+    function ($scope, authentication) {
+    
+      $scope.logout = function logout () {
+        authentication.logout();
+      };
+    }
+  );

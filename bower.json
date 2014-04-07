@@ -5,35 +5,27 @@
   "description": "Compilation of cool stuff.",
   "version": "0.0.1",
   "dependencies": {
-    "jquery": "1.10.1",
+    "jquery": "2.0.3",
     "lodash": "1.3.1",
-    "moment": "2.0.0",
-    "angular": "~1.2.0",
-    "angular-strap": "0.7.6",
-    "bootstrap": "3.0.0",
-    "bootstrap-datepicker": "1.1.2",
-    "bootstrap-timepicker": "0.2.3",
-    "javascript-debug": "cowboy/javascript-debug",
+    "moment": "2.5.1",
+    "angular": "1.2.14",
+    "angular-resource": "1.2.14",
+    "angular-sanitize": "1.2.14",
+    "angular-cookies": "1.2.14",
+    "angular-animate": "1.2.14",
+    "angular-route": "1.2.14",
+    "angular-ui-bootstrap": "0.10.0",
+    "angular-ui-router": "0.2.7",
+    "angular-ui-select2": "0.0.5",
+    "bootstrap": "3.1.0",
     "modernizr": "2.6.2",
-    "angular-ui-utils": "0.0.3",
-    "angular-ui-bootstrap": "0.4.0",
-    "angular-ui-router": "92388f8e4da68f618e64537adc45fd5ab1ed32a8",
-    "retinajs": "imulus/retinajs",
-    "font-awesome": "~3.2.1",
-    "respond.js": "scottjehl/Respond",
-    "bootstrap-select": "latest",
-    "add-to-homescreen": "*",
-    "fuelux": "~2.3.1",
-    "faker": "Marak/Faker.js",
-    "hammerjs": "~1.0.5",
-    "lesshat": "~1.1.2"
+    "font-awesome": "4.0.3",
+    "lato": "0.1.0",
+    "nprogress": "0.1.2",
+    "messenger": "1.3.5"
   },
-  "devDependencies" : {
-    "jasmine" : "1.3.1",
-    "angular-mocks" : "~1.2.0"
-  },
-  "resolutions": {
-    "jquery": "1.10.1",
-    "bootstrap": "3.0.0"
+  "devDependencies": {
+    "jasmine": "1.3.1",
+    "angular-mocks": "1.2.14"
   }
 }

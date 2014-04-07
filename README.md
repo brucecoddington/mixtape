@@ -6,10 +6,9 @@ Track list:
 
 * [Locomotive](http://locomotivejs.org/)
 * [Express](http://expressjs.com/)
-* [SocketIO](http://socket.io/)
 * [Angular](http://angularjs.org/)
 * [karma](http://karma-runner.github.io/0.8/index.html)
-* [Mocha](http://visionmedia.github.io/mocha/)
+* [Jasmine](http://jasmine.github.io/)
 * [chai](http://chaijs.com/)
 * [sinon](http://sinonjs.org/)
 * [Bootstrap](http://twitter.github.io/bootstrap/)
@@ -27,7 +26,7 @@ This mixtape is heavily influenced by these projects
 * [angular-requirejs-seed](https://github.com/maxdow/angularjs-requirejs-seed)
 * [Grails](http://grails.org/)
 
-# Dependencies: #
+# Global Dependencies: #
 
 * [Node](http://nodejs.org/)
 * [Mongo](http://www.mongodb.org/)
@@ -36,15 +35,14 @@ This mixtape is heavily influenced by these projects
 * [Bower](http://twitter.github.com/bower/) `npm install -g bower`
 * [Nodemon](https://github.com/remy/nodemon/) `npm install -g nodemon`
 * [Docco](http://jashkenas.github.io/docco/) `npm install -g docco`
-* [Karma](https://github.com/karma-runner/karma/) `npm install -g karma`
 
 # Starting: #
 
 #### Install the Node dependencies locally. ####
 `npm install`
 
-#### Run init task to initialize a freshly checked out project ####
-`grunt init`
+#### Install the client dependencies. ####
+`bower install`
 
 #### Start your Mongo DB instance (if it's not already) ####
 
@@ -72,11 +70,6 @@ This mixtape is heavily influenced by these projects
 
 ## And a couple of shortcut tasks to run various combinations: ##
 
-* `grunt init` 
-
-  * Runs bower install
-  * Builds project dependencies (Angular)
-  * Runs the assemble task
 
 * `grunt debug` 
 

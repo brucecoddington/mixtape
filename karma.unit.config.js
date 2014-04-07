@@ -1,16 +1,23 @@
 module.exports = function(config) {
   config.set({
+
+    background: true,
+    autoWatch: true,
+
     frameworks: ['jasmine'],
 
     files: [
       '../node_modules/chai/chai.js',
-      '../node_modules/sinon/lib/sinon.js',
+      '../node_modules/chai-as-promised/lib/chai-as-promised.js',
+      '../node_modules/sinon-chai/lib/sinon-chai.js',
+      '../node_modules/sinon/pkg/sinon.js',
 
-      'dist/assets/js/app.js',
+      {pattern: 'dist/assets/js/deps.js', watched: false},
+      'src/**/*.js',
+
       'assets/js/components/angular-mocks/angular-mocks.js',
-      'test/util/state.mock.js',
-      
-      'test/unit/**/*.spec.js', 
+
+      'test/unit/**/*.spec.js',
 
       'assets/templates/**/*.html'
     ],
@@ -19,7 +26,7 @@ module.exports = function(config) {
 
     // generate js files from html templates
     preprocessors : {
-      'assets/templates/**/*.html': 'html2js'
+      'assets/templates/**/*.html': ['ng-html2js']
     },
 
     browsers: ['Chrome', 'Firefox'],
@@ -30,6 +37,5 @@ module.exports = function(config) {
       'karma-firefox-launcher', 
       'karma-ng-html2js-preprocessor'
     ]
-
   });
 };
