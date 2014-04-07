@@ -1,19 +1,37 @@
-(function () {
+angular.module('app', [
+  'ui.router',
+  'data.resources',
+  'app.controllers',
+  'app.employees',
+  'app.projects',
+  'app.timesheets',
+  'app.timesheets.timeunits',
+  'app.security',
+  'authorization.services'
+])
+
+  .config(function ($stateProvider, authorizationProvider) {
+
+    $stateProvider
+      .state('app', {
+        abstract: true,
+        url: '/app',
+        data: {
+          title: 'The Timesheet App'
+        },
+        views : {
+          'navbar' : {
+            controller: 'NavCtrl',
+            templateUrl: 'assets/templates/app/navbar.html'
+          },
+          'content' : {
+            controller: 'AppCtrl',
+            templateUrl: 'assets/templates/app/index.html'
+          }
+        }, 
+        resolve: {
+          authenticatedUser: authorizationProvider.requireAuthenticatedUser
+        }
+      });
+  });
   
-  'use strict';
-
-  var logger = window.debug;
-  logger.group("Registering app module");
-
-  var app = angular.module('app', [
-    'app.directives', 
-    'app.controllers',
-    'app.resources',
-    'app.services'
-  ]);
-
-
-  logger.debug("App module bootstrapped.");
-  logger.groupEnd(); 
-
-}());

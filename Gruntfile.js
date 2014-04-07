@@ -4,40 +4,69 @@
 //
 module.exports = function (grunt) {
 
+  var componentList = [
+    // Shims
+    'modernizr/modernizr.js',
+
+    // jQuery and Related
+    'jquery/jquery.js',
+    'select2/select2.js',
+    'messenger/build/js/messenger.js',
+
+    // bootstrap
+    'bootstrap/dist/js/bootstrap.js',
+
+    // AngularJS libraries
+    'angular/angular.js',
+    'angular-cookies/angular-cookies.js',
+    'angular-resource/angular-resource.js',
+    'angular-sanitize/angular-sanitize.js',
+    'angular-animate/angular-animate.js',
+
+    // Angular UI libraries
+    'angular-ui-router/release/angular-ui-router.js',
+    'angular-ui-utils/components/angular-ui-docs/build/ui-utils.js',
+    'angular-ui-select2/src/select2.js',
+    'angular-ui-bootstrap/src/position/position.js',
+    'angular-ui-bootstrap/src/datepicker/datepicker.js',
+    'angular-ui-bootstrap/src/pagination/pagination.js',
+    'angular-ui-bootstrap/src/buttons/buttons.js',
+
+    //NProgress
+    'nprogress/nprogress.js',
+
+    // utilities
+    'lodash/dist/lodash.js',
+    'moment/moment.js'
+  ],
+
+  watchedFiles = [
+    'client/src/**/*.js',
+    'client/test/**/*.js',
+    '<%= assets %>/templates/**/*.html',
+    '<%= assets %>/less/**/*.less'
+  ];
+
   grunt.initConfig ({
-    pkg : grunt.file.readJSON('package.json'),
+    pkg: grunt.file.readJSON('package.json'),
 
     assets: 'client/assets',
-    components: '<%= assets %>/js/components',
+    components: '<%= assets %>/js',
     clientdist: 'client/dist',
 
     // The clean task ensures all files are removed from the dist/ directory so
     // that no files linger from previous builds.
-    clean: ["dist", "<%= clientdist %>", "client/docs", "client/test-reports", "*.zip"],
+    clean: ['dist', '<%= clientdist %>', 'client/docs', 'client/test-reports'],
 
     // The jshint option for scripturl is set to lax, because the anchor
     // override inside main.js needs to test for them so as to not accidentally
     // route.
     jshint:{
-      options: {
-        scripturl: true,
-        laxcomma: true,
-        nomen: false,
-        globals : {
-          angular: true,
-          chai: true,
-          describe: true,
-          beforeEach: true,
-          afterEach: true,
-          it: true,
-          xit: true
-        }
+      code: {
+        src: ['client/src/**/*.js']
       },
-      code : {
-        src: ["client/src/**/*.js"]
-      },
-      specs : {
-        src: ["client/test/**/*.js"],
+      specs: {
+        src: ['client/test/**/*.js'],
         options: {
           expr: true
         }
@@ -48,15 +77,15 @@ module.exports = function (grunt) {
     less:{
       app:{
         options: {
-          paths: ["<%= assets %>/less"]
+          paths: ['<%= assets %>/less']
         },
-        files : {
+        files: {
           '<%= clientdist %>/assets/css/style.css': '<%= assets %>/less/style.less'
         }
       }
     },
 
-    // Combines the application templates into a single javascript file that populates 
+    // Combines the application templates into a single javascript file that populates
     // the angular template cache.
     //
     // Also builds the angular ui-bootstrap application specific template overrides
@@ -77,130 +106,40 @@ module.exports = function (grunt) {
       },
       lib: {
         options: {
-          base: '<%= assets %>/templates/lib/angular-ui-bootstrap',
+          base: '<%= assets %>/js/angular-ui-bootstrap',
         },
         src: [
-          '<%= assets %>/templates/lib/angular-ui-bootstrap/**/*.html'
+          '<%= assets %>/js/angular-ui-bootstrap/template/**/*.html'
         ],
         dest: '<%= clientdist %>/assets/templates/lib.templates.js'
-      }
-    },
-
-    ngmin : {
-      app : {
-        src : 'client/src/**/*.js',
-        dest : '<%= clientdist %>/temp/app.js'
       }
     },
 
     // The concatenate task is used here to merge the almond require/define
     // shim and the templates into the application code.
     concat:{
-      jsdeps : {
-        src : [
-          // Shims
-          '<%= components %>/es5-shim/es5-shim.js',
-          '<%= components %>/respond.js/dest/respond.src.js',
-          '<%= components %>/modernizr/modernizr.js',
-
-          // jQuery and Related
-          '<%= components %>/jquery/jquery.js',
-          '<%= components %>/hammerjs/dist/hammer.js',
-          '<%= components %>/select2/select2.js',
-          '<%= components %>/messenger/build/js/messenger.js',
-          '<%= components %>/messenger/build/js/messenger-theme-future.js',
-
-          // bootstrap
-          '<%= components %>/bootstrap/dist/js/bootstrap.js',
-          '<%= components %>/bootstrap-datepicker/js/bootstrap-datepicker.js',
-          '<%= components %>/bootstrap-timepicker/js/bootstrap-timepicker.js',
-
-          // AngularJS libraries
-          '<%= components %>/angular/angular.js',
-          '<%= components %>/angular-cookies/angular-cookies.js',
-          '<%= components %>/angular-resource/angular-resource.js',
-          '<%= components %>/angular-sanitize/angular-sanitize.js',
-          '<%= components %>/angular-strap/dist/angular-strap.js',
-
-          //AngularJS Library Dependencies
-          '<%= components %>/bootstrap-select/bootstrap-select.js',
-          '<%= components %>/angular-strap/vendor/bootstrap-datepicker.js',
-
-          // Angular UI libraries
-          '<%= components %>/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.6.0.js',
-          '<%= components %>/angular-ui-select2/src/select2.js',
-          '<%= components %>/angular-ui-router/release/angular-ui-router.js',
-          '<%= components %>/angular-ui-utils/components/angular-ui-docs/build/ui-utils.js',
-
-          // Angular UI Calendar
-          '<%= components %>/angular-ui-calendar/src/calendar.js',
-          '<%= components %>/fullcalendar/fullcalendar.js',
-
-          //Highcharts
-          '<%= components %>/highcharts/highcharts.src.js',
-
-          //Farbtastic
-          '<%= components %>/farbtastic/farbtastic.js',
-
-          //NProgress
-          '<%= components %>/nprogress/nprogress.js',
-
-          // Spin JS
-          '<%= components %>/spin.js/dist/spin.js',
-
-          // logger
-          '<%= components %>/javascript-debug/ba-debug.js',
-
-          // utilities
-          '<%= components %>/lodash/dist/lodash.js',
-          '<%= components %>/moment/moment.js',
-          '<%= components %>/add-to-homescreen/src/add2home.js',
-          '<%= components %>/responsive-tables/responsive-tables.js',
-          '<%= components %>/faker/Faker.js',
-          '<%= components %>/color/one-color-all-debug.js',
-          '<%= components %>/accounting/accounting.js'
-        ],
-
-        dest: "<%= clientdist %>/assets/js/deps.js"
+      jsdeps: {
+        src: getConcatFiles(),
+        dest: '<%= clientdist %>/assets/js/deps.js'
       },
-      appjs : {
-        src : [
+      appjs: {
+        src: [
           '<%= clientdist %>/assets/js/deps.js',
           '<%= clientdist %>/assets/templates/main.templates.js',
           '<%= clientdist %>/assets/templates/lib.templates.js',
-          '<%= clientdist %>/temp/app.js'
+          'client/src/**/*.js'
         ],
-        dest: "<%= clientdist %>/assets/js/app.js"
+        dest: '<%= clientdist %>/assets/js/app.js'
       },
-      css : {
-        src : [
-          // jQuery and Related
-          "<%= components %>/select2/select2.css",
-          "<%= components %>/messenger/build/css/messenger.css",
-          "<%= components %>/messenger/build/css/messenger-theme-air.css",
-          "<%= components %>/messenger/build/css/messenger-spinner.css",
-
-          // Angular Strap
-          "<%= components %>/bootstrap-select/bootstrap-select.css",
-          "<%= components %>/angular-strap/vendor/bootstrap-datepicker.css",
-
-          // Angular UI Calendar
-          "<%= components %>/fullcalendar/fullcalendar.css",
-          //"<%= components %>/fullcalendar/fullcalendar.print.css",
-
-          //Farbtastic
-          "<%= components %>/farbtastic/farbtastic.css",
-
-          //NProgress
-          "<%= components %>/nprogress/nprogress.css",
-          
-          // utilities
-          "<%= components %>/add-to-homescreen/style/add2home.css",
-        
-          // D3 Control
-          "<%= clientdist %>/assets/css/style.css"
+      css: {
+        src: [
+          '<%= components %>/select2/select2.css',
+          '<%= components %>/nprogress/nprogress.css',
+          '<%= components %>/messenger/build/css/messenger.css',
+          '<%= components %>/messenger/build/css/messenger-spinner.css',
+          '<%= clientdist %>/assets/css/style.css'
         ],
-        dest: "<%= clientdist %>/assets/css/style.css"
+        dest: '<%= clientdist %>/assets/css/style.css'
       }
     },
 
@@ -208,123 +147,56 @@ module.exports = function (grunt) {
     // order and concatenate them into a single CSS file named style.css.  It
     // also minifies all the CSS as well.  This is named style.css, because we
     // only want to load one stylesheet in index.html.
-    cssmin :{
-      all : {
-        files : {
-          "<%= clientdist %>/assets/css/style.min.css": ["<%= clientdist %>/assets/css/style.css"]
+    cssmin: {
+      all: {
+        files: {
+          '<%= clientdist %>/assets/css/style.min.css': ['<%= clientdist %>/assets/css/style.css']
         }
       }
     },
 
-    // Takes the built require.js file and minifies it for filesize benefits.
-    uglify : {
-      dist : {
+    // Takes the built app.js file and minifies it for filesize benefits.
+    uglify: {
+      dist: {
         files: {
-          "<%= clientdist %>/assets/js/app.min.js" : ["<%= clientdist %>/assets/js/app.js"]
+          '<%= clientdist %>/assets/js/app.min.js': ['<%= clientdist %>/assets/js/app.js']
         }
       }
     },
 
     // A task that runs in the background 'watching' for changes to code.
-    watch : {
-      options : {
+    watch: {
+      options: {
         livereload: true,
         atBegin: true
       },
       development: {
-        files: [
-          'client/src/**/*.js',
-          'client/test/**/*.js',
-          '<%= assets %>/templates/**/*.html',
-          '<%= assets %>/less/**/*.less',
-          'app/views/**/*.jade'
-        ],
-        tasks: ['development', 'karma:unit:run', 'karma:e2e:run']
+        files: watchedFiles,
+        tasks: ['development'] 
       },
       debug: {
-        files: [
-          'client/src/**/*.js',
-          'client/test/**/*.js',
-          '<%= assets %>/templates/**/*.html',
-          '<%= assets %>/less/**/*.less',
-          'app/views/**/*.jade'
-        ],
-        tasks: ['debug', 'karma:unit:run', 'karma:e2e:run']
+        files: watchedFiles,
+        tasks: ['debug'] 
       },
       production: {
-        files: [
-          'client/src/**/*.js',
-          'client/test/**/*.js',
-          '<%= assets %>/templates/**/*.html',
-          '<%= assets %>/less/**/*.less',
-          'app/views/**/*.jade'
-        ],
-        tasks: ['production', 'karma:unit:run', 'karma:e2e:run']
-      },
-      server : {
-        files: [
-          'test/**/*.js',
-          'app/**/*.js'
-        ],
-        tasks: ['mochacli']
+        files: watchedFiles,
+        tasks: ['production'] 
       }
-    },
-
-    // Starts the karama runner for unit and e2e tests.
-    // For the non CI tasks, tests are ran when the task is re-invoked 
-    // from the watch task.
-    // For the CI tasks, tests are ran immediately.  The application server
-    // must be running for these to succeed 
-    karma : {
-      unit : {
-        reporters: 'dots',
-        configFile: 'karma.unit.config.js',
-        options: {
-          background: true
-        }
-      },
-
-      e2e : {
-        reporters: 'dots',
-        configFile: 'karma.e2e.config.js',
-        options : {
-          port: 9877,
-          runnerPort: 9101,
-          background: true
-        }
-      },
-
-      unitci : {
-        configFile: 'karma.ci.unit.config.js'
-      },
-
-      e2eci : {
-        configFile: 'karma.ci.e2e.config.js'
-      }
-    },
-
-    // Run the server-side Mocha tests
-    mochacli : {
-      options : {
-        reporter: 'spec',
-        bail: true
-      },
-      all : ['test/**/*.js']
     },
 
     // Stages all the files for running the application.  Each of these
-    // tasks are cumulative where production builds off of debug, debug 
+    // tasks are cumulative where production builds off of debug, debug
     // off of development, and development off of vendor.
     // vendor: All of the 3rd party library files
     // development: All of the files required for development mode
     // debug: All of the files required for debug mode
     // production:  All of the files required for production mode
     copy: {
-      vendor : {
+      vendor: {
         files: [
           {
             expand: true,
-            cwd: '<%= components %>/font-awesome/font',
+            cwd: '<%= components %>/font-awesome/fonts',
             src:['**'],
             dest:'<%= clientdist %>/assets/font/font-awesome'
           },
@@ -333,32 +205,24 @@ module.exports = function (grunt) {
             cwd: '<%= components %>/lato/font',
             src:['**'],
             dest:'<%= clientdist %>/assets/font/lato'
-          },
-          {
-            expand: true,
-            cwd: '<%= components %>/dynatree/src/skin',
-            src:['**.gif'],
-            dest:'<%= clientdist %>/assets/img/dynatree'
-          },
-          {
-            expand: true,
-            cwd: '<%= components %>/farbtastic',
-            src:['**.png'],
-            dest:'<%= clientdist %>/assets/img/farbtastic'
           }
         ]
       },
-      development : {
+      development: {
         files: [
           {
             expand: true,
             cwd: '<%= assets %>',
             src: ['img/**', 'font/**'],
             dest: '<%= clientdist %>/assets'
+          },
+          {
+            src: '<%= assets %>/html/index.html',
+            dest:'<%= clientdist %>/<%= pkg.name %>/index.html'
           }
         ]
       },
-      debug : {
+      debug: {
         files: [
           {
             expand: true,
@@ -367,14 +231,12 @@ module.exports = function (grunt) {
             dest: '<%= clientdist %>/<%= pkg.name %>-debug/assets'
           },
           {
-            expand: true,
-            cwd: '<%= clientdist %>/assets/html',
-            src:['index.html'],
-            dest: '<%= clientdist %>/<%= pkg.name %>-debug'
+            src: '<%= assets %>/html/index.html',
+            dest:'<%= clientdist %>/<%= pkg.name %>/index.html'
           }
         ]
       },
-      production : {
+      production: {
         files: [
           {
             expand: true,
@@ -383,7 +245,7 @@ module.exports = function (grunt) {
             dest: '<%= clientdist %>/<%= pkg.name %>/assets'
           },
           {
-            src: '<%= clientdist %>/assets/html/index.min.html',
+            src: '<%= assets %>/html/index.html',
             dest:'<%= clientdist %>/<%= pkg.name %>/index.html'
           }
         ]
@@ -392,6 +254,22 @@ module.exports = function (grunt) {
 
     // Compile the **jade** templates into html for deployment
     jade: {
+      development: {
+        options: {
+          pretty: true,
+          data: {
+            env: 'development',
+            applicationScripts : getScripts('client/src', 'src'),
+            templateScripts: [
+              'assets/templates/main.templates.js',
+              'assets/templates/lib.templates.js'
+            ]
+          }
+        },
+        files: {
+          '<%= assets %>/html/index.html': ['api/app/views/application/index.jade']
+        }
+      },
       debug: {
         options: {
           pretty: true,
@@ -401,10 +279,10 @@ module.exports = function (grunt) {
           }
         },
         files: {
-          '<%= clientdist %>/assets/html/index.html' : ['app/views/application/index.jade']
+          '<%= assets %>/html/index.html': ['api/app/views/application/index.jade']
         }
       },
-      production : {
+      production: {
         options: {
           data: {
             debug: false,
@@ -412,7 +290,7 @@ module.exports = function (grunt) {
           }
         },
         files: {
-          '<%= clientdist %>/assets/html/index.min.html' : ['app/views/application/index.jade']
+          '<%= assets %>/html/index.html': ['api/app/views/application/index.jade']
         }
       }
     },
@@ -420,49 +298,49 @@ module.exports = function (grunt) {
     // The **docco** task iterates through the `src` files and creates annotated source reports for them.
     docco: {
       options: {
-        layout : "parallel"
+        layout: 'parallel'
       },
       client: {
         options: {
-          output : "dist/docs/client/"
+          output: 'dist/docs/client/'
         },
-        src: "client/src/**/*.js"
+        src: 'client/src/**/*.js'
       },
       app: {
         options: {
-          output : "dist/docs/app/"
+          output: 'dist/docs/app/'
         },
-        src: "app/**/*.js"
+        src: 'app/**/*.js'
       },
       grunt: {
         options: {
-          output : "dist/docs/docs/grunt/"
+          output: 'dist/docs/docs/grunt/'
         },
-        src: "Gruntfile.js"
+        src: 'Gruntfile.js'
       },
       config: {
         options: {
-          output : "dist/docs/config/"
+          output: 'dist/docs/config/'
         },
-        src: "config/**/*.js"
+        src: 'config/**/*.js'
       }
     },
 
     // The **runapp** task will run the `server.js` in a `nodemon` and watch the server files for changes
     runapp: {
-      development : {
+      development: {
         env: 'development'
       },
 
-      debug : {
+      debug: {
         env: 'debug'
       },
 
-      production : {
+      production: {
         env: 'production'
       },
 
-      test : {
+      test: {
         options: {
           dieWithParent: true
         },
@@ -470,121 +348,105 @@ module.exports = function (grunt) {
       }
     },
 
-    // Runs shell tasks
-    // bowerInstall - Runs `bower install`
-    // angular - Runs npm install for the Angular source pulled down with bower install.
-    // angularuibootstrap - Runs npm install for the angular-ui bootstrap source pulled down with bower install.
-    // angularuiutils - Runs npm install for the angular-ui utils source pulled down with bower install.
-    shell : {
-      bowerInstall : {
-        options: {
-          stdout: true,
-          stderr: true
-        },
-        command: 'bower install'
-      },
-      startup : {
-        options: {
-          stdout: true,
-          stderror: true
-        },
-        command: [
-        'grunt karma:unit',
-        'grunt karma:e2e',
-        'grunt watch'
-        ].join('&')
-      },
-      angularuibootstrap : {
-        options: {
-          stdout: true,
-          stderr: true,
-          execOptions: {
-            cwd: '<%= components %>/angular-ui-bootstrap'
-          }
-        },
-        command: 'npm install'
-      },
-      angularuiutils : {
-        options: {
-          stdout: true,
-          stderr: true,
-          execOptions: {
-            cwd: '<%= components %>/angular-ui-utils'
-          }
-        },
-        command: 'npm install'
+    // Task to add the array-style angular injection to protect against uglifying.
+    ngmin: {
+      app: {
+        src: 'client/src/**/*.js',
+        dest: '<%= clientdist %>/app.js'
       }
     },
 
-    // Runs dependency grunt builds
-    hub: {
-      angularuibootstrap: {
-        src: ['<%= components %>/angular-ui-bootstrap/Gruntfile.js'],
-        tasks: ['html2js', 'build']
-      },
-      angularuiutils: {
-        src: ['<%= components %>/angular-ui-utils/gruntFile.js'],
-        tasks: ['build']
+  // *********************************************************************************************
+  // New Tasks go below here !!!
+
+    // Starts the karma runner for unit and e2e tests.
+    // Tests are run when the task is re-invoked from the watch task.
+    karma : {
+      unit : {
+        reporters: 'dots',
+        configFile: 'karma.config.js'
       }
     },
 
-    maven: {
+    // Starts the protractor e2e tests.
+    protractor: {
       options: {
-        groupId: 'com.lodosoftware.control',
-        artifactId: 'd3-control-ui',        
+        configFile: 'protractor.config.js',
+        keepAlive: true,
+        noColor: false
       },
-      deploy: {
-        options: {
-          goal: 'deploy',
-          url: 'http://nexus.dev.d3banking.com/nexus/content/repositories/snapshots',
-          repositoryId: 'lodosoftware-nexus'
-        },
-        src: ['**']
+      e2e: {
       },
-      release: {
+      debug: {
         options: {
-          goal: 'deploy',
-          url: 'http://nexus.dev.d3banking.com/nexus/content/repositories/releases',
-          repositoryId: 'lodosoftware-nexus'
-        },
-        src: ['**']
+          debug: true
+        }
+      }
+    },
+
+    // Task to add the array-style angular injection to protect against uglifying.
+    ngmin: {
+      app: {
+        src: 'client/src/**/*.js',
+        dest: '<%= clientdist %>/app.js'
       }
     }
+
   });
 
   // *********************************************************************************************
 
-  grunt.loadNpmTasks('grunt-hub');
-  grunt.loadNpmTasks("grunt-contrib-concat");
-  grunt.loadNpmTasks("grunt-contrib-jade");
-  grunt.loadNpmTasks("grunt-contrib-less");
-  grunt.loadNpmTasks("grunt-contrib-watch");
-  grunt.loadNpmTasks("grunt-contrib-jshint");
-  grunt.loadNpmTasks("grunt-contrib-copy");
-  grunt.loadNpmTasks("grunt-contrib-uglify");
-  grunt.loadNpmTasks("grunt-contrib-cssmin");
+  function getConcatFiles() {
+    var _ = require('lodash');
+
+    return _.map(componentList, function (component) {
+      return '<%= components %>/' + component;
+    });
+  }
+ 
+  function getScripts(dir, dest) {
+    var path = require('path');
+    var fs = require('fs');
+    var files = fs.readdirSync(dir);
+    var _ = require('lodash');
+    var scripts = [];
+
+    _.each(files, function (file) {
+      var name = dir + '/' + file;
+      var destName = dest + '/' + file;
+    
+      if (fs.statSync(name).isDirectory()) {
+          scripts = scripts.concat(getScripts(name, destName));
+      } else if (path.extname(file) === '.js') {
+        scripts.push(destName);
+      }
+
+    });
+
+    return scripts;
+  }
+
+  // *********************************************************************************************
+
+  // Load NPM Package Tasks
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-mixtape-run-app');
-  grunt.loadNpmTasks("grunt-karma");
-  grunt.loadNpmTasks("grunt-shell");
+  grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-docco-multi');
   grunt.loadNpmTasks('grunt-html2js');
-  grunt.loadNpmTasks('grunt-maven-tasks');
   grunt.loadNpmTasks('grunt-ngmin');
+  grunt.loadNpmTasks('grunt-mixtape-run-app');
+  grunt.loadNpmTasks('grunt-protractor-runner');
+  grunt.loadNpmTasks('grunt-shell');
 
   // **********************************************************************************************
-
-  //Initialize a fresh project.  This will build any dependencies and run the default grunt task.
-  grunt.registerTask("init", ['shell:bowerInstall', 'builddeps', 'production']);
-
-  //Build dependencies of the project
-  grunt.registerTask("builddeps", ['angularuibootstrap', 'angularuiutils']);
-
-  //Build angular-ui bootstrap
-  grunt.registerTask("angularuibootstrap", ['shell:angularuibootstrap', 'hub:angularuibootstrap']);
-
-  //Build angular-ui utils
-  grunt.registerTask("angularuiutils", ['shell:angularuiutils', 'hub:angularuiutils']);
 
   // The default task will remove all contents inside the dist/ folder, lint
   // all your code, precompile all the underscore templates into
@@ -592,18 +454,14 @@ module.exports = function (grunt) {
   // dist/debug/require.js, and then concatenate the require/define shim
   // almond.js and dist/debug/templates.js into the require.js file.
 
-  grunt.registerTask("default", ['clean']);
+  grunt.registerTask('default', ['clean', 'jshint', 'less', 'concat:css', 'html2js', 'concat:jsdeps', 'copy:vendor', 'copy:development']);
 
   // Task to compile everything in development mode
-  grunt.registerTask("development", ['default', 'jshint', 'less', 'concat:css', 'html2js', 'concat:jsdeps', 'copy:vendor', 'copy:development']);
-  grunt.registerTask("debug", ['development', 'ngmin:app', 'concat:appjs', 'jade:debug', 'copy:debug']);
-  grunt.registerTask("production", ['debug', 'cssmin', 'uglify', 'jade:production', 'copy:production']);
+  grunt.registerTask('development', ['default']);
+  grunt.registerTask('debug', ['development', 'concat:appjs', 'jade:debug', 'copy:debug']);
+  grunt.registerTask('production', ['debug', 'cssmin', 'uglify', 'jade:production', 'copy:production']);
 
   // Forks off the application server and runs the unit and e2e tests.
   // Test results stored in client/test-reports
-  grunt.registerTask("test", ['production', 'runapp:test', 'karma:unitci', 'karma:e2eci']);
-
-  // Gitflow tasks
-  grunt.registerTask('deploy', ['test', 'maven:deploy', 'clean']);
-  grunt.registerTask('release', ['test', 'maven:release', 'clean']);
+  grunt.registerTask('test', ['production', 'runapp:test']);
 };
