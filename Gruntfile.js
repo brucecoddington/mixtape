@@ -106,10 +106,10 @@ module.exports = function (grunt) {
       },
       lib: {
         options: {
-          base: '<%= assets %>/js/components/angular-ui-bootstrap',
+          base: '<%= assets %>/js/angular-ui-bootstrap',
         },
         src: [
-          '<%= assets %>/js/components/angular-ui-bootstrap/template/**/*.html'
+          '<%= assets %>/js/angular-ui-bootstrap/template/**/*.html'
         ],
         dest: '<%= clientdist %>/assets/templates/lib.templates.js'
       }

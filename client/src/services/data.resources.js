@@ -1,4 +1,4 @@
-angular.module('app.resources', ['ngResource'])
+angular.module('data.resources', ['ngResource'])
   .factory('data', function (api) {
 
       var data = {
