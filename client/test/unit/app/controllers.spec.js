@@ -1,37 +1,67 @@
-(function () {
-  'use strict';
+describe('App', function() {
 
   var expect = chai.expect;
   var controller, scope;
+ 
+  describe('Controllers', function() {
+      
+    beforeEach(
+      module( 
+        'ui.router',
+        'data.resources',
+        'ngResource',
+        'security.services',
+        'authentication.services',
+        'notifications.services',
+        'app.controllers'
+      ));
 
-  describe('App', function() {
-   
-      describe('Controllers', function() {
-          
-        beforeEach(
-          module(
-            'app.controllers', 
-            'navigation.sidenav', 
-            'navigation.quickview', 
-            'app.resources',
-            'app.services',
-            'ngResource'
-          ));
-
-        describe('MainController', function() {
-          it('should have the main controller in the app.controllers module',
-            inject(function($rootScope, $controller, sidenavSharedEventService, quickviewSharedEventService) {
-                var scope = $rootScope.$new(),
-                    controller = $controller("MainController", {
-                      $scope: scope,
-                      sidenavSharedEventService: sidenavSharedEventService,
-                      quickviewSharedEventService: quickviewSharedEventService
-                    });
-                
-                expect(controller).to.be.ok;
-          }));
+    describe('MainCtrl', function() {
+      beforeEach(inject(function($rootScope, $controller) {
+        scope = $rootScope.$new();
+        controller = $controller("MainCtrl", { 
+          $scope: scope 
         });
-   
-      });
+      }));
+
+      describe('setup', function () {
+        it('should be able to instantiate the controller', function () { 
+          expect(controller).to.be.ok;
+        });
+      }); 
+    });
+
+    describe('AppCtrl', function() {
+
+      beforeEach(inject(function($rootScope, $controller) {
+        scope = $rootScope.$new();
+        controller = $controller("AppCtrl", { 
+          $scope: scope 
+        });
+      }));
+
+      describe('setup', function () {
+        it('should be able to instantiate the controller', function () { 
+          expect(controller).to.be.ok;
+        });
+      }); 
+    });
+
+    describe('NavCtrl', function() {
+
+      beforeEach(inject(function($rootScope, $controller) {
+        scope = $rootScope.$new();
+        controller = $controller("NavCtrl", { 
+          $scope: scope 
+        });
+      }));
+
+      describe('setup', function () {
+        it('should be able to instantiate the controller', function () { 
+          expect(controller).to.be.ok;
+        });
+      }); 
+    });
+
   });
-}());
+});
